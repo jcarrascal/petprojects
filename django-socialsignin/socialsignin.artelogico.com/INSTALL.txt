@@ -1,0 +1,9 @@
+easy_install python-openid
+easy_install http://python-linkedin.googlecode.com/files/python-linkedin-1.5.tar.gz
+easy_install tweepy
+easy_install http://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.3.tar.gz
+easy_install http://github.com/facebook/python-sdk/tarball/master
+
+# Download delauth-python-1.2.tar.gz from here:
+# http://www.microsoft.com/downloads/en/details.aspx?FamilyID=A2466ABF-9629-42D8-B991-1D3FAF2FE872
+# and drop WindowsLiveLogin.py in your python's lib/site-packages folder.
