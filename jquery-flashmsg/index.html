@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<!--[if IE]><![endif]-->
+	<!--[if lt IE 9 ]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
+	<title>FlashMsg for jQuery</title>
+	<style>
+		#container {
+			margin: 0 auto;
+			width: 720px;
+		}
+		body {
+			font: 13px/1.4 "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+			margin: 30px;
+		}
+		h1 {
+			border-bottom: 1px solid #BBBBBB;
+			color: #222222;
+			font: 3.2em "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+		}
+		code, pre { font: Consolas, "Courier New", Courier, monospaced }
+		pre {
+			background-color: #EEEEEE;
+			padding: 1em;
+		}
+		dt { font-weight: bold }
+		dd { margin-bottom: 1em }
+		#demoMsg {
+			border: 0;
+			font: inherit;
+		}
+		.summary {
+			color: #777777;
+			font: italic 17px "myriad pro";
+		}
+		.options {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		.options td, .options th { padding: 4px 8px }
+		.options th {
+			background-color: #E2EDF4;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+	<div id="container">
+		<h1>FlashMsg for jQuery</h1>
+		<p class=summary>Displays a non-modal message for a certain ammount of time in the center of the page.</p>
+		<h2>Usage:</h2>
+		<p>In your page you need to include jQuery, the FlashMsg JavaScript file and the FlashMsg CSS file. In the following sample you can see how it looks:</p>
+		<pre id=demoCode>
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="jquery-flashmsg.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="css/style.css?v=1"&gt;
+&lt;script&gt;
+$(function() {
+
+	// Display a message on load.
+	$.flashMsg('<input id=demoMsg type=text value="Hello, world!">');
+
+});
+&lt;/script&gt;
+</pre>
+		<button id=demoExecute type=button>Execute</button>
+		<h2>Methods</h2>
+		<dl>
+			<dt>jQuery.flashMsg(msg)</dt>
+			<dd>
+				<p>Displays the specified message. It's equivalent to calling <code>jQuery.flashMsg('show', msg)</code>.</p>
+			</dd>
+
+			<dt>jQuery.flashMsg('setup', options)</dt>
+			<dd>
+				<p>Initializes the message display. If you don't call it, it will be initialized using the default settings. You can specify any of the following options:</p>
+				<table class=options>
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>id</td>
+						<td>string</td>
+						<td>"flashMsg"</td>
+						<td>Id of the message display.</td>
+					</tr>
+					<tr>
+						<td>displayTime</td>
+						<td>int</td>
+						<td>5000</td>
+						<td>Time to display the message in milliseconds. By default it's 5 seconds.</td>
+					</tr>
+					<tr>
+						<td>opacity</td>
+						<td>double</td>
+						<td>0.8</td>
+						<td>Opacity of the message display. 0-1</td>
+					</tr>
+				</table>
+			</dd>
+
+			<dt>jQuery.flashMsg('show', msg)</dt>
+			<dd>
+				<p>Displays the specified message.</p>
+			</dd>
+
+			<dt>jQuery.flashMsg('hide')</dt>
+			<dd>
+				<p>Hides the message display.</p>
+			</dd>
+		</dl>
+		
+		<h3>License</h3>
+		<p>You may use any FlashMsg under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.</p>
+		<p><a href="https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt">MIT-LICENSE.txt</a><br/>
+		<a href="https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt">GPL-LICENSE.txt</a></p>
+	</div>
+	<link rel="stylesheet" href="jquery-flashmsg.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="jquery-flashmsg.js"></script>
+	<script>
+		$('#demoExecute').click(function(e) {
+			e.stopPropagation();
+			$.flashMsg($('#demoMsg').val());
+		});
+		$(function() {
+			$.flashMsg('Don\'t forget to click the Execute button.');
+		});
+	</script>
+</body>
+</html>
