@@ -123,9 +123,11 @@ LIVEID_APP_ID =	''
 LIVEID_SECRET_KEY = ''
 LIVEID_POLICY_VIEW = 'example.views.privacy_policy'
 
+# http://twitter.com/oauth_clients
 TWITTER_CONSUMER_KEY = ''
 TWITTER_CONSUMER_SECRET = ''
 
+# https://www.linkedin.com/secure/developer
 LINKEDIN_CONSUMER_KEY = ''
 LINKEDIN_CONSUMER_SECRET = ''
 
