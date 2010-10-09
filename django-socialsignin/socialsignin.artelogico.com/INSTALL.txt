@@ -1,9 +1,153 @@
-easy_install python-openid
-easy_install http://python-linkedin.googlecode.com/files/python-linkedin-1.5.tar.gz
-easy_install tweepy
-easy_install http://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.3.tar.gz
-easy_install http://github.com/facebook/python-sdk/tarball/master
+Dependencies:
 
-# Download delauth-python-1.2.tar.gz from here:
-# http://www.microsoft.com/downloads/en/details.aspx?FamilyID=A2466ABF-9629-42D8-B991-1D3FAF2FE872
-# and drop WindowsLiveLogin.py in your python's lib/site-packages folder.
+	easy_install python-openid
+	easy_install http://python-linkedin.googlecode.com/files/python-linkedin-1.5.tar.gz
+	easy_install tweepy
+	easy_install http://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.3.tar.gz
+	easy_install http://github.com/facebook/python-sdk/tarball/master
+
+	# Download delauth-python-1.2.tar.gz from here:
+	# http://www.microsoft.com/downloads/en/details.aspx?FamilyID=A2466ABF-9629-42D8-B991-1D3FAF2FE872
+	# and drop WindowsLiveLogin.py in your python's lib/site-packages folder.
+
+
+Install the Social Sign-in app itself.
+
+	easy_install http://petprojects.googlecode.com/files/socialsignin-1.0.0-py2.7.egg
+
+
+Edit your settings.py and add 'socialsignin' to INSTALLED_APPS:
+
+	INSTALLED_APPS = (
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.sites',
+		'django.contrib.humanize',
+		'socialsignin',
+		'example',	# add your own apps here
+	)
+
+
+Add the authentication backends:
+
+	AUTHENTICATION_BACKENDS = (
+		'tamarinproject.registration.auth_backends.LocalUserBackend',
+		'tamarinproject.registration.auth_backends.OpenIDBackend',
+		'tamarinproject.registration.auth_backends.FacebookBackend',
+		'tamarinproject.registration.auth_backends.LiveIDBackend',
+		'tamarinproject.registration.auth_backends.TwitterBackend',
+		'tamarinproject.registration.auth_backends.LinkedInBackend',
+	)
+
+
+Specify your User model, login view and the view to redirect after authentication.
+If you aren't using a customized model use ('auth', 'User'):
+
+LOCAL_USER_MODEL = ('example', 'LocalUser')
+LOGIN_VIEW = 'django.contrib.auth.views.login'
+LOGIN_REDIRECT_VIEW = 'example.views.profile'
+
+
+Obtain keys for your site and specify them here:
+
+	# http://www.facebook.com/developers/createapp.php
+	FACEBOOK_APP_ID = ''
+	FACEBOOK_API_KEY = ''
+	FACEBOOK_SECRET_KEY = ''
+
+	# http://go.microsoft.com/fwlink/?LinkID=144070
+	LIVEID_APP_ID =	''
+	LIVEID_SECRET_KEY = ''
+	LIVEID_POLICY_VIEW = 'example.views.privacy_policy'
+
+	# http://twitter.com/oauth_clients 
+	TWITTER_CONSUMER_KEY = ''
+	TWITTER_CONSUMER_SECRET = ''
+
+	# https://www.linkedin.com/secure/developer
+	LINKEDIN_CONSUMER_KEY = ''
+	LINKEDIN_CONSUMER_SECRET = ''
+
+
+Add Social Sign-in urls to your urls.py:
+
+	urlpatterns = patterns('',
+		(r'^$', 'example.views.index'),
+		(r'^socialsignin/', include('socialsignin.urls')),
+		...
+	)
+
+
+Copy and customize the Social Sign-in HTML templates to your project under
+the "socialsignin" folder. If you only need to sign your users and don't plan on
+using the register and activate views copy only the login_widget.html file.
+
+Your folder should look like this:
+
+	templates/
+		socialsignin/
+			login_widget.html
+
+or like this:
+
+	templates/
+		socialsignin/
+			activate_done.html
+			activate_invalid.html
+			login_widget.html
+			register.html
+			register_done.html
+			register_email.txt
+
+
+Copy the socialsignin_logos.png to your media/images folder and the related css
+rules from the example site's public folder into your css/site.css:
+
+	/*
+	 * Login widget.
+	 */
+	#loginButtons a.button { padding: 4px; line-height: 0; }
+	#loginButtons a.button span {
+		background-image: url(../images/socialsignin_logos.png);
+		background-repeat: no-repeat;
+	...
+
+
+Wherever you need to display the login widget load the template tag like this:
+
+{% load socialsignin %}
+{% login_widget %}
+
+
+Synchronize the database and run the server:
+
+manage.py syncdb
+manage.py runserver
+
+
+Facebook requires that you run inside the domain you registered in Site URL
+and Site Domain, but for development you can edit your hosts file and setup
+a subdomain. For example
+
+	127.0.0.1     dev.example.com
+
+Linked In only works from the domain you registered.
+
+Windows Live ID doesn't follows the return URL sent so you'll need to setup one
+account for development and another for production so that they redirect to
+the corresponding url. For example:
+
+	DEVELOPMENT:
+	Application ID:	000000001234567A
+	Domain(s):	dev.example.com
+	Return URL:	http://dev.example.com/socialogin/liveid/done/
+	Secret Key:	PhsAFfhksdkasdWERSdfasfrqRASDa3H
+
+	PRODUCTION:
+	Application ID:	000000001234567B
+	Domain(s):	example.com
+	Return URL:	http://example.com/socialogin/liveid/done/
+	Secret Key:	PhsAFofSGsjlgeDGFGsdfsdfSDFsda3H
+
+and edit your hosts file to point the dev.example.com subdomain to 127.0.0.0
