@@ -8,8 +8,14 @@ AUTHENTICATION_FORM = getattr(settings, 'AUTHENTICATION_FORM', DjangoAuthenticat
 
 @register.inclusion_tag('socialsignin/login_widget.html', takes_context=True)
 def login_widget(context, auth_form=None):
+	request = context.get('request', None)
+	if request:
+		next = request.REQUEST.get('next', '')
+	else
+		next = ''
 	return {
-		'MEDIA_URL': context.get('MEDIA_URL', ''),
-		'request':   context.get('request', None),
 		'auth_form': auth_form or DjangoAuthenticationForm(),
+		'MEDIA_URL': context.get('MEDIA_URL', ''),
+		'request':   request,
+		'next':      next,
 	}
