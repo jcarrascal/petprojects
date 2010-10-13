@@ -1,0 +1,48 @@
+<form action="" id=openidForm method=get>
+	<p class=summary>Do you have an account on any of the following sites? Just click the logo to login.</p>
+	<table class="form" id=loginButtons>
+		<tr>
+			<td><a class="button image" href="{% url socialsignin.views.facebook_login %}" id=facebookLoginLink><span></span></a></td>
+			<td><a class="button image" href="{% url socialsignin.views.google_login %}" id=googleLoginLink><span></span></a></td>
+			<td><a class="button image" href="{% url socialsignin.views.liveid_login %}" id=liveidLoginLink><span></span></a></td>
+		</tr>
+		<tr>
+			<td><a class="button image" href="{% url socialsignin.views.twitter_login %}" id=twitterLoginLink><span></span></a></td>
+			<td><a class="button image" href="{% url socialsignin.views.linkedin_login %}" id=linkedinLoginLink><span></span></a></td>
+			<td><a class="button image" href="{% url socialsignin.views.yahoo_login %}" id=yahooLoginLink><span></span></a></td>
+		</tr>
+	</table>
+</form>
+<p class=summary>Or use your local account.</p>
+<form action="{% url django.contrib.auth.views.login %}" id=loginForm method=post>{% csrf_token %}
+	<input name="next" type="hidden" value="{{ next }}">
+	{% if auth_form.non_field_errors %}<p class="errornote">{{ auth_form.non_field_errors }}</p>{% endif %}
+	<table class=form>
+		<tfoot>
+			<tr>
+				<td colspan=2>
+					<button class=continue type=submit><span>Sign in</span></button><br>
+					<br>
+					<a href="{% url django.contrib.auth.views.password_reset %}">Forgot your password?</a><br>
+					<a href="{% url socialsignin.views.register %}">Don't have an account?</a>
+				</td>
+			</tr>
+		</tfoot>
+		<tr>
+			<th><label class=required for="{{ auth_form.username.auto_id }}">{{ auth_form.username.label }}:</label></th>
+			<td>{{ auth_form.username }} {{ auth_form.username.errors }}</td>
+		</tr>
+		<tr>
+			<th><label class=required for="{{ auth_form.password.auto_id }}">{{ auth_form.password.label }}:</label></th>
+			<td>{{ auth_form.password }} {{ auth_form.password.errors }}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				{{ auth_form.persistent }}
+				<label for="{{ auth_form.persistent.auto_id }}">{{ auth_form.persistent.label }}</label>
+				{{ auth_form.persistent.errors }}
+			</td>
+		</tr>
+	</table>
+</form>
