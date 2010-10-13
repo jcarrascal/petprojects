@@ -11,7 +11,7 @@ def login_widget(context, auth_form=None):
 	request = context.get('request', None)
 	if request:
 		next = request.REQUEST.get('next', '')
-	else
+	else:
 		next = ''
 	return {
 		'auth_form': auth_form or DjangoAuthenticationForm(),
