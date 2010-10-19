@@ -1,11 +1,10 @@
-/*
+/*!
  * FlashMsg plugin for jQuery: Displays a non-modal message for a certain ammount of time in the center of the page.
  * You may use any FlashMsg under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
  * https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt
  * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
  */
-
-;(function($) {
+(function($) {
 
 var settings = {
 	id: 'flashMsg',
