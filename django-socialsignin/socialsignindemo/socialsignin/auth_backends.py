@@ -44,7 +44,8 @@ class FacebookBackend(LocalUserBackend):
 			profile = FacebookProfile.objects.get(facebook_uid=facebook_uid)
 			user = profile.user
 		except FacebookProfile.DoesNotExist:
-			user = LOCAL_USER_MODEL(username=facebook_uid, first_name=me['first_name'], last_name=me['last_name'])
+			username = 'fb:' + str(facebook_uid)[-27:]
+			user = LOCAL_USER_MODEL(username=username, first_name=me['first_name'], last_name=me['last_name'])
 			user.save()
 			profile = FacebookProfile(facebook_uid=facebook_uid, user=user)
 		profile.access_token = access_token
@@ -60,18 +61,18 @@ class OpenIDBackend(LocalUserBackend):
 			profile = OpenIDProfile.objects.get(identity_url=openid_response.identity_url)
 			return profile.user
 		except OpenIDProfile.DoesNotExist:
-			username = openid_response.identity_url[-30:]
+			username = 'oi:' + openid_response.identity_url[-27:]
 			first_name, last_name, email = '', '', ''
 			access_token = None
 			if hasattr(openid_response, 'sreg'):
 				email = openid_response.sreg.get('email')[:75]
-				username = openid_response.sreg.get('nickname')[:30]
+				username = 'oi:' + openid_response.sreg.get('nickname')[-27:]
 				first_name, last_name = openid_response.sreg.get('fullname', ' ').split(' ', 1)
 			ax = AXFetchResponse.fromSuccessResponse(openid_response)
 			if ax:
 				if provider == 'Google':
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
-					username   = ax.getSingle(params['email'])[:30]
+					username   = 'gm:' + ax.getSingle(params['email'])[-27:]
 					first_name = ax.getSingle(params['first_name'])[:30]
 					last_name  = ax.getSingle(params['last_name'])[:30]
 					email      = ax.getSingle(params['email'])[:75]
@@ -117,7 +118,8 @@ class LiveIDBackend(LocalUserBackend):
 			first_name = inner_text(owner.getElementsByTagName('FirstName')[0])
 			last_name = inner_text(owner.getElementsByTagName('LastName')[0])
 			email = inner_text(owner.getElementsByTagName('WindowsLiveID')[0])
-			user = LOCAL_USER_MODEL(username=liveid_uid, first_name=first_name, last_name=last_name, email=email)
+			username = 'wl:' + str(liveid_uid)[-27:]
+			user = LOCAL_USER_MODEL(username=username, first_name=first_name, last_name=last_name, email=email)
 			user.save()
 			profile = LiveIDProfile(liveid_uid=liveid_uid, user=user)
 		profile.access_token = access_token
@@ -137,7 +139,8 @@ class TwitterBackend(LocalUserBackend):
 			profile = TwitterProfile.objects.get(twitter_uid=twitter_uid)
 			user = profile.user
 		except TwitterProfile.DoesNotExist:
-			user = LOCAL_USER_MODEL(username=twitter_uid, first_name=me.name, last_name='')
+			username = 'tw:' + str(twitter_uid)[-27:]
+			user = LOCAL_USER_MODEL(username=username, first_name=me.name, last_name='')
 			user.save()
 			profile = TwitterProfile(twitter_uid=twitter_uid, user=user)
 		profile.access_token = access_token
@@ -157,7 +160,8 @@ class LinkedInBackend(LocalUserBackend):
 			profile = LinkedInProfile.objects.get(linkedin_uid=linkedin_uid)
 			user = profile.user
 		except LinkedInProfile.DoesNotExist:
-			user = LOCAL_USER_MODEL(username=linkedin_uid, first_name=me.first_name, last_name=me.last_name)
+			username = 'li:' + str(linkedin_uid)[-27:]
+			user = LOCAL_USER_MODEL(username=username, first_name=me.first_name, last_name=me.last_name)
 			user.save()
 			profile = LinkedInProfile(linkedin_uid=linkedin_uid, user=user)
 		profile.access_token = linkedin.access_token
