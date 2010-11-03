@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 
 
 class LocalUser(User):
@@ -13,6 +13,7 @@ class LocalUser(User):
 	local_avatar = models.ImageField(blank=True, max_length=200, null=True, upload_to='avatars/%Y/%m/')
 	failed_attempts = models.IntegerField(blank=True, null=True)
 	locked_until = models.DateField(blank=True, null=True)
+	objects = UserManager()
 
 
 OPENID_AX_PARAMS_BY_PROVIDER = getattr(settings, 'OPENID_AX_PARAMS_BY_PROVIDER', {

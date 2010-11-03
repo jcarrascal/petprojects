@@ -43,12 +43,13 @@ class RegistrationForm(forms.Form):
 		return self.cleaned_data['email']
 
 	def save(self):
-		user = LOCAL_USER_MODEL.objects.create(username=self.cleaned_data['new_username'],
-		                                       email=self.cleaned_data['email'],
-											   password=self.cleaned_data['password1'])
+		print LOCAL_USER_MODEL, LOCAL_USER_MODEL.objects
+		user = LOCAL_USER_MODEL.objects.create_user(username=self.cleaned_data['new_username'],
+		                                            email=self.cleaned_data['email'],
+											        password=self.cleaned_data['password1'])
 		user.first_name = self.cleaned_data['first_name']
 		user.last_name = self.cleaned_data['last_name']
 		user.is_active = False
-		user.activation_key = activation_key = md5_constructor(str(random()) + user.username).hexdigest()
+		user.activation_key = md5_constructor(str(random()) + user.username).hexdigest()
 		user.save()
 		return user
