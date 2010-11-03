@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.db import transaction
 from django.db.models import get_model
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response, redirect
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -64,17 +64,18 @@ def redirect_if_authenticated(request, *args, **kwargs):
 		if request.GET.has_key('next') and is_local_redirect(request.GET['next']):
 			return HttpResponseRedirect(request.GET['next'])
 		else:
-			return redirect(LOGIN_REDIRECT_VIEW)
+			return HttpResponseRedirect(reverse(LOGIN_REDIRECT_VIEW))
 	messages.error(request, 'Sorry, we don\'t support your account... yet.')
-	return redirect(LOGIN_VIEW)
+	return HttpResponseRedirect(reverse(LOGIN_VIEW))
 
 
-def login(request, template_name='registration/login.html',
+def login_view(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
           locked_template_name='registration/locked_account.html'):
 	"""Extends Django's original login() view with support for a remember_me checkbox and
 	locking accounts for half-hour after MAX_FAILED_ATTEMPTS."""
+
 	intended = None
 	if request.POST.has_key('username'):
 		try:
@@ -124,7 +125,7 @@ def facebook_done(request):
 	if not response_qs.has_key('access_token'):
 		if request.GET.has_key('error_reason'):
 			messages.error(request, request.GET.get('error_reason', 'Unknown reason.'))
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	access_token = response_qs['access_token'][-1]
 	facebook = GraphAPI(access_token)
 	return redirect_if_authenticated(request, facebook=facebook, access_token=access_token)
@@ -137,7 +138,7 @@ def openid_login(request, openid_url=None, return_to=None, provider='Default'):
 		auth_request = consumer.begin(openid_url)
 	except DiscoveryFailure:
 		messages.error(request, 'Invalid openid URL')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	return_to = return_to or reverse_absolute_uri(request, openid_done)
 	realm = getattr(settings, 'OPENID_REALM', request.build_absolute_uri('/'))
 	if provider in OPENID_AX_PARAMS_BY_PROVIDER:
@@ -166,7 +167,7 @@ def default_on_success(request, provider, openid_response):
 
 def default_on_failure(request, provider, message, openid_response):
 	messages.error(request, message)
-	return redirect(LOGIN_VIEW)
+	return HttpResponseRedirect(reverse(LOGIN_VIEW))
 
 
 def google_login(request):
@@ -211,18 +212,18 @@ def twitter_done(request):
 	oauth_verifier = request.GET.get('oauth_verifier', None)
 	if oauth_token is None or oauth_verifier is None:
 		messages.error(request, 'Mising required parameters.')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	request_token = request.session.get('twitter_request_token', None)
 	if request_token is None or request_token.key != oauth_token:
 		messages.error(request, 'Invalid token')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	twitter = OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
 	twitter.set_request_token(request_token.key, request_token.secret)
 	try:
 		access_token = twitter.get_access_token(oauth_verifier)
 	except TweepError, e:
 		messages.error(request, e)
-		return None
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	return redirect_if_authenticated(request, twitter=twitter, access_token=access_token)
 
 
@@ -231,7 +232,7 @@ def linkedin_login(request):
 	api = LinkedIn(LINKEDIN_CONSUMER_KEY, LINKEDIN_CONSUMER_SECRET, callback)
 	if not api.requestToken():
 		messages.error(request, 'Invalid token.')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	request.session['linkedin_request_token'] = (api.request_token, api.request_token_secret)
 	return HttpResponseRedirect(api.getAuthorizeURL())
 
@@ -241,11 +242,11 @@ def linkedin_done(request):
 	oauth_verifier = request.GET.get('oauth_verifier', None)
 	if not oauth_token or not oauth_verifier:
 		messages.error(request, 'Mising required parameters.')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	request_token = request.session.get('linkedin_request_token', None)
 	if not request_token or request_token[0] != oauth_token:
 		messages.error(request, 'Invalid token')
-		return redirect(LOGIN_VIEW)
+		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	callback = reverse_absolute_uri(request, linkedin_done)
 	linkedin = LinkedIn(LINKEDIN_CONSUMER_KEY, LINKEDIN_CONSUMER_SECRET, callback)
 	if not linkedin.accessToken(request_token[0], request_token[1], oauth_verifier):

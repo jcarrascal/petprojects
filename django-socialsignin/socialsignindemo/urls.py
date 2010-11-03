@@ -1,5 +1,4 @@
 from django.conf.urls.defaults import *
-from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.simple import direct_to_template
 from socialsignin.forms import RegistrationForm
 
@@ -9,14 +8,16 @@ from socialsignin.forms import RegistrationForm
 
 urlpatterns = patterns('',
     (r'^', include('example.urls')),
+
     (r'^socialsignin/', include('socialsignin.urls')),
+
 	(r'^register/$', 'socialsignin.views.register', { 'registration_form': RegistrationForm }),
 	(r'^register/done/$', 'socialsignin.views.register_done'),
 	(r'^activate/(?P<user_id>\d+)-(?P<activation_key>[A-Fa-f0-9]{32})$', 'socialsignin.views.activate'),
 	(r'^activate/done/$', direct_to_template, { 'template': 'registration/activate_done.html' }, 'socialsignin.views.activate_done'),
 	(r'^username_available/$', 'socialsignin.views.username_available'),
 	(r'^email_available/$', 'socialsignin.views.email_available'),
-	(r'^login/$', 'django.contrib.auth.views.login', { 'authentication_form': AuthenticationForm }),
+	(r'^login/$', 'socialsignin.views.login_view'),
 	(r'^logout/', 'django.contrib.auth.views.logout'),
 	(r'^password_reset/$', 'django.contrib.auth.views.password_reset', { 'email_template_name': 'socialsignin/password_reset_email.txt' }),
 
