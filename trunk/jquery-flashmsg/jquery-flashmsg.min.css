@@ -1,1 +1,7 @@
-html,body{height:100%;}.flashMsg{background-color:black;-moz-border-radius:8px;border-radius:8px;color:#FFF;display:none;font:20px/50px Helvetica,Arial,Sans-Serif;left:25%;letter-spacing:-1px;opacity:0;position:fixed;top:130px;width:50%;z-index:100000;}.flashMsg p{margin:0;padding:.3em;text-align:center;}.flashMsg a{color:#FFF;}.flashMsg a:hover{color:#FFF;}
+/*
+ * FlashMsg plugin for jQuery: Displays a non-modal message for a certain ammount of time in the center of the page.
+ * You may use any FlashMsg under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
+ * https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt
+ * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
+ */
+(function(f){var d={id:"flashMsg",displayTime:5000,opacity:0.8};var c,g,e,b=0;var a={setup:function(h){d=f.extend({},d,h);c=f('<div id="'+d.id+'" class="flashMsg"><div class="container"></div></div>').appendTo(document.body);g=f(".container",c);return this},show:function(i){var h=f("<p/>").html(i);if(e){clearTimeout(e);h.hide().appendTo(g);b+=200;setTimeout(function(){h.slideToggle()},b)}else{h.appendTo(g);c.show().animate({opacity:d.opacity},200,function(){f(window).mousemove(a.hide).click(a.hide).keypress(a.hide)})}e=setTimeout(a.hide,d.displayTime)},hide:function(){clearTimeout(e);e=null;b=0;f(window).unbind("mousemove",a.hide).unbind("click",a.hide).unbind("keypress",a.hide);c.animate({opacity:0},500,function(){c.hide();g.html("")})}};f.flashMsg=function(h){if(!c&&h!="setup"){a.setup({})}var i=a[h];if(!i){return a.show(h)}return i.apply(this,Array.prototype.slice.call(arguments,1))}})(jQuery);

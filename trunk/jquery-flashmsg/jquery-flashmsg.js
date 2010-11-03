@@ -12,10 +12,10 @@ var settings = {
 	opacity: 0.8
 };
 
-var flashMsg = null;
-var flashMsgContainer = null;
-var timeout = null;
-var waitTime = 0;
+var flashMsg,
+	flashMsgContainer,
+	timeout,
+	waitTime = 0;
 
 var methods = {
 	setup: function(options) {
@@ -25,6 +25,7 @@ var methods = {
 		flashMsgContainer = $('.container', flashMsg);
 		return this;
 	},
+
 	show: function(msg) {
 		var p = $('<p/>').html(msg);
 		if (timeout) {
@@ -46,11 +47,15 @@ var methods = {
 	hide: function() {
 		clearTimeout(timeout);
 		timeout = null;
+		waitTime = 0;
 		$(window)
 			.unbind('mousemove', methods.hide)
 			.unbind('click', methods.hide)
 			.unbind('keypress', methods.hide);
-		flashMsg.animate({ opacity: 0 }, 500, function() { flashMsg.hide(); flashMsgContainer.html('') });
+		flashMsg.animate({ opacity: 0 }, 500, function() {
+			flashMsg.hide();
+			flashMsgContainer.html('');
+		});
 	}
 }
 
