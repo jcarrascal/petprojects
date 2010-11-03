@@ -111,7 +111,7 @@ AUTHENTICATION_BACKENDS = (
 )
 LOCAL_USER_MODEL = ('socialsignin', 'LocalUser')
 AUTHENTICATION_FORM = ('socialsignin.forms', 'AuthenticationForm')
-LOGIN_VIEW = 'socialsignin.views.login'
+LOGIN_VIEW = 'socialsignin.views.login_view'
 LOGIN_REDIRECT_VIEW = 'example.views.profile'
 LOGIN_REDIRECT_URL = '/profile/'
 

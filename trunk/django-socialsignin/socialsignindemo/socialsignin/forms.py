@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 from random import random
 
 
-
 LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
 	raise ImproperlyConfigured('Could not get local user model.')

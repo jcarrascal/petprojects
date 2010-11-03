@@ -14,7 +14,7 @@
 	</table>
 </form>
 <p class=summary>Or use your local account.</p>
-<form action="{% url django.contrib.auth.views.login %}" id=loginForm method=post>{% csrf_token %}
+<form action="{{ login_url }}" id=loginForm method=post>{% csrf_token %}
 	<input name="next" type="hidden" value="{{ next }}">
 	{% if auth_form.non_field_errors %}<p class="errornote">{{ auth_form.non_field_errors }}</p>{% endif %}
 	<table class=form>
