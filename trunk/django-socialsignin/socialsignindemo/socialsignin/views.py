@@ -80,14 +80,14 @@ def login_view(request, template_name='registration/login.html',
 	if request.POST.has_key('username'):
 		try:
 			intended = LOCAL_USER_MODEL.objects.get(username=request.POST['username'])
-			if intended.locked_until > datetime.now():
+			if intended.locked_until and intended.locked_until > datetime.now():
 				return render_to_response(locked_template_name, { 'intended': intended },
 				                          context_instance=RequestContext(request))
 			elif intended.locked_until:
 				intended.failed_attempts = None
 				intended.locked_until = None
 				intended.save()
-		except LOCAL_USER_MODEL.DoesNotExists:
+		except LOCAL_USER_MODEL.DoesNotExist:
 			pass
 	if request.POST.has_key('remember_me'):
 		if not request.POST['remember_me']:
@@ -100,8 +100,9 @@ def login_view(request, template_name='registration/login.html',
 			intended.save()
 			return response
 		intended.failed_attempts = (intended.failed_attempts or 0) + 1
-		if intended.failed_attempts > MAX_FAILED_ATTEMPTS:
+		if intended.failed_attempts >= MAX_FAILED_ATTEMPTS:
 			intended.locked_until = datetime.now() + timedelta(minutes=30)
+		intended.save()
 	return response
 
 

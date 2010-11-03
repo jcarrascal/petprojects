@@ -1,13 +1,13 @@
-﻿#!$HOME/local/bin/python2.7
+#!$HOME/local/bin/python2.7
 # -*- coding: utf-8 -*-
 __author__="Julio César Carrascal Urquijo"
 __date__ ="$23/09/2010 12:39:57 PM$"
 
-from setuptools import setup,find_packages
+from setuptools import setup
 
-setup (
+setup(
 	name = 'socialsignin',
-	version = '1.0.1',
+	version = '1.1.0',
 	packages = ['socialsignin', 'socialsignin.templatetags'],
 
 	# Declare your packages' dependencies here, for eg:
