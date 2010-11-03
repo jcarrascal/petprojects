@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from cgi import MiniFieldStorage
+from datetime import datetime, timedelta
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, REDIRECT_FIELD_NAME
+from django.contrib.auth.views import login as django_login_view
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import transaction
@@ -11,11 +13,12 @@ from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from facebook import GraphAPI
+#from facebook import GraphAPI
 from linkedin.linkedin import LinkedIn
 from openid.consumer.consumer import Consumer, SUCCESS, CANCEL, FAILURE
 from openid.consumer.discover import DiscoveryFailure
 from openid.extensions.ax import AttrInfo, FetchRequest as AXFetchRequest
+from socialsignin.forms import AuthenticationForm
 from socialsignin.shortcuts import send_template_mail
 from socialsignin.models import OPENID_AX_PARAMS_BY_PROVIDER
 from tweepy import OAuthHandler, TweepError
@@ -28,6 +31,7 @@ LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
 	raise ImproperlyConfigured('Could not get local user model.')
 
+MAX_FAILED_ATTEMPTS = getattr(settings, 'MAX_FAILED_ATTEMPTS', 5)
 LOGIN_VIEW = getattr(settings, 'LOGIN_VIEW', 'django.contrib.auth.views.login')
 LOGIN_REDIRECT_VIEW = getattr(settings, 'LOGIN_REDIRECT_VIEW', '')
 
@@ -63,6 +67,41 @@ def redirect_if_authenticated(request, *args, **kwargs):
 			return redirect(LOGIN_REDIRECT_VIEW)
 	messages.error(request, 'Sorry, we don\'t support your account... yet.')
 	return redirect(LOGIN_VIEW)
+
+
+def login(request, template_name='registration/login.html',
+          redirect_field_name=REDIRECT_FIELD_NAME,
+          authentication_form=AuthenticationForm,
+          locked_template_name='registration/locked_account.html'):
+	"""Extends Django's original login() view with support for a remember_me checkbox and
+	locking accounts for half-hour after MAX_FAILED_ATTEMPTS."""
+	intended = None
+	if request.POST.has_key('username'):
+		try:
+			intended = LOCAL_USER_MODEL.objects.get(username=request.POST['username'])
+			if intended.locked_until > datetime.now():
+				return render_to_response(locked_template_name, { 'intended': intended },
+				                          context_instance=RequestContext(request))
+			elif intended.locked_until:
+				intended.failed_attempts = None
+				intended.locked_until = None
+				intended.save()
+		except LOCAL_USER_MODEL.DoesNotExists:
+			pass
+	if request.POST.has_key('remember_me'):
+		if not request.POST['remember_me']:
+			request.session.set_expiry(0)
+	response = django_login_view(request, template_name, redirect_field_name, authentication_form)
+	if intended:
+		if type(response) == HttpResponseRedirect:
+			intended.failed_attempts = None
+			intended.locked_until = None
+			intended.save()
+			return response
+		intended.failed_attempts = (intended.failed_attempts or 0) + 1
+		if intended.failed_attempts > MAX_FAILED_ATTEMPTS:
+			intended.locked_until = datetime.now() + timedelta(minutes=30)
+	return response
 
 
 def facebook_login(request):
@@ -235,15 +274,18 @@ def register(request, registration_form, captcha_field='captcha', template_name=
 			initial={ captcha_field: request.META['REMOTE_ADDR'] })
 		if form.is_valid():
 			new_user = form.save()
-			activate_link = reverse(activate, args=(new_user.id, new_user.activation_key))
+			activate_link = reverse('socialsignin.views.activate', args=(new_user.id, new_user.activation_key))
 			ctx = { 'new_user': new_user, 'activate_link': activate_link }
 			send_template_mail((new_user.email,), _(u'Activate your account'),
 			                   email_template_name, request, ctx)
-			return HttpResponseRedirect(reverse(register_done))
+			return HttpResponseRedirect(reverse('socialsignin.views.register_done'))
 	else:
 		form = registration_form()
 	return render_to_response(template_name, { 'reg_form': form },
 		context_instance=RequestContext(request))
+
+def register_done(request, template_name='socialsignin/register_done.html'):
+	return render_to_response(template_name, {}, context_instance=RequestContext(request))
 
 
 def username_available(request):

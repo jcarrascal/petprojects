@@ -109,8 +109,9 @@ AUTHENTICATION_BACKENDS = (
 	'socialsignin.auth_backends.TwitterBackend',
 	'socialsignin.auth_backends.LinkedInBackend',
 )
-LOCAL_USER_MODEL = ('auth', 'User')
-LOGIN_VIEW = 'django.contrib.auth.views.login'
+LOCAL_USER_MODEL = ('socialsignin', 'LocalUser')
+AUTHENTICATION_FORM = ('socialsignin.forms', 'AuthenticationForm')
+LOGIN_VIEW = 'socialsignin.views.login'
 LOGIN_REDIRECT_VIEW = 'example.views.profile'
 
 # http://www.facebook.com/developers/createapp.php
