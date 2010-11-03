@@ -113,6 +113,7 @@ LOCAL_USER_MODEL = ('socialsignin', 'LocalUser')
 AUTHENTICATION_FORM = ('socialsignin.forms', 'AuthenticationForm')
 LOGIN_VIEW = 'socialsignin.views.login'
 LOGIN_REDIRECT_VIEW = 'example.views.profile'
+LOGIN_REDIRECT_URL = '/profile/'
 
 # http://www.facebook.com/developers/createapp.php
 FACEBOOK_APP_ID = ''
