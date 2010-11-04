@@ -10,6 +10,7 @@ from random import random
 
 LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
+	from django.core.exceptions import ImproperlyConfigured
 	raise ImproperlyConfigured('Could not get local user model.')
 
 
