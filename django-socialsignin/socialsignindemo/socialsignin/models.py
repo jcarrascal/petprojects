@@ -4,16 +4,15 @@ from django.conf import settings
 from django.contrib.auth.models import User, UserManager
 
 
-class LocalUser(User):
-	user = models.OneToOneField(User, unique=True)
-	activation_key = models.CharField(blank=True, max_length=40, null=True)
-	modified_email_key = models.CharField(blank=True, max_length=40, null=True)
-	modified_email = models.EmailField(blank=True, null=True)
-	avatar_url = models.URLField(blank=True, null=True, verify_exists=False)
-	local_avatar = models.ImageField(blank=True, max_length=200, null=True, upload_to='avatars/%Y/%m/')
-	failed_attempts = models.IntegerField(blank=True, null=True)
-	locked_until = models.DateTimeField(blank=True, null=True)
-	objects = UserManager()
+if settings.LOCAL_USER_MODEL == ('socialsignin', 'LocalUser'):
+	class LocalUser(User):
+		user = models.OneToOneField(User, unique=True)
+		activation_key = models.CharField(blank=True, max_length=40, null=True)
+		modified_email_key = models.CharField(blank=True, max_length=40, null=True)
+		modified_email = models.EmailField(blank=True, null=True)
+		failed_attempts = models.IntegerField(blank=True, null=True)
+		locked_until = models.DateTimeField(blank=True, null=True)
+		objects = UserManager()
 
 
 OPENID_AX_PARAMS_BY_PROVIDER = getattr(settings, 'OPENID_AX_PARAMS_BY_PROVIDER', {
