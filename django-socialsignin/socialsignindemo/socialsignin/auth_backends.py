@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.contrib.auth.backends import ModelBackend
-from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_model
 from openid.extensions.ax import FetchResponse as AXFetchResponse
 from socialsignin.models import OPENID_AX_PARAMS_BY_PROVIDER, FacebookProfile, OpenIDProfile, \
@@ -15,6 +14,7 @@ from xml.dom.minidom import parseString
 
 LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
+	from django.core.exceptions import ImproperlyConfigured
 	raise ImproperlyConfigured('Could not get local user model.')
 
 
