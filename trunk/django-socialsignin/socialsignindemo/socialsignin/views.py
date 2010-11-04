@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-#from facebook import GraphAPI
+from facebook import GraphAPI
 from linkedin.linkedin import LinkedIn
 from openid.consumer.consumer import Consumer, SUCCESS, CANCEL, FAILURE
 from openid.consumer.discover import DiscoveryFailure
@@ -29,6 +29,7 @@ from WindowsLiveLogin import WindowsLiveLogin
 
 LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
+	from django.core.exceptions import ImproperlyConfigured
 	raise ImproperlyConfigured('Could not get local user model.')
 
 MAX_FAILED_ATTEMPTS = getattr(settings, 'MAX_FAILED_ATTEMPTS', 5)
