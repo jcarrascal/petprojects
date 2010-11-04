@@ -1,5 +1,4 @@
 from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
 from socialsignin.forms import RegistrationForm
 
 # Uncomment the next two lines to enable the admin:
@@ -14,7 +13,7 @@ urlpatterns = patterns('',
 	(r'^register/$', 'socialsignin.views.register', { 'registration_form': RegistrationForm }),
 	(r'^register/done/$', 'socialsignin.views.register_done'),
 	(r'^activate/(?P<user_id>\d+)-(?P<activation_key>[A-Fa-f0-9]{32})$', 'socialsignin.views.activate'),
-	(r'^activate/done/$', direct_to_template, { 'template': 'registration/activate_done.html' }, 'socialsignin.views.activate_done'),
+	(r'^activate/done/$', 'django.views.generic.simple.direct_to_template', { 'template': 'registration/activate_done.html' }, 'socialsignin.views.activate_done'),
 	(r'^username_available/$', 'socialsignin.views.username_available'),
 	(r'^email_available/$', 'socialsignin.views.email_available'),
 	(r'^login/$', 'socialsignin.views.login_view'),
