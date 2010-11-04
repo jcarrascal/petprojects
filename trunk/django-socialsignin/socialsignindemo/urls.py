@@ -19,7 +19,6 @@ urlpatterns = patterns('',
 	(r'^email_available/$', 'socialsignin.views.email_available'),
 	(r'^login/$', 'socialsignin.views.login_view'),
 	(r'^logout/', 'django.contrib.auth.views.logout'),
-	(r'^password_reset/$', 'django.contrib.auth.views.password_reset', { 'email_template_name': 'socialsignin/password_reset_email.txt' }),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
