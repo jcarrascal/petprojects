@@ -13,7 +13,7 @@ Dependencies:
 
 Install the Social Sign-in app itself.
 
-	easy_install http://petprojects.googlecode.com/files/socialsignin-1.0.0-py2.7.egg
+	easy_install http://petprojects.googlecode.com/files/socialsignin-1.1.0-py2.7.egg
 
 
 Edit your settings.py and add 'socialsignin' to INSTALLED_APPS:
