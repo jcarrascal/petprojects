@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hello {{ new_user.first_name|default:new_user.username }}.
+
+Welcome. Your account has been created but it still inactive. To activate it please click the following link:
+
+{{ root_url }}{{ activate_link }}
+
+Your name, in case you've forgotten, is: {{ new_user.username }}
+
+Thank you.
+{% endautoescape %}
