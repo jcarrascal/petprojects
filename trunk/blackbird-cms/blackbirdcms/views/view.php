@@ -1,16 +1,39 @@
 <?php
 
+/*
+ * Blackbird CMS - Content management system for PHP5
+ * Copyright (C) 2011 Julio César Carrascal Urquijo
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-class BB_Views_ViewException extends Exception
+namespace BB\Views;
+
+/**
+ * Exception class thrown
+ */
+class ViewException extends \Exception
 {
 }
 
-class BB_Views_View
+class View
 {
 	private $mConfig;
 	private $mCurrentBlocks;
 	private $mBlockContents;
 	private $mProperties;
+	private $mInherits;
 
 	function  __construct($config)
 	{
@@ -18,6 +41,7 @@ class BB_Views_View
 		$this->mCurrentBlocks = array();
 		$this->mBlockContents = array();
 		$this->mProperties = array();
+		$this->mInherits = null;
 	}
 
 	function __set($name, $value)
@@ -46,10 +70,26 @@ class BB_Views_View
 		return null;
 	}
 
+	function inherits($template, $type='html')
+	{
+		if ($this->mInherits != null)
+			throw new ViewException("Only single inheritance is supported.");
+		$this->mInherits = array($template, $type);
+	}
+
 	function render($template, $type='html')
 	{
+		$this->mInherits = null;
 		$filename = $this->locateFilename($template, $type);
-		return $this->captureTemplate($filename);
+		$contents = $this->captureTemplate($filename);
+		while ($this->mInherits != null)
+		{
+			list($template, $type) = $this->mInherits;
+			$this->mInherits = null;
+			$filename = $this->locateFilename($template, $type);
+			$contents = $this->captureTemplate($filename);
+		}
+		return $contents;
 	}
 
 	function locateFilename($template, $type)
@@ -60,7 +100,7 @@ class BB_Views_View
 			if (is_readable($filename))
 				return $filename;
 		}
-		throw new BB_Views_ViewException("Template '$template.$type.php' wasn't found in templatePaths: " . serialize($this->config['templatePaths']));
+		throw new ViewException("Template '$template.$type.php' wasn't found in templatePaths: " . serialize($this->config['templatePaths']));
 	}
 
 	function hasContent($blockName)
