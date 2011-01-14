@@ -45,7 +45,7 @@ class BB_Bootstrap
 		{
 			$this->responseSent = explode(' ', microtime());
 			$totalTime = ($this->requestStarted[1] - $this->requestStarted[1]) + ($this->requestStarted[0] - $this->requestStarted[0]);
-			echo "<!--\n";
+			echo "\n<!--\n";
 			echo "Page rendered in $totalTime seconds\n";
 			echo "-->";
 		}
