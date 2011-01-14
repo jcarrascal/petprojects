@@ -18,11 +18,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace BB;
+
 
 /**
  * Initializes the framework and loads configuration settings.
  */
-class BB_Bootstrap
+class Bootstrap
 {
 	function  __construct()
 	{
