@@ -28,7 +28,9 @@
 		<div id=main>
 			<?php if ($this->hasContent('top')) { ?><div id=top><?php echo $this->content('top') ?></div><?php } ?>
 
+			<?php if ($this->hasContent('leftColumn', 'mainColumn', 'centerColumn', 'rightColumn')) { ?>
 			<div id=columns>
+
 				<?php if ($this->hasContent('leftColumn')) { ?><div id=leftColumn><?php echo $this->content('leftColumn') ?></div><?php } ?>
 
 				<?php if ($this->hasContent('mainColumn')) { ?><div id=mainColumn><?php echo $this->content('mainColumn') ?></div><?php } ?>
@@ -38,6 +40,8 @@
 				<?php if ($this->hasContent('rightColumn')) { ?><div id=rightColumn><?php echo $this->content('rightColumn') ?></div><?php } ?>
 
 			</div>
+			<?php } ?>
+
 			<?php if ($this->hasContent('bottom')) { ?><div id=bottom><?php echo $this->content('bottom') ?></div><?php } ?>
 
 		</div>
