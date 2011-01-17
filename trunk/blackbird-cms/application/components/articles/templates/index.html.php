@@ -1,5 +1,5 @@
 <?php
-$this->inherits('masterpage');
+$this->inherits('index');
 $this->beginBlock('header');
 ?>
 <h1>Lorem ipsum</h1>

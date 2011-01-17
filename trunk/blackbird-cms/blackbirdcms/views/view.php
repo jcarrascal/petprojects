@@ -75,20 +75,21 @@ class ViewException extends \Exception
  * </code>
  *
  * Template inheritance allows you to abstract the parts that are common to
- * several pages into a master page. Using inheritance the previous example
- * could be written like this:
+ * several pages into a master page. You must provide the 'layoutPaths'
+ * configuration parameter with directories where master pages will be stored.
+ *
+ * Using inheritance the previous example could be written like this:
  *
  * <code>
  *     <?php $this->inherits('masterpage', array('title' => $this->title)) ?>
- *
  *     <?php $this->beginBlock('main') ?>
- *     <p><?php echo $this->message ?></p>
+ *         <p><?php echo $this->message ?></p>
  *     <?php $this->endBlock() ?>
  * </code>
  *
- * Here we are passing the 'title' variable and 'main' block to the
- * 'masterpage' template. The 'masterpage.html.php' file could be something like
- * this:
+ * Here we are passing the 'title' variable and the 'main' block to the
+ * 'masterpage' template. The 'masterpage.html.php' file could be something
+ * like this:
  *
  * <code>
  *     <!doctype html>
@@ -118,6 +119,7 @@ class ViewException extends \Exception
 class View
 {
 	private $mTemplatePaths;
+	private $mLayoutPaths;
 	private $mDefaultEncoder;
 	private $mConfig;
 	private $mCurrentBlocks;
@@ -134,6 +136,8 @@ class View
 		if (!isset($config['templatePaths']))
 			throw new ViewException('You must provide the \'templatePaths\' configuration parameter.');
 		$this->mTemplatePaths = $config['templatePaths'];
+		unset($config['templatePaths']);
+		$this->mLayoutPaths = $config['layoutPaths'];
 		unset($config['templatePaths']);
 		$this->mDefaultEncoder = isset($config['defaultEncoder']) ? $config['defaultEncoder'] : 'as_html';
 		unset($config['defaultEncoder']);
@@ -271,23 +275,33 @@ class View
 	function render($template, $type='html')
 	{
 		$this->mInherits = null;
-		$filename = $this->locateFilename($template, $type);
+		$filename = $this->locateTemplate($template, $type);
 		$contents = $this->captureTemplate($filename);
 		while ($this->mInherits != null)
 		{
 			list($template, $type, $this->mProperties) = $this->mInherits;
 			$this->mInherits = null;
-			$filename = $this->locateFilename($template, $type);
+			$filename = $this->locateLayout($template, $type);
 			$contents = $this->captureTemplate($filename);
 		}
 		return $contents;
 	}
 
-	private function locateFilename($template, $type)
+	private function locateTemplate($template, $type)
 	{
-		foreach ($this->mTemplatePaths as $templatePath)
+		return $this->locateFilename($template, $type, $this->mTemplatePaths);
+	}
+
+	private function locateLayout($template, $type)
+	{
+		return $this->locateFilename($template, $type, $this->mLayoutPaths);
+	}
+
+	private function locateFilename($template, $type, $paths)
+	{
+		foreach ($paths as $path)
 		{
-			$filename = "$templatePath/$template.$type.php";
+			$filename = "$path/$template.$type.php";
 			if (is_readable($filename))
 				return $filename;
 		}
