@@ -99,10 +99,26 @@ class ViewException extends \Exception
  *     </body>
  *     </html>
  * </code>
+ *
+ * To specify the default encoder function applied to properties use the
+ * 'defaultEncoder' configuration parameter. For example, in an email template
+ * it would be prefered to specify the 'as_text' encoder function:
+ *
+ * <code>
+ *     $config = array('templatePaths' => array('./emails'), 'defaultEncoder' => 'as_text');
+ *     $view = new View($config);
+ *     $view->render('welcome_email');
+ * </code>
+ *
+ * An encoder is any function that receives a string and returns another
+ * string. Available encoders are 'as_text', 'as_html', 'as_attribute' and
+ * 'as_string'. You can write your own encoder function and specify it in the
+ * constructor.
  */
 class View
 {
 	private $mTemplatePaths;
+	private $mDefaultEncoder;
 	private $mConfig;
 	private $mCurrentBlocks;
 	private $mBlockContents;
@@ -113,12 +129,14 @@ class View
 	 * Initializes a new instance of the View class.
 	 * @param array $config Only the 'templatePaths' parameter is required.
 	 */
-	function  __construct($config)
+	function __construct($config)
 	{
 		if (!isset($config['templatePaths']))
 			throw new ViewException('You must provide the \'templatePaths\' configuration parameter.');
 		$this->mTemplatePaths = $config['templatePaths'];
 		unset($config['templatePaths']);
+		$this->mDefaultEncoder = isset($config['defaultEncoder']) ? $config['defaultEncoder'] : 'as_html';
+		unset($config['defaultEncoder']);
 		$this->mConfig = $config;
 		$this->mCurrentBlocks = array();
 		$this->mBlockContents = array();
@@ -137,31 +155,34 @@ class View
 	}
 
 	/**
-	 * Returns the value of the specified property encoded as HTML for security.
+	 * Returns the value of the specified property encoded using the default
+	 * encoder (usually 'as_html') for security.
 	 * @param string $name The name of the property.
 	 * @return mixed The value for the property.
 	 */
 	function __get($name)
 	{
-		if (isset($this->mProperties[$name]))
-		{
-			$value = $this->mProperties[$name];
-			if (is_string($value))
-				return htmlentities($value, ENT_COMPAT, 'UTF-8');
-			return $value;
-		}
-		return null;
+		return $this->get($name);
 	}
 
 	/**
-	 * Returns the value of the specified property without any encoding.
+	 * Returns the value of the specified property. If no encoder is specified
+	 * the default function (usually 'as_html') is used.
 	 * @param string $name The name of the property.
+	 * @param string $encoder The name of the encoder function.
 	 * @return mixed The value for the property.
 	 */
-	function getRaw($name)
+	function get($name, $encoder=null)
 	{
 		if (isset($this->mProperties[$name]))
-			return $this->mProperties[$name];
+		{
+			if ($encoder == null)
+				$encoder = $this->mDefaultEncoder;
+			$value = $this->mProperties[$name];
+			if (is_string($value))
+				return call_user_func($encoder, $value);
+			return $value;
+		}
 		return null;
 	}
 
@@ -170,10 +191,12 @@ class View
 	 * @param string $name The name of the parameter.
 	 * @return mixed The value for the parameter.
 	 */
-	function config($name)
+	function config($name, $encoder=null)
 	{
+		if ($encoder == null)
+			$encoder = $this->mDefaultEncoder;
 		if (isset($this->mConfig[$name]))
-			return htmlentities($this->mConfig[$name], ENT_COMPAT, 'UTF-8');
+			return call_user_func($encoder, $value);
 		return null;
 	}
 

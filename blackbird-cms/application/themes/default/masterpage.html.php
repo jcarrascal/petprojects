@@ -9,8 +9,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	<title><?php echo $this->pageTitle ?></title>
-	<meta name="description" content="<?php echo $this->config('metaDescription') ?>">
-	<meta name="author" content="<?php echo $this->config('metaAuthor') ?>">
+	<meta name="description" content="<?php echo $this->config('metaDescription', 'as_attribute') ?>">
+	<meta name="author" content="<?php echo $this->config('metaAuthor', 'as_attribute') ?>">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="<?php echo ROOT_URL ?>/favicon.ico">
@@ -59,7 +59,7 @@
 	<![endif]-->
 
 	<script>
-	var _gaq = [['_setAccount', '<?php echo $this->config('googleAnalytics') ?>'], ['_trackPageview']];
+	var _gaq = [['_setAccount', '<?php echo $this->config('googleAnalytics', 'as_string') ?>'], ['_trackPageview']];
 	(function(d, t) {
 		var g = d.createElement(t),
 		s = d.getElementsByTagName(t)[0];
