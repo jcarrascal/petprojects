@@ -18,16 +18,19 @@ class Router
 		'day' => Router::INTEGER,
 	);
 
-	static function append($route, $defaults, $options=array(), $parse=true)
+	static function clear()
 	{
-		Router::$mRoutes[] = array($parse ? Router::parse($route, $options) : $route,
-			$defaults);
+		Router::$mRoutes = array();
 	}
 
-	static function prepend($route, $defaults, $options=array(), $parse=true)
+	static function append($route, $defaults=array(), $options=array())
 	{
-		array_unshift(Router::$mRoutes, array($parse ? Router::parse($route, $options) : $route,
-			$defaults));
+		Router::$mRoutes[] = array(Router::parse($route, $options), $defaults);
+	}
+
+	static function prepend($route, $defaults=array(), $options=array(), $parse=true)
+	{
+		array_unshift(Router::$mRoutes, array(Router::parse($route, $options), $defaults));
 	}
 
 	static function parse($route, $options)
@@ -48,8 +51,29 @@ class Router
 			}
 		}
 		if (substr($route, -2) == '/*')
-			$route = substr($route, 0, -1) . '(?P<params>.*)';
+			$route = substr($route, 0, -2) . '(?P<params>/.*)?';
+		else if (substr($route, -1) == '/')
+			$route .= '?';
+		else
+			$route .= '/?';
 		return "|^$route$|";
 	}
 
+	function route($url)
+	{var_dump(Router::$mRoutes);
+		foreach (Router::$mRoutes as $route)
+		{
+			list ($pattern, $defaults) = $route;
+			if (preg_match($pattern, $url, $values))
+			{
+				foreach ($defaults as $key => $value)
+				{
+					if (!isset($values[$key]) || $values[$key] == '')
+						$values[$key] = $value;
+				}
+				return $values;
+			}
+		}
+		return false;
+	}
 }
