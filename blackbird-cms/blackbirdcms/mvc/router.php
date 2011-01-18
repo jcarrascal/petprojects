@@ -1,15 +1,21 @@
 <?php
 
-//namespace BB\MVC;
+namespace BB\MVC;
 
-
+/**
+ * Routes requests to their corresponding controller/action.
+ * @author Julio César Carrascal Urquijo <jcarrascal@gmail.com>
+ */
 class Router
 {
-	const WORD = '[A-Za-z_][A-Za-z0-9]*';
+	/** Matches alphanumeric characters and underscore. */
+	const WORD = '[A-Za-z_][A-Za-z0-9_]*';
+
+	/** Matches only digits. */
 	const INTEGER = '[0-9]+';
 
-	static $mRoutes = array();
-	static $mPatterns = array(
+	private static $mRoutes = array();
+	private static $mKnownPatterns = array(
 		'module' => Router::WORD,
 		'controller' => Router::WORD,
 		'action' => Router::WORD,
@@ -18,21 +24,59 @@ class Router
 		'day' => Router::INTEGER,
 	);
 
+	/**
+	 * Removes existing routes.
+	 */
 	static function clear()
 	{
 		Router::$mRoutes = array();
 	}
 
+	/**
+	 * Append a new route to the end of the routes list. This new route will be
+	 * tried last and will have lower precedence. For information on the
+	 * allowed syntax for the route string see parse().
+	 * @param string $route A well formed route string.
+	 * @param array $defaults Default values for optional indexes.
+	 * @param array $options Character classes for custom indexes.
+	 */
 	static function append($route, $defaults=array(), $options=array())
 	{
 		Router::$mRoutes[] = array(Router::parse($route, $options), $defaults);
 	}
 
-	static function prepend($route, $defaults=array(), $options=array(), $parse=true)
+	/**
+	 * Prepend a new route to the end of the routes list. This new route will
+	 * be tried first and will have higher precedence. For information on the
+	 * allowed syntax for the route string see parse().
+	 * @param string $route A well formed route string.
+	 * @param array $defaults Default values for optional indexes.
+	 * @param array $options Character classes for custom indexes.
+	 */
+	static function prepend($route, $defaults=array(), $options=array())
 	{
 		array_unshift(Router::$mRoutes, array(Router::parse($route, $options), $defaults));
 	}
 
+	/**
+	 * Parses the $route string into a PCRE regular expression that will be
+	 * used to map URL request to the corresponding controller/action. The
+	 * allowed syntax for the route string is:
+	 * {{{
+	 * /:word    Will capture alphanumeric characters inside the 'word' index.
+	 *           You can change the regexp for word by passing in the $options
+	 *           parameter something like:
+	 *           array('word' =&gt; '[a-z]+')
+	 * [/:word]  Will make the 'word' index optional. You can pass a default
+	 *           value in $defaults like this:
+	 *           array('word' =&gt; 'word')
+	 * /*        At the end of the route will mean that extra parameters can be
+	 *           added to the url and will be stored in the 'params' index.
+	 * }}}
+	 * @param string $route A well formed route string.
+	 * @param array $options Character classes for custom indexes.
+	 * @return string
+	 */
 	static function parse($route, $options)
 	{
 		$route = str_replace(']', ')?', str_replace('[', '(?:', $route));
@@ -43,8 +87,8 @@ class Router
 				$name = substr($match, 1);
 				if (isset($options[$name]))
 					$pattern = $options[$name];
-				else if (isset(Router::$mPatterns[$name]))
-					$pattern = Router::$mPatterns[$name];
+				else if (isset(Router::$mKnownPatterns[$name]))
+					$pattern = Router::$mKnownPatterns[$name];
 				else
 					$pattern = Router::WORD;
 				$route = str_replace($match, "(?P<$name>$pattern)", $route);
@@ -59,6 +103,12 @@ class Router
 		return "|^$route$|";
 	}
 
+	/**
+	 * Returns the corresponding controller/action for the given $url by
+	 * matching all configured routes in order.
+	 * @param string $url
+	 * @return array
+	 */
 	function route($url)
 	{
 		foreach (Router::$mRoutes as $route)

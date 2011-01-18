@@ -4,6 +4,7 @@ require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/router.php';
 
 class RouterTest extends PHPUnit_Framework_TestCase
 {
+
 	function testThatParseCreatesUsablePatternForSimpleRoute()
 	{
 		$pattern = Router::parse('/:controller/:action/*', array());
@@ -21,11 +22,11 @@ class RouterTest extends PHPUnit_Framework_TestCase
 	function testThatParseCreatesPatternForCustomRoute()
 	{
 		$pattern = Router::parse('/:lang/:year/:month/:day', array(
-			'lang'  => '[a-z]{2}',
-			'year'  => '[0-9]{4}',
-			'month' => '[0-9]{2}',
-			'day'   => '[0-9]{2}',
-		));
+				'lang' => '[a-z]{2}',
+				'year' => '[0-9]{4}',
+				'month' => '[0-9]{2}',
+				'day' => '[0-9]{2}',
+			));
 		$this->assertTrue(preg_match($pattern, '/en/2011/01/17', $matches) != 0, $pattern);
 		$this->assertEquals('en', $matches['lang']);
 		$this->assertEquals('2011', $matches['year']);
