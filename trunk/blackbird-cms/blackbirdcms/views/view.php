@@ -20,14 +20,14 @@
 
 namespace BB\Views;
 
-
 /**
  * Exception class thrown by View objects.
+ * @author Julio César Carrascal Urquijo <jcarrascal@gmail.com>
  */
 class ViewException extends \Exception
 {
-}
 
+}
 
 /**
  * Renders the specified template and provides automatic html encoding for
@@ -42,10 +42,10 @@ class ViewException extends \Exception
  * the 'templatePaths' parameter with the directories where the templates will
  * be searched.
  *
- * <code>
- *     $config = array('templatePaths' => array('./templates', './themes/default'));
- *     $view = new View($config);
- * </code>
+ * <pre>
+ * $config = array('templatePaths' =&gt; array('./templates', './themes/default'));
+ * $view = new View($config);
+ * </pre>
  *
  * You can pass other parameters in the $config array and they will be
  * accesible inside the template using the $this->config(<name>) method.
@@ -53,26 +53,26 @@ class ViewException extends \Exception
  * Once you have a configured View object you can set variables and render a
  * template.
  *
- * <code>
- *     $view->title = 'Welcome to my site';
- *     $view->message = 'Hello, world!';
- *     echo $view->render('index');
- * </code>
+ * <pre>
+ * $view-&gt;title = 'Welcome to my site';
+ * $view-&gt;message = 'Hello, world!';
+ * echo $view-&gt;render('index');
+ * </pre>
  *
  * The template can be any PHP source code you might need to output HTML, JSON,
  * CSS or any other textual format. To render the index template create a
  * 'index.html.php' file inside either the './templates' or the
  * './themes/default' directory:
  *
- * <code>
- *     <!doctype html>
- *     <html>
- *     <head><title><?php echo $this->title ?></title></head>
- *     <body>
- *       <p><?php echo $this->message ?></p>
- *     </body>
- *     </html>
- * </code>
+ * <pre>
+ * &lt;!doctype html&gt;
+ * &lt;html&gt;
+ * &lt;head&gt;&lt;title&gt;&lt;?php echo $this-&gt;title ?&gt;&lt;/title&gt;&lt;/head&gt;
+ * &lt;body&gt;
+ *   &lt;p&gt;&lt;?php echo $this-&gt;message ?&gt;&lt;/p&gt;
+ * &lt;/body&gt;
+ * &lt;/html&gt;
+ * </pre>
  *
  * Template inheritance allows you to abstract the parts that are common to
  * several pages into a master page. You must provide the 'layoutPaths'
@@ -80,41 +80,42 @@ class ViewException extends \Exception
  *
  * Using inheritance the previous example could be written like this:
  *
- * <code>
- *     <?php $this->inherits('masterpage', array('title' => $this->title)) ?>
- *     <?php $this->beginBlock('main') ?>
- *         <p><?php echo $this->message ?></p>
- *     <?php $this->endBlock() ?>
- * </code>
+ * <pre>
+ * &lt;?php $this-&gt;inherits('masterpage', array('title' =&gt; $this-&gt;title)) ?&gt;
+ * &lt;?php $this-&gt;beginBlock('main') ?&gt;
+ *     &lt;p&gt;&lt;?php echo $this-&gt;message ?&gt;&lt;/p&gt;
+ * &lt;?php $this-&gt;endBlock() ?&gt;
+ * </pre>
  *
  * Here we are passing the 'title' variable and the 'main' block to the
  * 'masterpage' template. The 'masterpage.html.php' file could be something
  * like this:
  *
- * <code>
- *     <!doctype html>
- *     <html>
- *     <head><title><?php echo $this->title ?></title></head>
- *     <body>
- *       <p><?php echo $this->contents('block') ?></p>
- *     </body>
- *     </html>
- * </code>
+ * <pre>
+ * &lt;!doctype html&gt;
+ * &lt;html&gt;
+ * &lt;head&gt;&lt;title&gt;&lt;?php echo $this-&gt;title ?&gt;&lt;/title&gt;&lt;/head&gt;
+ * &lt;body&gt;
+ *   &lt;p&gt;&lt;?php echo $this-&gt;contents('block') ?&gt;&lt;/p&gt;
+ * &lt;/body&gt;
+ * &lt;/html&gt;
+ * </pre>
  *
  * To specify the default encoder function applied to properties use the
  * 'defaultEncoder' configuration parameter. For example, in an email template
  * it would be prefered to specify the 'as_text' encoder function:
  *
- * <code>
- *     $config = array('templatePaths' => array('./emails'), 'defaultEncoder' => 'as_text');
- *     $view = new View($config);
- *     $view->render('welcome_email');
- * </code>
+ * <pre>
+ * $config = array('templatePaths' =&gt; array('./emails'), 'defaultEncoder' =&gt; 'as_text');
+ * $view = new View($config);
+ * $view-&gt;render('welcome_email');
+ * </pre>
  *
  * An encoder is any function that receives a string and returns another
  * string. Available encoders are 'as_text', 'as_html', 'as_attribute' and
  * 'as_string'. You can write your own encoder function and specify it in the
  * constructor.
+ * @author Julio César Carrascal Urquijo <jcarrascal@gmail.com>
  */
 class View
 {
@@ -224,7 +225,7 @@ class View
 	 */
 	function hasContent($blockName)
 	{
-		foreach (func_get_args() as $name)
+		foreach (func_get_args () as $name)
 		{
 			if (isset($this->mBlockContents[$name]))
 				return true;
