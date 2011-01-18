@@ -32,7 +32,7 @@ class Router
 
 	static function parse($route, $options)
 	{
-		$route = str_replace(']', ')', str_replace('[', '(?:', $route));
+		$route = str_replace(']', ')?', str_replace('[', '(?:', $route));
 		if (preg_match_all('/(:[A-Za-z0-9_]+)/', $route, $matches))
 		{
 			foreach ($matches[0] as $match)
