@@ -71,6 +71,8 @@ class Router
 					if (!isset($values[$key]) || $values[$key] == '')
 						$values[$key] = $value;
 				}
+				if (isset($values['params']))
+					$values['params'] = preg_split('|/|', $values['params'], 0, PREG_SPLIT_NO_EMPTY);
 				return $values;
 			}
 		}
