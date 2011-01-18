@@ -60,7 +60,7 @@ class Router
 	}
 
 	function route($url)
-	{var_dump(Router::$mRoutes);
+	{
 		foreach (Router::$mRoutes as $route)
 		{
 			list ($pattern, $defaults) = $route;
