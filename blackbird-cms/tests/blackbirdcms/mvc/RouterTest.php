@@ -71,9 +71,10 @@ class RouterTest extends PHPUnit_Framework_TestCase
 	{
 		Router::clear();
 		Router::append('/:controller/:action/*');
-		$values = Router::route('/hello/world/');var_dump($values);
-		$this->assertEquals('hello', $value['controller']);
-		$this->assertEquals('world', $value['action']);
+		$values = Router::route('/hello/world/');
+		var_dump($values, $values['controller'], $values['action']);
+		$this->assertEquals('hello', $values['controller']);
+		$this->assertEquals('world', $values['action']);
 	}
 }
 
