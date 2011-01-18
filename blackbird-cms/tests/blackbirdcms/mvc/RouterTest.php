@@ -7,15 +7,15 @@ class RouterTest extends PHPUnit_Framework_TestCase
 	function testThatParseCreatesUsablePatternForSimpleRoute()
 	{
 		$pattern = Router::parse('/:controller/:action/*', array());
-		$this->assertTrue(preg_match($pattern, '/hello/world/', $matches) != 0);
-		$this->assertEquals($matches['controller'], 'hello');
-		$this->assertEquals($matches['action'], 'world');
+		$this->assertTrue(preg_match($pattern, '/hello/world/', $matches) != 0, $pattern);
+		$this->assertEquals('hello', $matches['controller']);
+		$this->assertEquals('world', $matches['action']);
 
-		$this->assertTrue(preg_match($pattern, '/hello/cruel/world/', $matches) != 0);
-		$this->assertEquals($matches['controller'], 'hello');
-		$this->assertEquals($matches['action'], 'cruel');
+		$this->assertTrue(preg_match($pattern, '/hello/cruel/world/', $matches) != 0, $pattern);
+		$this->assertEquals('hello', $matches['controller']);
+		$this->assertEquals('cruel', $matches['action']);
 
-		$this->assertFalse(preg_match($pattern, '/hello/world!/', $matches) != 0);
+		$this->assertFalse(preg_match($pattern, '/hello/world!/', $matches) != 0, $pattern);
 	}
 
 	function testThatParseCreatesPatternForCustomRoute()
@@ -26,32 +26,54 @@ class RouterTest extends PHPUnit_Framework_TestCase
 			'month' => '[0-9]{2}',
 			'day'   => '[0-9]{2}',
 		));
-		$this->assertTrue(preg_match($pattern, '/en/2011/01/17', $matches) != 0);
-		$this->assertEquals($matches['lang'], 'en');
-		$this->assertEquals($matches['year'], '2011');
-		$this->assertEquals($matches['month'], '01');
-		$this->assertEquals($matches['day'], '17');
+		$this->assertTrue(preg_match($pattern, '/en/2011/01/17', $matches) != 0, $pattern);
+		$this->assertEquals('en', $matches['lang']);
+		$this->assertEquals('2011', $matches['year']);
+		$this->assertEquals('01', $matches['month']);
+		$this->assertEquals('17', $matches['day']);
 
-		$this->assertFalse(preg_match($pattern, '/spa/2011/01/17', $matches) != 0);
-		$this->assertFalse(preg_match($pattern, '/en/201a/01/17', $matches) != 0);
-		$this->assertFalse(preg_match($pattern, '/en/2011/0a/17', $matches) != 0);
-		$this->assertFalse(preg_match($pattern, '/en/2011/01/1a', $matches) != 0);
+		$this->assertFalse(preg_match($pattern, '/spa/2011/01/17', $matches) != 0, $pattern);
+		$this->assertFalse(preg_match($pattern, '/en/201a/01/17', $matches) != 0, $pattern);
+		$this->assertFalse(preg_match($pattern, '/en/2011/0a/17', $matches) != 0, $pattern);
+		$this->assertFalse(preg_match($pattern, '/en/2011/01/1a', $matches) != 0, $pattern);
 	}
 
 	function testThatParseCreatesPatternWithOptionalSegments()
 	{
 		$pattern = Router::parse('/[:lang/]:controller/:action/', array('lang' => '[a-z]{2}'));
 		$this->assertTrue(preg_match($pattern, '/en/contact/form/', $matches) != 0, $pattern);
-		$this->assertEquals($matches['lang'], 'en');
-		$this->assertEquals($matches['controller'], 'contact');
-		$this->assertEquals($matches['action'], 'form');
+		$this->assertEquals('en', $matches['lang']);
+		$this->assertEquals('contact', $matches['controller']);
+		$this->assertEquals('form', $matches['action']);
 
 		$this->assertTrue(preg_match($pattern, '/contact/form/', $matches) != 0, $pattern);
-		$this->assertEquals($matches['lang'], '');
-		$this->assertEquals($matches['controller'], 'contact');
-		$this->assertEquals($matches['action'], 'form');
+		$this->assertEquals('', $matches['lang']);
+		$this->assertEquals('contact', $matches['controller']);
+		$this->assertEquals('form', $matches['action']);
 
 		$this->assertFalse(preg_match($pattern, '/contact/', $matches) != 0, $pattern);
+	}
+
+	function testThatMatchesWithOrWithoutTrailingSlash()
+	{
+		$pattern = Router::parse('/:controller/:action/', array('lang' => '[a-z]{2}'));
+		$this->assertTrue(preg_match($pattern, '/products/list', $matches) != 0, $pattern);
+		$this->assertTrue(preg_match($pattern, '/products/list/', $matches) != 0, $pattern);
+
+		$pattern = Router::parse('/:controller/:action/*', array('lang' => '[a-z]{2}'));
+		$this->assertTrue(preg_match($pattern, '/products/list', $matches) != 0, $pattern);
+		$this->assertTrue(preg_match($pattern, '/products/list/', $matches) != 0, $pattern);
+		$this->assertTrue(preg_match($pattern, '/products/list/10', $matches) != 0, $pattern);
+		$this->assertTrue(preg_match($pattern, '/products/list/10/', $matches) != 0, $pattern);
+	}
+
+	function testThatRoutesToControllerAction()
+	{
+		Router::clear();
+		Router::append('/:controller/:action/*');
+		$values = Router::route('/hello/world/');var_dump($values);
+		$this->assertEquals('hello', $value['controller']);
+		$this->assertEquals('world', $value['action']);
 	}
 }
 
