@@ -1,8 +1,10 @@
 <?php
 
+namespace BB\MVC;
+
 require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/router.php';
 
-class RouterTest extends PHPUnit_Framework_TestCase
+class RouterTest extends \PHPUnit_Framework_TestCase
 {
 
 	function testThatParseCreatesUsablePatternForSimpleRoute()
@@ -83,4 +85,3 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(array(1, 2, 3), $values['params']);
 	}
 }
-
