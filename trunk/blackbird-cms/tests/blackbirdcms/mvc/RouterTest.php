@@ -6,7 +6,7 @@ require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/router.php';
 
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
-
+/*
 	function testThatParseCreatesUsablePatternForSimpleRoute()
 	{
 		$pattern = Router::parse('/:controller/:action/*', array());
@@ -72,8 +72,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatRoutesToControllerAction()
 	{
-		Router::clear();
-		Router::append('/:controller/:action/*');
+		Router::clearRoutes();
+		Router::appendRoute('/:controller/:action/*');
 		$values = Router::route('/hello/world/');
 		$this->assertEquals('hello', $values['controller']);
 		$this->assertEquals('world', $values['action']);
@@ -83,5 +83,28 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('hello', $values['controller']);
 		$this->assertEquals('world', $values['action']);
 		$this->assertEquals(array(1, 2, 3), $values['params']);
+	}
+*/
+	function testThatRoutesToModules()
+	{
+		Router::clearModules();
+		Router::appendModule('admin', '');
+
+		Router::clearRoutes();
+		Router::appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
+		Router::appendRoute('/:controller[/:action]/*', array('action' => 'index'));
+
+		$values = Router::route('/admin/products/edit/');
+		$this->assertEquals('admin', $values['module']);
+		$this->assertEquals('products', $values['controller']);
+		$this->assertEquals('edit', $values['action']);
+
+		$values = Router::route('/products/edit/');
+		$this->assertEquals('products', $values['controller']);
+		$this->assertEquals('edit', $values['action']);
+
+		$values = Router::route('/products/');
+		$this->assertEquals('products', $values['controller']);
+		$this->assertEquals('index', $values['action']);
 	}
 }

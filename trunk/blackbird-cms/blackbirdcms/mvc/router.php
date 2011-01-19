@@ -41,11 +41,12 @@ class Router
 		'month' => Router::INTEGER,
 		'day' => Router::INTEGER,
 	);
+	private static $mModules = array();
 
 	/**
 	 * Removes existing routes.
 	 */
-	static function clear()
+	static function clearRoutes()
 	{
 		Router::$mRoutes = array();
 	}
@@ -58,7 +59,7 @@ class Router
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
 	 */
-	static function append($route, $defaults=array(), $options=array())
+	static function appendRoute($route, $defaults=array(), $options=array())
 	{
 		Router::$mRoutes[] = array(Router::parse($route, $options), $defaults);
 	}
@@ -71,9 +72,24 @@ class Router
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
 	 */
-	static function prepend($route, $defaults=array(), $options=array())
+	static function prependRoute($route, $defaults=array(), $options=array())
 	{
 		array_unshift(Router::$mRoutes, array(Router::parse($route, $options), $defaults));
+	}
+
+	static function clearModules()
+	{
+		Router::$mModules = array();
+	}
+
+	static function appendModule($name, $path)
+	{
+		Router::$mModules[$name] = $path;
+	}
+
+	static function prependModule($name, $path)
+	{
+		Router::$mModules = array_merge(array($name => $path), Router::$mModules);
 	}
 
 	/**
@@ -134,6 +150,8 @@ class Router
 			list ($pattern, $defaults) = $route;
 			if (preg_match($pattern, $url, $values))
 			{
+				if (isset($values['module']) && !isset(Router::$mModules[$values['module']]))
+					continue;
 				foreach ($defaults as $key => $value)
 				{
 					if (!isset($values[$key]) || $values[$key] == '')
