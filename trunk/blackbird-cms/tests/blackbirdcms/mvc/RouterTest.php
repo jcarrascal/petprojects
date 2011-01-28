@@ -6,7 +6,7 @@ require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/router.php';
 
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
-/*
+
 	function testThatParseCreatesUsablePatternForSimpleRoute()
 	{
 		$pattern = Router::parse('/:controller/:action/*', array());
@@ -84,7 +84,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('world', $values['action']);
 		$this->assertEquals(array(1, 2, 3), $values['params']);
 	}
-*/
+
 	function testThatRoutesToModules()
 	{
 		Router::clearModules();

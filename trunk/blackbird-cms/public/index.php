@@ -9,6 +9,5 @@ define('CONFIG_PATH', APPLICATION_PATH . '/config/config.sample.php');
 
 require LIBRARY_PATH . '/bootstrap.php';
 $bootstrap = new BB\Bootstrap();
+$bootstrap->loadConfiguration(APPLICATION_PATH . '/config/config.sample.php');
 $bootstrap->run(CONFIG_PATH);
-
-

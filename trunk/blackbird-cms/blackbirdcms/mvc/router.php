@@ -20,6 +20,25 @@
 
 namespace BB\MVC;
 
+require_once LIBRARY_PATH . '/mvc/controller.php';
+
+class HttpException extends \Exception
+{
+
+}
+
+/** Thrown when the specified action hasn't been located, is private or requires authentication. */
+class Http401UnauthorizedException extends HttpException
+{
+
+}
+
+/** Thrown when the request can't be routed to a controller or the specified controller can't be located. */
+class Http404NotFoundException extends HttpException
+{
+
+}
+
 /**
  * Routes requests to their corresponding controller/action.
  * @author Julio César Carrascal Urquijo <jcarrascal@gmail.com>
@@ -32,8 +51,9 @@ class Router
 	/** Matches only digits. */
 	const INTEGER = '[0-9]+';
 
-	private static $mRoutes = array();
-	private static $mKnownPatterns = array(
+	private $mConfig;
+	private $mRoutes = array();
+	private $mKnownPatterns = array(
 		'module' => Router::WORD,
 		'controller' => Router::WORD,
 		'action' => Router::WORD,
@@ -41,14 +61,25 @@ class Router
 		'month' => Router::INTEGER,
 		'day' => Router::INTEGER,
 	);
-	private static $mModules = array();
+	private $mControllerPath;
+	private $mModulePaths = array();
+
+	function __construct($config=array())
+	{
+		$this->mConfig = $config;
+	}
+
+	function setControllerPath($path)
+	{
+		$this->mControllerPath = $path;
+	}
 
 	/**
 	 * Removes existing routes.
 	 */
-	static function clearRoutes()
+	function clearRoutes()
 	{
-		Router::$mRoutes = array();
+		$this->mRoutes = array();
 	}
 
 	/**
@@ -59,9 +90,9 @@ class Router
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
 	 */
-	static function appendRoute($route, $defaults=array(), $options=array())
+	function appendRoute($route, $defaults=array(), $options=array())
 	{
-		Router::$mRoutes[] = array(Router::parse($route, $options), $defaults);
+		$this->mRoutes[] = array($this->parse($route, $options), $defaults);
 	}
 
 	/**
@@ -72,24 +103,24 @@ class Router
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
 	 */
-	static function prependRoute($route, $defaults=array(), $options=array())
+	function prependRoute($route, $defaults=array(), $options=array())
 	{
-		array_unshift(Router::$mRoutes, array(Router::parse($route, $options), $defaults));
+		array_unshift($this->mRoutes, array($this->parse($route, $options), $defaults));
 	}
 
-	static function clearModules()
+	function clearModules()
 	{
-		Router::$mModules = array();
+		$this->mModulePaths = array();
 	}
 
-	static function appendModule($name, $path)
+	function appendModule($name, $path)
 	{
-		Router::$mModules[$name] = $path;
+		$this->mModulePaths[$name] = $path;
 	}
 
-	static function prependModule($name, $path)
+	function prependModule($name, $path)
 	{
-		Router::$mModules = array_merge(array($name => $path), Router::$mModules);
+		$this->mModulePaths = array_merge(array($name => $path), $this->mModulePaths);
 	}
 
 	/**
@@ -111,7 +142,7 @@ class Router
 	 * @param array $options Character classes for custom indexes.
 	 * @return string
 	 */
-	static function parse($route, $options)
+	function parse($route, $options)
 	{
 		$route = str_replace(']', ')?', str_replace('[', '(?:', $route));
 		if (preg_match_all('/(:[A-Za-z0-9_]+)/', $route, $matches))
@@ -121,10 +152,10 @@ class Router
 				$name = substr($match, 1);
 				if (isset($options[$name]))
 					$pattern = $options[$name];
-				else if (isset(Router::$mKnownPatterns[$name]))
-					$pattern = Router::$mKnownPatterns[$name];
+				else if (isset($this->mKnownPatterns[$name]))
+					$pattern = $this->mKnownPatterns[$name];
 				else
-					$pattern = Router::WORD;
+					$pattern = $this->WORD;
 				$route = str_replace($match, "(?P<$name>$pattern)", $route);
 			}
 		}
@@ -138,19 +169,19 @@ class Router
 	}
 
 	/**
-	 * Returns the corresponding controller/action for the given $url by
+	 * Returns the corresponding controller/action for the given $requestUri by
 	 * matching all configured routes in order.
-	 * @param string $url
+	 * @param string $requestUri
 	 * @return array
 	 */
-	function route($url)
+	function route($requestUri)
 	{
-		foreach (Router::$mRoutes as $route)
+		foreach ($this->mRoutes as $route)
 		{
 			list ($pattern, $defaults) = $route;
-			if (preg_match($pattern, $url, $values))
+			if (preg_match($pattern, $requestUri, $values))
 			{
-				if (isset($values['module']) && !isset(Router::$mModules[$values['module']]))
+				if (isset($values['module']) && !isset($this->mModulePaths[$values['module']]))
 					continue;
 				foreach ($defaults as $key => $value)
 				{
@@ -163,5 +194,54 @@ class Router
 			}
 		}
 		return false;
+	}
+
+	function dispatch($request)
+	{
+		$requestUri = $request->server['REQUEST_URI'];
+
+		$values = $this->route($requestUri);
+		if ($values === false)
+			throw new Http404NotFoundException("Can't route the $requestUri url.", 404);
+
+		do
+		{
+			$request->pushData('routing', $values);
+			$controller = $this->locateController($values, $request);
+			if (!is_object($controller))
+				throw new Http404NotFoundException("Can't find the {$values['controller']} controller.", 404);
+
+			$values = $controller->route($values);
+			$action_name = $this->locateAction($values, $controller);
+			if ($action_name === false)
+				throw new Http401UnauthorizedException("You are not authorized to call the {$values['action']} action.");
+
+			$continue = $controller->invoke($action_name, $values);
+		}
+		while ($continue);
+	}
+
+	protected function locateController($values, $request)
+	{
+		$basePath = $this->mControllerPath;
+		$controller = \strtolower($values['controller']);
+		if (isset($values['module']) && isset($this->mModulePaths[$values['module']]))
+			$basePath = $this->mModulePaths[$values['module']];
+		$filename = "$basePath/{$controller}controller.php";
+		if (!\is_readable($filename))
+			return false;
+		require_once $filename;
+		$class_name = $controller . 'Controller';
+		if (!\class_exists($class_name))
+			return false;
+		return new $class_name($request, $this->mConfig);
+	}
+
+	protected function locateAction($values, $controller)
+	{
+		$action_name = $values['action'] . 'Action';
+		if (!\method_exists($controller, $action_name))
+			return false;
+		return $action_name;
 	}
 }
