@@ -26,6 +26,10 @@ namespace BB;
  */
 class Bootstrap
 {
+	private $mRouter;
+	private $mRequest;
+	private $mConfig;
+
 	function  __construct()
 	{
 		if (DEBUG)
@@ -36,8 +40,54 @@ class Bootstrap
 		}
 	}
 
+	function loadConfiguration($filename)
+	{
+		\ob_start();
+		$this->mConfig = include($filename);
+		\ob_end_clean();
+		return $this->mConfig;
+	}
+
+	function getRouter()
+	{
+		if ($this->mRouter == null)
+		{
+			require LIBRARY_PATH . '/mvc/router.php';
+			$this->mRouter = new MVC\Router($this->mConfig);
+			$this->initializeRoutes($this->mRouter);
+		}
+		return $this->mRouter;
+	}
+
+	protected function initializeRoutes($router)
+	{
+		$router->clearRoutes();
+		$router->setControllerPath(APPLICATION_PATH . '/controllers');
+		$router->appendRoute('/:controller[/:action]', array('action' => 'index'));
+		$router->appendRoute('/', array('controller' => 'index', 'action' => 'index'));
+	}
+
+	function getRequest()
+	{
+		if ($this->mRequest == null)
+		{
+			session_start();
+			require LIBRARY_PATH . '/mvc/request.php';
+			$this->mRequest = new MVC\Request($_REQUEST, $_GET, $_POST,
+				$_FILES, $_SESSION, $_COOKIE, $_SERVER, $_ENV);
+		}
+		return $this->mRequest;
+	}
+
 	function run()
 	{
+		$router = $this->getRouter();
+		$request = $this->getRequest();
+		try { $router->dispatch($request); }
+		catch (Exception $ex)
+		{
+			$router->dispatchError($request, $ex);
+		}
 		$this->postResponse();
 	}
 
