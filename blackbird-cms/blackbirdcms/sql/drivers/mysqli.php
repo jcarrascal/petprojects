@@ -20,7 +20,7 @@ class DriverMySQLi
 
 	function quote($str)
 	{
-		return $this->mInstance->escape_string($str);
+		return "'" . $this->mInstance->real_escape_string($str) . "'";
 	}
 
 	function query($query)
@@ -36,6 +36,15 @@ class DriverMySQLi
 	function fetchRow($result)
 	{
 		return $result->fetch_row();
+	}
+
+	function insert($tableName, $columnNames, $quotedValues)
+	{
+		$sql = "insert into $tableName (" . implode(', ', $columnNames) . ")\n    values ("
+			. implode(', ', $quotedValues) . ")";
+		if ($this->mInstance->query($sql) === false)
+			return false;
+		return $this->mInstance->insert_id;
 	}
 }
 

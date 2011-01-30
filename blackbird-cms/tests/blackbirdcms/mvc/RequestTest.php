@@ -1,15 +1,14 @@
 <?php
 
-namespace BB\MVC;
+define('LIBRARY_PATH', dirname(__FILE__) . '/../../../blackbirdcms/');
+require_once LIBRARY_PATH . '/mvc/request.php';
 
-require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/request.php';
-
-class RequestTest extends \PHPUnit_Framework_TestCase
+class RequestTest extends PHPUnit_Framework_TestCase
 {
 	function testThatHasWriteAccessToSuperGlobalVariables()
 	{
 		$array = array();
-		$request = new Request($array);
+		$request = new BB\MVC\Request($array);
 		$request->request['hello'] = 'world';
 		$this->assertEquals('world', $array['hello']);
 	}
