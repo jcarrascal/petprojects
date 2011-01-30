@@ -99,10 +99,10 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		$router->appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
 		$router->appendRoute('/:controller[/:action]/*', array('action' => 'index'));
 
-		$values = $router->route('/articles/index/edit/');
-		$this->assertEquals('articles', $values['module']);
-		$this->assertEquals('index', $values['controller']);
-		$this->assertEquals('edit', $values['action']);
+		$values = $router->route('/content/article/index/');
+		$this->assertEquals('content', $values['module']);
+		$this->assertEquals('article', $values['controller']);
+		$this->assertEquals('index', $values['action']);
 
 		$values = $router->route('/products/edit/');
 		$this->assertEquals('products', $values['controller']);

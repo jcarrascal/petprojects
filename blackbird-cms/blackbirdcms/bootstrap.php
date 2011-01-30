@@ -77,7 +77,8 @@ class Bootstrap
 	protected function initializeRoutes($router)
 	{
 		$router->clearRoutes();
-		$router->appendRoute('/:controller[/:action]', array('action' => 'index'));
+		$router->appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
+		$router->appendRoute('/:controller[/:action]/*', array('action' => 'index'));
 		$router->appendRoute('/', array('controller' => 'index', 'action' => 'index'));
 	}
 
