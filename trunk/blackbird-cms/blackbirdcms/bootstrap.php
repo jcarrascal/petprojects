@@ -20,7 +20,6 @@
 
 namespace BB;
 
-
 /**
  * Initializes the framework and loads configuration settings.
  */
@@ -30,7 +29,7 @@ class Bootstrap
 	private $mRequest;
 	private $mConfig;
 
-	function  __construct()
+	function __construct()
 	{
 		if (DEBUG)
 		{
@@ -54,15 +53,30 @@ class Bootstrap
 		{
 			require LIBRARY_PATH . '/mvc/router.php';
 			$this->mRouter = new MVC\Router($this->mConfig);
+			$this->initializeControllers($this->mRouter);
+			$this->initializeModules($this->mRouter);
 			$this->initializeRoutes($this->mRouter);
 		}
 		return $this->mRouter;
 	}
 
+	protected function initializeControllers($router)
+	{
+		$router->clearControllerPaths();
+		$router->appendControllerPath(APPLICATION_PATH . '/controllers/');
+		$router->appendControllerPath(LIBRARY_PATH . '/controllers/');
+	}
+
+	protected function initializeModules($router)
+	{
+		$router->clearModulePaths();
+		$router->appendModulePath(APPLICATION_PATH . '/modules/');
+		$router->appendModulePath(LIBRARY_PATH . '/modules/');
+	}
+
 	protected function initializeRoutes($router)
 	{
 		$router->clearRoutes();
-		$router->setControllerPath(APPLICATION_PATH . '/controllers');
 		$router->appendRoute('/:controller[/:action]', array('action' => 'index'));
 		$router->appendRoute('/', array('controller' => 'index', 'action' => 'index'));
 	}
@@ -74,7 +88,7 @@ class Bootstrap
 			session_start();
 			require LIBRARY_PATH . '/mvc/request.php';
 			$this->mRequest = new MVC\Request($_REQUEST, $_GET, $_POST,
-				$_FILES, $_SESSION, $_COOKIE, $_SERVER, $_ENV);
+					$_FILES, $_SESSION, $_COOKIE, $_SERVER, $_ENV);
 		}
 		return $this->mRequest;
 	}
@@ -83,7 +97,10 @@ class Bootstrap
 	{
 		$router = $this->getRouter();
 		$request = $this->getRequest();
-		try { $router->dispatch($request); }
+		try
+		{
+			$router->dispatch($request);
+		}
 		catch (Exception $ex)
 		{
 			$router->dispatchError($request, $ex);

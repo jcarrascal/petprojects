@@ -61,7 +61,7 @@ class Router
 		'month' => Router::INTEGER,
 		'day' => Router::INTEGER,
 	);
-	private $mControllerPath;
+	private $mControllerPaths = array();
 	private $mModulePaths = array();
 
 	function __construct($config=array())
@@ -69,17 +69,14 @@ class Router
 		$this->mConfig = $config;
 	}
 
-	function setControllerPath($path)
-	{
-		$this->mControllerPath = $path;
-	}
-
 	/**
 	 * Removes existing routes.
+	 * @return Router
 	 */
 	function clearRoutes()
 	{
 		$this->mRoutes = array();
+		return $this;
 	}
 
 	/**
@@ -89,38 +86,96 @@ class Router
 	 * @param string $route A well formed route string.
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
+	 * @return Router
 	 */
 	function appendRoute($route, $defaults=array(), $options=array())
 	{
 		$this->mRoutes[] = array($this->parse($route, $options), $defaults);
+		return $this;
 	}
 
 	/**
-	 * Prepend a new route to the end of the routes list. This new route will
-	 * be tried first and will have higher precedence. For information on the
-	 * allowed syntax for the route string see parse().
+	 * Prepend a new route to the begining of the routes list. This new route
+	 * will be tried first and will have higher precedence. For information on
+	 * the allowed syntax for the route string see parse().
 	 * @param string $route A well formed route string.
 	 * @param array $defaults Default values for optional indexes.
 	 * @param array $options Character classes for custom indexes.
+	 * @return Router
 	 */
 	function prependRoute($route, $defaults=array(), $options=array())
 	{
 		array_unshift($this->mRoutes, array($this->parse($route, $options), $defaults));
+		return $this;
 	}
 
-	function clearModules()
+	/**
+	 * Removes existing controller paths.
+	 * @return Router
+	 */
+	function clearControllerPaths()
+	{
+		$this->mControllerPaths = array();
+		return $this;
+	}
+
+	/**
+	 * Append a new controller path to the end of the list. This new controller
+	 * path will be tried last and will have lower precedence.
+	 * @param string $path
+	 * @return Router
+	 */
+	function appendControllerPath($path)
+	{
+		$this->mControllerPaths[] = $path;
+		return $this;
+	}
+
+	/**
+	 * Prepend a new controller path to the begining of the list. This new
+	 * controller path will be tried first and will have higher precedence.
+	 * @param string $path
+	 * @return Router
+	 */
+	function prependControllerPath($path)
+	{
+		array_unshift($this->mControllerPaths, $path);
+		return $this;
+	}
+
+	/**
+	 * Removes existing module paths.
+	 * @return Router
+	 */
+	function clearModulePaths()
 	{
 		$this->mModulePaths = array();
+		return $this;
 	}
 
-	function appendModule($name, $path)
+	/**
+	 * Append a new module path to the end of the list. This new module path
+	 * will be tried last and will have lower precedence.
+	 * @param string $name
+	 * @param string $path
+	 * @return Router
+	 */
+	function appendModulePath($path)
 	{
-		$this->mModulePaths[$name] = $path;
+		$this->mModulePaths[] = $path;
+		return $this;
 	}
 
-	function prependModule($name, $path)
+	/**
+	 * Prepend a new module path to the begining of the list. This new module
+	 * path will be tried first and will have higher precedence.
+	 * @param string $path
+	 * @return Router
+	 */
+	function prependModule($path)
 	{
-		$this->mModulePaths = array_merge(array($name => $path), $this->mModulePaths);
+		array_unshift($this->mModulePaths, $path);
+		return $this;
 	}
 
 	/**
@@ -181,7 +236,7 @@ class Router
 			list ($pattern, $defaults) = $route;
 			if (preg_match($pattern, $requestUri, $values))
 			{
-				if (isset($values['module']) && !isset($this->mModulePaths[$values['module']]))
+				if (isset($values['module']) && !$this->isModule($values['module']))
 					continue;
 				foreach ($defaults as $key => $value)
 				{
@@ -223,12 +278,34 @@ class Router
 
 	protected function locateController($values, $request)
 	{
-		$basePath = $this->mControllerPath;
-		$controller = \strtolower($values['controller']);
-		if (isset($values['module']) && isset($this->mModulePaths[$values['module']]))
-			$basePath = $this->mModulePaths[$values['module']];
-		$filename = "$basePath/{$controller}controller.php";
-		if (!\is_readable($filename))
+		$found = true;
+		$controller = $values['controller'];
+		if (isset($values['module']))
+		{
+			$module = $values['module'];
+			foreach ($this->mModulePaths as $path)
+			{
+				$filename = "$path/$module/controllers/{$controller}controller.php";
+				if (is_readable($filename))
+				{
+					$found = true;
+					break;
+				}
+			}
+		}
+		else
+		{
+			foreach ($this->mControllerPaths as $path)
+			{
+				$filename = "$path/{$controller}controller.php";
+				if (is_readable($filename))
+				{
+					$found = true;
+					break;
+				}
+			}
+		}
+		if (!$found)
 			return false;
 		require_once $filename;
 		$class_name = $controller . 'Controller';
@@ -243,5 +320,15 @@ class Router
 		if (!\method_exists($controller, $action_name))
 			return false;
 		return $action_name;
+	}
+
+	private function isModule($name)
+	{
+		foreach ($this->mModulePaths as $path)
+		{
+			if (is_dir("$path/$name/controllers"))
+				return true;
+		}
+		return false;
 	}
 }
