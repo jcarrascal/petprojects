@@ -134,7 +134,7 @@ class View
 	 * Initializes a new instance of the View class.
 	 * @param array $config Only the 'templatePaths' parameter is required.
 	 */
-	function __construct($config)
+	function __construct($config, $properties = array())
 	{
 		if (!isset($config['templatePaths']))
 			throw new ViewException('You must provide the \'templatePaths\' configuration parameter.');
@@ -147,7 +147,7 @@ class View
 		$this->mConfig = $config;
 		$this->mCurrentBlocks = array();
 		$this->mBlockContents = array();
-		$this->mProperties = array();
+		$this->mProperties = $properties;
 		$this->mInherits = null;
 	}
 

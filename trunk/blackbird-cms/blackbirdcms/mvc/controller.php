@@ -31,6 +31,7 @@ class Controller
 {
 	var $request;
 	var $config;
+	var $viewData = array();
 
 	/**
 	 * Initializes a new instance of the Controller class.
@@ -117,7 +118,7 @@ class ViewResult
 
 	function execute($controller)
 	{
-		$view = new View($controller->config['view']);
+		$view = new View($controller->config['view'], $controller->viewData);
 		echo $view->render($this->mTemplate, $this->mType);
 	}
 }
