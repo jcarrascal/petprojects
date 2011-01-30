@@ -92,16 +92,16 @@ class RouterTest extends PHPUnit_Framework_TestCase
 	function testThatRoutesToModules()
 	{
 		$router = new BB\MVC\Router();
-		$router->clearModules();
-		$router->appendModule('admin', '');
+		$router->clearModulePaths();
+		$router->appendModulePath(LIBRARY_PATH . '/modules');
 
 		$router->clearRoutes();
 		$router->appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
 		$router->appendRoute('/:controller[/:action]/*', array('action' => 'index'));
 
-		$values = $router->route('/admin/products/edit/');
-		$this->assertEquals('admin', $values['module']);
-		$this->assertEquals('products', $values['controller']);
+		$values = $router->route('/articles/index/edit/');
+		$this->assertEquals('articles', $values['module']);
+		$this->assertEquals('index', $values['controller']);
 		$this->assertEquals('edit', $values['action']);
 
 		$values = $router->route('/products/edit/');
