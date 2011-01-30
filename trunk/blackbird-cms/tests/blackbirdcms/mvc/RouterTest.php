@@ -1,15 +1,15 @@
 <?php
 
-namespace BB\MVC;
+define('LIBRARY_PATH', dirname(__FILE__) . '/../../../blackbirdcms/');
+require_once LIBRARY_PATH . '/mvc/router.php';
 
-require_once dirname(__FILE__) . '/../../../blackbirdcms/mvc/router.php';
-
-class RouterTest extends \PHPUnit_Framework_TestCase
+class RouterTest extends PHPUnit_Framework_TestCase
 {
 
 	function testThatParseCreatesUsablePatternForSimpleRoute()
 	{
-		$pattern = Router::parse('/:controller/:action/*', array());
+		$router = new BB\MVC\Router();
+		$pattern = $router->parse('/:controller/:action/*', array());
 		$this->assertTrue(preg_match($pattern, '/hello/world/', $matches) != 0, $pattern);
 		$this->assertEquals('hello', $matches['controller']);
 		$this->assertEquals('world', $matches['action']);
@@ -23,7 +23,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatParseCreatesPatternForCustomRoute()
 	{
-		$pattern = Router::parse('/:lang/:year/:month/:day', array(
+		$router = new BB\MVC\Router();
+		$pattern = $router->parse('/:lang/:year/:month/:day', array(
 				'lang' => '[a-z]{2}',
 				'year' => '[0-9]{4}',
 				'month' => '[0-9]{2}',
@@ -43,7 +44,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatParseCreatesPatternWithOptionalSegments()
 	{
-		$pattern = Router::parse('/[:lang/]:controller/:action/', array('lang' => '[a-z]{2}'));
+		$router = new BB\MVC\Router();
+		$pattern = $router->parse('/[:lang/]:controller/:action/', array('lang' => '[a-z]{2}'));
 		$this->assertTrue(preg_match($pattern, '/en/contact/form/', $matches) != 0, $pattern);
 		$this->assertEquals('en', $matches['lang']);
 		$this->assertEquals('contact', $matches['controller']);
@@ -59,11 +61,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatMatchesWithOrWithoutTrailingSlash()
 	{
-		$pattern = Router::parse('/:controller/:action/', array('lang' => '[a-z]{2}'));
+		$router = new BB\MVC\Router();
+		$pattern = $router->parse('/:controller/:action/', array('lang' => '[a-z]{2}'));
 		$this->assertTrue(preg_match($pattern, '/products/list', $matches) != 0, $pattern);
 		$this->assertTrue(preg_match($pattern, '/products/list/', $matches) != 0, $pattern);
 
-		$pattern = Router::parse('/:controller/:action/*', array('lang' => '[a-z]{2}'));
+		$pattern = $router->parse('/:controller/:action/*', array('lang' => '[a-z]{2}'));
 		$this->assertTrue(preg_match($pattern, '/products/list', $matches) != 0, $pattern);
 		$this->assertTrue(preg_match($pattern, '/products/list/', $matches) != 0, $pattern);
 		$this->assertTrue(preg_match($pattern, '/products/list/10', $matches) != 0, $pattern);
@@ -72,14 +75,15 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatRoutesToControllerAction()
 	{
-		Router::clearRoutes();
-		Router::appendRoute('/:controller/:action/*');
-		$values = Router::route('/hello/world/');
+		$router = new BB\MVC\Router();
+		$router->clearRoutes();
+		$router->appendRoute('/:controller/:action/*');
+		$values = $router->route('/hello/world/');
 		$this->assertEquals('hello', $values['controller']);
 		$this->assertEquals('world', $values['action']);
 		$this->assertEquals(array(), $values['params']);
 
-		$values = Router::route('/hello/world/1/2/3');
+		$values = $router->route('/hello/world/1/2/3');
 		$this->assertEquals('hello', $values['controller']);
 		$this->assertEquals('world', $values['action']);
 		$this->assertEquals(array(1, 2, 3), $values['params']);
@@ -87,23 +91,24 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
 	function testThatRoutesToModules()
 	{
-		Router::clearModules();
-		Router::appendModule('admin', '');
+		$router = new BB\MVC\Router();
+		$router->clearModules();
+		$router->appendModule('admin', '');
 
-		Router::clearRoutes();
-		Router::appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
-		Router::appendRoute('/:controller[/:action]/*', array('action' => 'index'));
+		$router->clearRoutes();
+		$router->appendRoute('/:module/:controller[/:action]/*', array('action' => 'index'));
+		$router->appendRoute('/:controller[/:action]/*', array('action' => 'index'));
 
-		$values = Router::route('/admin/products/edit/');
+		$values = $router->route('/admin/products/edit/');
 		$this->assertEquals('admin', $values['module']);
 		$this->assertEquals('products', $values['controller']);
 		$this->assertEquals('edit', $values['action']);
 
-		$values = Router::route('/products/edit/');
+		$values = $router->route('/products/edit/');
 		$this->assertEquals('products', $values['controller']);
 		$this->assertEquals('edit', $values['action']);
 
-		$values = Router::route('/products/');
+		$values = $router->route('/products/');
 		$this->assertEquals('products', $values['controller']);
 		$this->assertEquals('index', $values['action']);
 	}
