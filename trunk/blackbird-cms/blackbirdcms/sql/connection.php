@@ -4,10 +4,12 @@ namespace BB\SQL;
 
 class SqlException extends \Exception
 {
+
 }
 
 class Connection
 {
+
 	static function connect($dsn)
 	{
 		$dsn = is_array($dsn) ? $dsn : parse_url($dsn);
@@ -22,7 +24,6 @@ class Connection
 		$driver->connect($dsn);
 		return new Connection($dsn, $driver);
 	}
-
 	private $mDSN;
 
 	private function __construct($dsn, $driver)
@@ -36,11 +37,22 @@ class Connection
 		$this->mDriver->disconnect();
 	}
 
+	/**
+	 * Properly quote the given string to make it safe to concatenate with other SQL sentences.
+	 * @param string $query
+	 * @return mixed 
+	 */
 	function quote($value)
 	{
 		return $this->mDriver->quote($value);
 	}
 
+	/**
+	 * Execute the specified select statement and retrieve all rows as an array
+	 * of objects.
+	 * @param string $sql
+	 * @return array
+	 */
 	function fetchAll($sql)
 	{
 		if (($result = $this->mDriver->query($sql)) !== false)
@@ -53,6 +65,12 @@ class Connection
 		return false;
 	}
 
+	/**
+	 * Execute the specified select statement and retrieve the first row as an
+	 * object.
+	 * @param <type> $sql
+	 * @return <type>
+	 */
 	function fetchRow($sql)
 	{
 		if (($result = $this->mDriver->query($sql)) !== false)
@@ -60,6 +78,13 @@ class Connection
 		return false;
 	}
 
+	/**
+	 * Execute the specified select statement and retrieve all rows as an
+	 * associative array where the first column is the key and the second
+	 * column is the value.
+	 * @param string $sql
+	 * @return array
+	 */
 	function fetchAssoc($sql)
 	{
 		if (($result = $this->mDriver->query($sql)) !== false)
@@ -72,6 +97,12 @@ class Connection
 		return false;
 	}
 
+	/**
+	 * Execute the specified select statement and retrieve the first column of
+	 * all rows as an array.
+	 * @param string $sql
+	 * @return array
+	 */
 	function fetchColumn($sql)
 	{
 		if (($result = $this->mDriver->query($sql)) !== false)
@@ -84,6 +115,12 @@ class Connection
 		return false;
 	}
 
+	/**
+	 * Execute the specified select statement and retrive the first column of
+	 * the first row.
+	 * @param string $sql
+	 * @return mixed
+	 */
 	function fetchScalar($sql)
 	{
 		if (($result = $this->mDriver->query($sql)) !== false)
@@ -95,6 +132,13 @@ class Connection
 		return false;
 	}
 
+	/**
+	 * Execute the given query. Returns a database dependent result object for
+	 * select statement, TRUE for insert, update and delete statements, FALSE
+	 * on error.
+	 * @param string $sql
+	 * @return mixed
+	 */
 	function execute($sql)
 	{
 		return $this->mDriver->query($sql);
