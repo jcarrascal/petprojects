@@ -32,7 +32,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
 	{
 		$conn = BB\SQL\Connection::connect(ConnectionTest::MYSQL_CONNECTION_STRING);
 		$rows = $conn->fetchAssoc('select User, Host from user');
-		$this->assertTrue(count($rows) > 0 );
+		$this->assertTrue(count($rows) > 0);
 		$this->assertTrue($rows['root'] == 'localhost');
 	}
 
@@ -43,7 +43,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
 	{
 		$conn = BB\SQL\Connection::connect(ConnectionTest::MYSQL_CONNECTION_STRING);
 		$rows = $conn->fetchAssoc('show tables');
-		$this->assertTrue(count($rows) > 0 );
+		$this->assertTrue(count($rows) > 0);
 		$this->contains('columns_priv', $rows);
 		$this->contains('tables_priv', $rows);
 		$this->contains('proc', $rows);
@@ -97,5 +97,3 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
 		$conn->execute('drop table if exists test_insert_update');
 	}
 }
-
-?>
