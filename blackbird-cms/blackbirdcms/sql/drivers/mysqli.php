@@ -10,10 +10,9 @@ class DriverMySQLi
 	 */
 	function connect($dsn)
 	{
-		$this->mInstance = new MySQLi($dsn['host'], $dsn['user'], $dsn['pass'], substr($dsn['path'], 1));
-		$errorCode = mysqli_connect_errno();
-		if ($errorCode)
-			throw new BB\SQL\Sql\Exception(mysqli_connect_error(), $errorCode);
+		$this->mInstance = @new MySQLi($dsn['host'], $dsn['user'], isset($dsn['pass']) ? $dsn['pass'] : null, substr($dsn['path'], 1));
+		if ($this->mInstance->connect_errno)
+			throw new BB\SQL\SqlException($this->mInstance->connect_error, $this->mInstance->connect_errno);
 	}
 
 	/**
@@ -42,7 +41,10 @@ class DriverMySQLi
 	 */
 	function query($query)
 	{
-		return $this->mInstance->query($query);
+		$result = $this->mInstance->query($query);
+		if ($result === false)
+			throw new BB\SQL\SqlException($this->mInstance->error, $this->mInstance->errno);
+		return $result;
 	}
 
 	/**

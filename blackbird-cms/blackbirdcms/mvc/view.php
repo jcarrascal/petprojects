@@ -311,7 +311,7 @@ class View
 			if (is_readable($filename))
 				return $filename;
 		}
-		throw new ViewException("Template '$template.$type.php' wasn't found in templatePaths: " . var_export($this->config['templatePaths'], true));
+		throw new ViewException("Template '$template.$type.php' wasn't found in templatePaths: " . var_export($paths, true));
 	}
 
 	private function captureTemplate($filename)
