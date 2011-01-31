@@ -68,7 +68,7 @@ class Controller
 		unset($params['module']);
 		unset($params['controller']);
 		unset($params['action']);
-		if (count($params['params']) > 0)
+		if (isset($params['params']) && count($params['params']) > 0)
 			$result = \call_user_func_array(array($this, $action), $params['params']);
 		else
 			$result = \call_user_func(array($this, $action));

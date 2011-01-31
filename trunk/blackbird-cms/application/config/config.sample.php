@@ -6,8 +6,8 @@ $config = array(
 	),
 	'view' => array(
 		'templatePaths' => array(
-			APPLICATION_PATH . '/templates',
-			LIBRARY_PATH . '/modules/content/templates'
+			LIBRARY_PATH . '/modules/content/templates',
+			LIBRARY_PATH . '/templates',
 		),
 		'layoutPaths' => array(LIBRARY_PATH . '/themes/default'),
 		'metaAuthor' => 'Julio César Carrascal Urquijo <jcarrascal@gmail.com>',
