@@ -1,8 +1,8 @@
 <?php
 
 define('DEBUG', true);
-define('LIBRARY_PATH', dirname(__FILE__) . '/../blackbirdcms');
-define('APPLICATION_PATH', dirname(__FILE__) . '/../application');
+define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../blackbirdcms'));
+define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 define('ROOT_URL', '');
 define('CONFIG_PATH', APPLICATION_PATH . '/config/config.sample.php');
 

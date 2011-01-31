@@ -21,6 +21,7 @@
 namespace BB\MVC;
 
 require_once LIBRARY_PATH . '/mvc/view.php';
+require_once LIBRARY_PATH . '/mvc/model.php';
 
 /**
  * Base class for controller classes. Provides access to $_REQUEST, $_GET,
@@ -57,9 +58,9 @@ class Controller
 
 	/**
 	 * In this controller try to invoke the action specified.
-	 * @param <type> $action
-	 * @param <type> $values
-	 * @return <type>
+	 * @param string $action
+	 * @param array $values
+	 * @return mixed
 	 */
 	function invoke($action, &$values)
 	{
@@ -67,7 +68,10 @@ class Controller
 		unset($params['module']);
 		unset($params['controller']);
 		unset($params['action']);
-		$result = \call_user_func_array(array($this, $action), $params);
+		if (count($params['params']) > 0)
+			$result = \call_user_func_array(array($this, $action), $params['params']);
+		else
+			$result = \call_user_func(array($this, $action));
 		if (is_object($result))
 			return $result->execute($this);
 		return false;

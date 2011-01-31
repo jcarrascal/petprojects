@@ -2,17 +2,14 @@
 
 $config = array(
 	'databases' => array(
-		'default' => array(
-			'driver' => 'mysql',
-			'host' => 'mysql.example.com',
-			'username' => 'secret',
-			'password' => 'password',
-			''
-		),
+		'default' => 'mysqli://secret+password@mysql.example.com/blackbirdcms',
 	),
 	'view' => array(
-		'templatePaths' => array(APPLICATION_PATH . '/templates'),
-		'layoutPaths' => array(APPLICATION_PATH . '/themes/default'),
+		'templatePaths' => array(
+			APPLICATION_PATH . '/templates',
+			LIBRARY_PATH . '/modules/content/templates'
+		),
+		'layoutPaths' => array(LIBRARY_PATH . '/themes/default'),
 		'metaAuthor' => 'Julio César Carrascal Urquijo <jcarrascal@gmail.com>',
 		'metaDescription' => 'Blackbird is a new content management system for PHP5',
 		'googleAnalytics' => 'UA-XXXXX-X', // change the UA-XXXXX-X to be your site's ID
@@ -21,10 +18,7 @@ $config = array(
 
 if (defined('DEBUG'))
 {
-	$config['databases']['default']['host'] = 'localhost';
-	$config['databases']['default']['username'] = 'root';
-	$config['databases']['default']['password'] = '123456';
-	$config['databases']['default']['database'] = 'blackbirdcms';
+	$config['databases']['default'] = 'mysqli://root@localhost/blackbirdcms';
 }
 
 return $config;
