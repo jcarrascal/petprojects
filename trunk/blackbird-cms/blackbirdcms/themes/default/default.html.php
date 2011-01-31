@@ -16,14 +16,18 @@
 	<link rel="shortcut icon" href="<?php echo ROOT_URL ?>/favicon.ico">
 	<link rel="apple-touch-icon" href="<?php echo ROOT_URL ?>/apple-touch-icon.png">
 
-	<link rel="stylesheet" href="<?php echo ROOT_URL ?>/css/style.css?v=2">
-	<script src="<?php echo ROOT_URL ?>/js/libs/modernizr-1.6.min.js"></script>
+	<link rel="stylesheet" href="<?php echo ROOT_URL ?>/themes/<?php echo $this->config('theme', 'as_url') ?>/styles.css">
+	<script src="<?php echo ROOT_URL ?>/js/modernizr-1.6.min.js"></script>
 </head>
 
 <body>
 
 	<div id=container>
-		<header><?php echo $this->content('header') ?></header>
+		<header>
+			<h1 id="header"><span><?php if ($this->config('siteName') != '') echo $this->config('siteName') ?></span></h1>
+			<h2><?php if ($this->config('siteSlogan') != '') echo $this->config('siteSlogan') ?></h2>
+			<?php echo $this->content('header') ?>
+		</header>
 
 		<div id=main>
 			<?php if ($this->hasContent('top')) { ?><div id=top><?php echo $this->content('top') ?></div><?php } ?>
