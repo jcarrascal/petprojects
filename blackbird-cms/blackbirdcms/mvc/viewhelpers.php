@@ -19,7 +19,7 @@
  */
 
 /** Returns the same string. */
-function as_text($value)
+function as_is($value)
 {
 	return $value;
 }
