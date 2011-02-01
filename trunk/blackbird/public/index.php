@@ -38,7 +38,7 @@
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = "../tamarin";
+	$application_folder = "../blackbird";
 
 /*
  * --------------------------------------------------------------------
