@@ -169,7 +169,6 @@ fieldset {
 	margin-bottom: 1em;
 }
 h1, h2, h3, h4, h5, h6, legend {
-	color: #333;
 	font-family: "Candara", "Trebuchet MS", Verdana, Helvetica, sans-serif;
 	font-weight: bold;
 	margin-bottom: 0.4em;
@@ -222,12 +221,36 @@ strike { text-decoration: line-through }
  * Layout.
  */
 body {
-	 margin: 20px;
+	background: #FFF url(images/background.jpg) repeat-x;
+	margin: 0 20px;
 }
 #container {
-	border: 1px solid #CCC;
-	margin: 0 auto;
+	background: #FFF;
+	border: 1px solid #DCDCD0;
+	-webkit-box-shadow: 0px 0px 10px #FFF;
+	-moz-box-shadow: 0px 0px 10px #FFF;
+	box-shadow: 0px 0px 10px #FFF;
+	margin: 20px auto 20px;
 	overflow: hidden;
-	width: 720px;
-	padding: 10px;
+	width: 710px;
+	padding: 15px;
+}
+header {
+	background: #FF5000 url(images/header.png) repeat-x;
+	color: #FFF;
+	height: 90px;
+	overflow: hidden;
+	padding: 30px 20px;
+	margin-bottom: 1em;
+}
+
+
+.article-meta, .article-footer {
+	color: #999;
+	font-size: 12px;
+}
+.article-footer {
+	background: url(images/separator.png) repeat-x;
+	height: 18px;
+	padding: 16px 20px;
 }
