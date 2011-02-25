@@ -115,9 +115,11 @@ class LiveIDBackend(LocalUserBackend):
 			profile = LiveIDProfile.objects.get(liveid_uid=liveid_uid)
 			user = profile.user
 		except LiveIDProfile.DoesNotExist:
-			first_name = inner_text(owner.getElementsByTagName('FirstName')[0])
-			last_name = inner_text(owner.getElementsByTagName('LastName')[0])
 			email = inner_text(owner.getElementsByTagName('WindowsLiveID')[0])
+			fntag = owner.getElementsByTagName('FirstName')
+			first_name = inner_text(fntag[0]) if fntag else ''
+			lntag = owner.getElementsByTagName('LastName')
+			last_name = inner_text(lntag[0]) if lntag else ''
 			username = 'wl:' + str(liveid_uid)[-27:]
 			user = LOCAL_USER_MODEL(username=username, first_name=first_name, last_name=last_name, email=email)
 			user.save()
