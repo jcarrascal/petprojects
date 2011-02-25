@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import transaction
 from django.db.models import get_model
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
@@ -306,16 +306,19 @@ def email_available(request):
 	except:
 		return HttpResponse('true')
 
-
 @csrf_protect
 @transaction.commit_on_success
 def activate(request, user_id, activation_key, template_name='socialsignin/activate_invalid.html'):
+	print user_id, activation_key
 	try:
-		user = get_object_or_404(LocalUser, id=user_id, activation_key=activation_key)
+		user = get_object_or_404(LOCAL_USER_MODEL, id=user_id, activation_key=activation_key)
 		user.activation_key = None
 		user.is_active = True
 		user.save()
 		return HttpResponseRedirect(reverse(activate_done))
-	except:
+	except Http404:
 		return render_to_response(template_name, {},
 			context_instance=RequestContext(request))
+
+def activate_done(request, template_name='socialsignin/activate_done.html'):
+	return render_to_response(template_name, {}, context_instance=RequestContext(request))

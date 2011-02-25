@@ -7,7 +7,7 @@ from urllib import urlencode
 
 
 def send_template_mail(recipient_list, subject, template_file, request, ctx={}, from_email=None):
-	ctx['root_url'] = request.build_absolute_uri('/')
+	ctx['root_url'] = request.build_absolute_uri('/')[:-1]
 	message = render_to_string(template_file, RequestContext(request, ctx))
 	return send_mail(subject, message, from_email or settings.DEFAULT_FROM_EMAIL, recipient_list, settings.DEBUG)
 
