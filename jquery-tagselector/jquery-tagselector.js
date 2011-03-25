@@ -6,7 +6,7 @@
  */
 (function($) {
 
-	$.fn.tagSelector = function(source) {
+	$.fn.tagSelector = function(source, name) {
 		return this.each(function() {
 			var input = $('input[type=text]', this),
 				hidden = $('input[type=hidden]', this);
@@ -26,6 +26,7 @@
 						var tag = $('<span class="tag"/>')
 							.text('@' + ui.item.username)
 							.append('<a>×</a>')
+							.append($('<input type=hidden/>').attr('name', name).val(ui.item.id))
 							.insertBefore(input);
 						hidden.val(hidden.val() + ',' + ui.item.id)
 						return false;
