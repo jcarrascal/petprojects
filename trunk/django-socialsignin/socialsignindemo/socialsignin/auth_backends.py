@@ -168,6 +168,6 @@ class LinkedInBackend(LocalUserBackend):
 			profile = LinkedInProfile(linkedin_uid=linkedin_uid, user=user)
 		profile.access_token = linkedin.access_token
 		profile.profile_url = me.public_url
-		profile.profile_picture = me.picture_url
+		profile.profile_picture = me.picture_url or ''
 		profile.save()
 		return user
