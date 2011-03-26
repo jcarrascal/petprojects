@@ -24,11 +24,10 @@
 						select: function(event, ui) {
 							//<span class=tag>@jcarrascal<a>×</a><input type=hidden name=tag value=1/></span>
 							var tag = $('<span class="tag"/>')
-								.text('@' + ui.item.username)
+								.text(ui.item.username)
 								.append('<a>×</a>')
 								.append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
 								.insertBefore(input);
-							
 							return true;
 						}
 					})
