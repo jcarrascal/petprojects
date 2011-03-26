@@ -8,11 +8,12 @@
 
 	$.fn.tagSelector = function(source, name) {
 		return this.each(function() {
-				$(this).click(function() { input.focus(); })
+				var selector = $(this),
+					input = $('input[type=text]', this);
+				selector.click(function() { input.focus(); })
 					.delegate('.tag a', 'click', function() {
 						$(this).parent().remove();
 					});
-				var input = $('input[type=text]', this);
 				console.log(input);
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active)
@@ -30,12 +31,19 @@
 								.insertBefore(input);
 							return true;
 						}
-					})
-					.data('autocomplete')._renderItem = function(ul, item) {
+					});
+				input.data('autocomplete')._renderItem = function(ul, item) {
 						return $('<li/>')
 							.data('item.autocomplete', item)
 							.append($('<a/>').text(item.display_name))
 							.appendTo(ul);
+					};
+				input.data('autocomplete')._resizeMenu = function(ul, item) {
+						var ul = this.menu.element;
+						ul.outerWidth(Math.max(
+							ul.width( "" ).outerWidth(),
+							selector.outerWidth()
+						));
 					};
 			});
 	};
