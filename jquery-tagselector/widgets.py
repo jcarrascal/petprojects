@@ -1,5 +1,6 @@
 from django import forms
 from django.forms.util import flatatt
+from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
 
 class TagSelectMultiple(forms.SelectMultiple):
