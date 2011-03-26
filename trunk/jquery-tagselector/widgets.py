@@ -1,5 +1,6 @@
 from django import forms
 from django.forms.util import flatatt
+from django.utils.encoding import force_unicode
 from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
 
@@ -17,7 +18,7 @@ class TagSelectMultiple(forms.SelectMultiple):
 		return mark_safe(u'\n'.join(output))
 
 	def render_option(self, selected_choices, option_value, option_label):
-		if option_value in selected_choices:
+		if unicode(option_value) in selected_choices:
 			return u'<span class="tag">%s <a>×</a><input name="%s" type="hidden" value="%s"/></span>' % (
 				conditional_escape(force_unicode(option_label)), escape(self.name), escape(option_value))
 		return ''
