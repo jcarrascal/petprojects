@@ -10,12 +10,17 @@ from urllib2 import Request, build_opener, HTTPError
 from urllib import unquote
 from xml.dom import Node
 from xml.dom.minidom import parseString
+import re
 
 
 LOCAL_USER_MODEL = get_model(*settings.LOCAL_USER_MODEL)
 if not LOCAL_USER_MODEL:
 	from django.core.exceptions import ImproperlyConfigured
 	raise ImproperlyConfigured('Could not get local user model.')
+
+
+def generate_username(prefix, first_name, last_name):
+	return prefix + re.sub('[^a-z0-9áéíóúÁÉÍÓÚ]+', '', (first_name + last_name).lower(), flags=re.IGNORECASE)[:30]
 
 
 class LocalUserBackend(ModelBackend):
@@ -44,7 +49,7 @@ class FacebookBackend(LocalUserBackend):
 			profile = FacebookProfile.objects.get(facebook_uid=facebook_uid)
 			user = profile.user
 		except FacebookProfile.DoesNotExist:
-			username = 'fb:' + str(facebook_uid)[-27:]
+			username = generate_username('fb:', me['first_name'], me['last_name'])
 			user = LOCAL_USER_MODEL(username=username, first_name=me['first_name'], last_name=me['last_name'])
 			user.save()
 			profile = FacebookProfile(facebook_uid=facebook_uid, user=user)
@@ -61,18 +66,18 @@ class OpenIDBackend(LocalUserBackend):
 			profile = OpenIDProfile.objects.get(identity_url=openid_response.identity_url)
 			return profile.user
 		except OpenIDProfile.DoesNotExist:
-			username = 'oi:' + openid_response.identity_url[-27:]
 			first_name, last_name, email = '', '', ''
+			username = generate_username('oi:', openid_response.identity_url, '')
 			access_token = None
 			if hasattr(openid_response, 'sreg'):
 				email = openid_response.sreg.get('email')[:75]
-				username = 'oi:' + openid_response.sreg.get('nickname')[-27:]
 				first_name, last_name = openid_response.sreg.get('fullname', ' ').split(' ', 1)
+				username = generate_username('oi:', first_name, last_name)
 			ax = AXFetchResponse.fromSuccessResponse(openid_response)
 			if ax:
 				if provider == 'Google':
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
-					username   = 'gm:' + ax.getSingle(params['email'])[-27:]
+					username   = generate_username('fb:', params['first_name'], params['last_name'])
 					first_name = ax.getSingle(params['first_name'])[:30]
 					last_name  = ax.getSingle(params['last_name'])[:30]
 					email      = ax.getSingle(params['email'])[:75]
@@ -80,6 +85,7 @@ class OpenIDBackend(LocalUserBackend):
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
 					email = ax.getSingle(params['email'])[:75]
 					first_name, last_name = ax.getSingle(params['fullname']).split(' ', 1)
+					username = generate_username('oi:', first_name, last_name)
 			user = LOCAL_USER_MODEL(username=username, first_name=first_name, last_name=last_name, email=email)
 			user.save()
 			profile = OpenIDProfile(user=user, identity_url=openid_response.identity_url, access_token=access_token)
@@ -120,7 +126,7 @@ class LiveIDBackend(LocalUserBackend):
 			first_name = inner_text(fntag[0]) if fntag else ''
 			lntag = owner.getElementsByTagName('LastName')
 			last_name = inner_text(lntag[0]) if lntag else ''
-			username = 'wl:' + str(liveid_uid)[-27:]
+			username = generate_username('wl:', first_name, last_name)
 			user = LOCAL_USER_MODEL(username=username, first_name=first_name, last_name=last_name, email=email)
 			user.save()
 			profile = LiveIDProfile(liveid_uid=liveid_uid, user=user)
@@ -141,7 +147,7 @@ class TwitterBackend(LocalUserBackend):
 			profile = TwitterProfile.objects.get(twitter_uid=twitter_uid)
 			user = profile.user
 		except TwitterProfile.DoesNotExist:
-			username = 'tw:' + str(twitter_uid)[-27:]
+			username = generate_username('tw:', me.name, '')
 			user = LOCAL_USER_MODEL(username=username, first_name=me.name, last_name='')
 			user.save()
 			profile = TwitterProfile(twitter_uid=twitter_uid, user=user)
@@ -162,7 +168,7 @@ class LinkedInBackend(LocalUserBackend):
 			profile = LinkedInProfile.objects.get(linkedin_uid=linkedin_uid)
 			user = profile.user
 		except LinkedInProfile.DoesNotExist:
-			username = 'li:' + str(linkedin_uid)[-27:]
+			username = generate_username('tw:', me.first_name, me.last_name)
 			user = LOCAL_USER_MODEL(username=username, first_name=me.first_name, last_name=me.last_name)
 			user.save()
 			profile = LinkedInProfile(linkedin_uid=linkedin_uid, user=user)
