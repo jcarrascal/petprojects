@@ -14,7 +14,6 @@
 					.delegate('.tag a', 'click', function() {
 						$(this).parent().remove();
 					});
-				console.log(input);
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active)
 							e.preventDefault();
@@ -25,7 +24,7 @@
 						select: function(event, ui) {
 							//<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
 							var tag = $('<span class="tag"/>')
-								.text(ui.item.username + ' ')
+								.text(ui.item.first_name + ' ')
 								.append('<a>×</a>')
 								.append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
 								.insertBefore(input);
@@ -35,7 +34,7 @@
 				input.data('autocomplete')._renderItem = function(ul, item) {
 						return $('<li/>')
 							.data('item.autocomplete', item)
-							.append($('<a/>').text(item.display_name))
+							.append($('<a/>').text(item.toString()))
 							.appendTo(ul);
 					};
 				input.data('autocomplete')._resizeMenu = function(ul, item) {
