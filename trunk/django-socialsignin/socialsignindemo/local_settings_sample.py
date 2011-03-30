@@ -4,4 +4,3 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 	'/Projects/Pet Projects/petprojects/django-socialsignin/templates',
 )
-print TEMPLATE_DIRS
