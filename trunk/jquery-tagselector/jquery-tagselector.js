@@ -24,7 +24,7 @@
 						select: function(event, ui) {
 							//<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
 							var tag = $('<span class="tag"/>')
-								.text(ui.item.first_name + ' ')
+								.text(ui.item.toString() + ' ')
 								.append('<a>×</a>')
 								.append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
 								.insertBefore(input);
@@ -40,7 +40,7 @@
 				input.data('autocomplete')._resizeMenu = function(ul, item) {
 						var ul = this.menu.element;
 						ul.outerWidth(Math.max(
-							ul.width( "" ).outerWidth(),
+							ul.width('').outerWidth(),
 							selector.outerWidth()
 						));
 					};
