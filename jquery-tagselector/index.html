@@ -10,8 +10,8 @@
 	<meta name="description" content="Allows selecting multiple &quote;Tags&quote; by using jQuery's autocomplete.">
 	<meta name="author" content="Julio César Carrascal Urquijo &lt;jcarrascal@gmail.com&gt;">
 	<link rel=stylesheet href="styles.css">
-	<link href="http://s.comerciando.co/v2.0/js/jquery-ui-1.8.11/jquery-ui.min.css" media=screen rel=stylesheet type="text/css">
-	<link rel=stylesheet href="jquery-tagselector.css">
+	<link href="http://s.comerciando.co/v2.0/js/jquery-ui-1.8.11/jquery-ui.min.css" rel=stylesheet type="text/css">
+	<link href="jquery-tagselector.css" rel=stylesheet>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 	<script src="jquery-tagselector.js"></script>
@@ -28,20 +28,35 @@
 		following sample you can see how it looks:
 	</p>
 	<pre>
-&lt;link rel="stylesheet" href="jquery-tagselector.css"&gt;
-&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;link href="http://s.comerciando.co/v2.0/js/jquery-ui-1.8.11/jquery-ui.min.css" rel=stylesheet type="text/css"&gt;
+&lt;link href="jquery-tagselector.css" rel=stylesheet&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"&gt;&lt;/script&gt;
 &lt;script src="jquery-tagselector.js"&gt;&lt;/script&gt;
-&lt;div class=tagSelector&gt;
+&lt;div id=tags class=tagSelector style="width:300px"&gt;
 	&lt;span class=tag&gt;
-		&lt;input name=tags type=hidden value=42&gt;
-		jQuery
+		jQuery &lt;a&gt;×&lt;/a&gt;
+		&lt;input name=tags type="hidden" value=42&gt;
 	&lt;/span&gt;
+	&lt;input type=text&gt;
 &lt;/div&gt;
 &lt;script&gt;
 $(function() {
 
-	// Display a message on load.
-	$('#tagSelector').tagSelector();
+	var tags = [
+		{ id: 42, toString: function() { return 'jQuery'; } },
+		{ id: 31, toString: function() { return 'Python'; } },
+		{ id: 25, toString: function() { return 'HTML'; } },
+		{ id: 83, toString: function() { return 'PHP'; } },
+		{ id: 40, toString: function() { return 'ASP.NET MVC'; } },
+		{ id: 25, toString: function() { return 'CSS'; } },
+		{ id: 66, toString: function() { return 'JavaScript'; } },
+		{ id: 87, toString: function() { return 'C#'; } },
+		{ id: 28, toString: function() { return 'D'; } },
+		{ id: 91, toString: function() { return 'Java'; } },
+		{ id: 10, toString: function() { return 'Ruby'; } },
+	];
+	$('#tags').tagSelector(tags, 'name');
 
 });
 &lt;/script&gt;
@@ -56,67 +71,52 @@ $(function() {
 			<input type=text>
 		</div>
 	</p>
+	<p>
+		There's a Django Form Widget that you can use with MultipleChoiceField and ModelMultipleChoiceField that
+		will render the field apropiatelly and display already selected values. Just import TagSelectMultiple from the
+		widgets.py file an use it like this:
+	</p>
+	<pre>
+from tagselector.widgets import TagSelectMultiple
+
+class TagsForm(forms.ModelForm):
+	tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(),
+		widget=TagSelectMultiple(attrs={ 'style': 'width:300px' }))
+</pre>
 	<h2>Methods</h2>
 	<dl>
-		<dt>jQuery.flashMsg(msg)</dt>
+		<dt>jQuery.tagSelector(source, name)</dt>
 		<dd>
-			<p>Displays the specified message. It's equivalent to calling <code>jQuery.flashMsg('show', msg)</code>.</p>
-		</dd>
-
-		<dt>jQuery.flashMsg('setup', options)</dt>
-		<dd>
-			<p>Initializes the message display. If you don't call it, it will be initialized using the default settings. You can specify any of the following options:</p>
+			<p>
+				Initializes the tagSelector for the selected elements. They should have the appropiate structure (at
+				least a div with an input field inside.
+			</p>
 			<table class=options>
 				<thead>
 					<tr>
 						<th>Parameter</th>
 						<th>Type</th>
-						<th>Default</th>
 						<th>Description</th>
 					</tr>
 				</thead>
 				<tr>
-					<td>id</td>
+					<td>source</td>
+					<td>string/array/function</td>
+					<td>The "source" property for jQuery UI autocomplete plugin.</td>
+				</tr>
+				<tr>
+					<td>name</td>
 					<td>string</td>
-					<td>"flashMsg"</td>
-					<td>Id of the message display.</td>
-				</tr>
-				<tr>
-					<td>displayTime</td>
-					<td>int</td>
-					<td>5000</td>
-					<td>Time to display the message in milliseconds. By default it's 5 seconds.</td>
-				</tr>
-				<tr>
-					<td>hideByUser</td>
-					<td>bool</td>
-					<td>true</td>
-					<td>
-						Hides the message before displayTime has elapsed if it detects user activity (mouse movement or
-						a keypress).
-					</td>
-				</tr>
-				<tr>
-					<td>opacity</td>
-					<td>double</td>
-					<td>0.8</td>
-					<td>Opacity of the message display. 0-1</td>
+					<td>Name of the hidden fields.</td>
 				</tr>
 			</table>
 		</dd>
-
-		<dt>jQuery.flashMsg('show', msg)</dt>
-		<dd>
-			<p>Displays the specified message.</p>
-		</dd>
-
-		<dt>jQuery.flashMsg('hide')</dt>
-		<dd>
-			<p>Hides the message display.</p>
-		</dd>
 	</dl>	
 	<h3>License</h3>
-	<p>You may use any FlashMsg under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.</p>
+	<p>
+		You may use any Tag Selector under the terms of either the MIT License or the GNU General Public License (GPL)
+		Version 2.
+	</p>
 	<p><a href="https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt">MIT-LICENSE.txt</a><br/>
 	<a href="https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt">GPL-LICENSE.txt</a></p>
 	<script>
@@ -133,7 +133,7 @@ $(function() {
 			{ id: 91, toString: function() { return 'Java'; } },
 			{ id: 10, toString: function() { return 'Ruby'; } },
 		];
-		$('#tags').tagSelector(tags, 'name');
+		$('#tags').tagSelector(tags, 'tags');
 	</script>
 </body>
 </html>
