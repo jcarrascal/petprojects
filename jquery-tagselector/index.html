@@ -7,10 +7,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Tag Selector for jQuery</title>
-	<meta name="description" content="Allows selecting multiple &quote;Tags&quote; by using jQuery's autocomplete.">
+	<meta name="description" content="Allows selecting multiple &quot;Tags&quot; by using jQuery UI's Autocomplete plugin with an interface similar to the one used by Facebook for sending a message to friends.">
 	<meta name="author" content="Julio César Carrascal Urquijo &lt;jcarrascal@gmail.com&gt;">
 	<link rel=stylesheet href="styles.css">
-	<link href="http://s.comerciando.co/v2.0/js/jquery-ui-1.8.11/jquery-ui.min.css" rel=stylesheet type="text/css">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/base/jquery-ui.css" rel=stylesheet type="text/css">
 	<link href="jquery-tagselector.css" rel=stylesheet>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
@@ -19,16 +19,28 @@
 <body>
 	<h1>Tag Selector for jQuery</h1>
 	<p class=summary>
-		Allows selecting multiple &quot;Tags&quot; by using jQuery's Autocomplete plugin with an interface
-		similar to the one used by Facebook for sending a message to friends.
+		Allows selecting multiple &quot;Tags&quot; by using <a href="http://jqueryui.com/demos/autocomplete/">jQuery
+		UI's Autocomplete</a> plugin with an interface similar to the one used by Facebook for sending a message to
+		friends.
+	</p>
+	<p>And this is how it looks like:</p>
+	<p>
+		<div id=tags class=tagSelector style="width:300px">
+			<span class=tag>
+				jQuery <a>×</a>
+				<input name=tags type=hidden value=42>
+			</span>
+			<input type=text>
+		</div>
 	</p>
 	<h2>Usage:</h2>
 	<p>
-		In your page you need to include jQuery, the Tag Selector JavaScript file and the Tag Selector CSS file. In the
-		following sample you can see how it looks:
+		In your page you need to include jQuery, jQuery UI CSS file, jQuery UI JavaScript file, the Tag Selector CSS 
+		file and the Tag Selector JavaScript file. In the following sample you can see how it looks:
 	</p>
 	<pre>
-&lt;link href="http://s.comerciando.co/v2.0/js/jquery-ui-1.8.11/jquery-ui.min.css" rel=stylesheet type="text/css"&gt;
+&lt;link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/base/jquery-ui.css"
+	rel=stylesheet type="text/css"&gt;
 &lt;link href="jquery-tagselector.css" rel=stylesheet&gt;
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"&gt;&lt;/script&gt;
@@ -36,7 +48,7 @@
 &lt;div id=tags class=tagSelector style="width:300px"&gt;
 	&lt;span class=tag&gt;
 		jQuery &lt;a&gt;×&lt;/a&gt;
-		&lt;input name=tags type="hidden" value=42&gt;
+		&lt;input name=tags type=hidden value=42&gt;
 	&lt;/span&gt;
 	&lt;input type=text&gt;
 &lt;/div&gt;
@@ -56,23 +68,13 @@ $(function() {
 		{ id: 91, toString: function() { return 'Java'; } },
 		{ id: 10, toString: function() { return 'Ruby'; } },
 	];
-	$('#tags').tagSelector(tags, 'name');
+	$('#tags').tagSelector(tags, 'tags');
 
 });
 &lt;/script&gt;
 </pre>
-	<p>And this is how it looks:</p>
 	<p>
-		<div id=tags class=tagSelector style="width:300px">
-			<span class=tag>
-				jQuery <a>×</a>
-				<input name=tags type="hidden" value=42>
-			</span>
-			<input type=text>
-		</div>
-	</p>
-	<p>
-		There's a Django Form Widget that you can use with MultipleChoiceField and ModelMultipleChoiceField that
+		There's also a Django Form Widget that you can use with MultipleChoiceField and ModelMultipleChoiceField that
 		will render the field apropiatelly and display already selected values. Just import TagSelectMultiple from the
 		widgets.py file an use it like this:
 	</p>
@@ -102,7 +104,10 @@ class TagsForm(forms.ModelForm):
 				<tr>
 					<td>source</td>
 					<td>string/array/function</td>
-					<td>The "source" property for jQuery UI autocomplete plugin.</td>
+					<td>
+						The "source" property for <a href="http://jqueryui.com/demos/autocomplete/">jQuery UI's 
+						Autocomplete</a> plugin.
+					</td>
 				</tr>
 				<tr>
 					<td>name</td>
