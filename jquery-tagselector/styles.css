@@ -1,0 +1,35 @@
+body {
+	font: 13px/1.4 "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+	margin: 30px auto;
+	width: 720px;
+}
+h1 {
+	border-bottom: 1px solid #BBBBBB;
+	color: #222222;
+	font: 3.2em "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+}
+code, pre {
+	font-family: Consolas, "Courier New", Courier, monospaced;
+	overflow: hidden;
+}
+pre {
+	background-color: #EEEEEE;
+	padding: 1em;
+}
+dt { font-weight: bold }
+dd { margin-bottom: 1em }
+.summary {
+	color: #777777;
+	font: italic 17px "Myriad Pro";
+}
+.options {
+	border-collapse: collapse;
+	width: 100%;
+}
+.options tr { vertical-align: top }
+.options td, .options th { padding: 4px 8px }
+.options th {
+	background-color: #E2EDF4;
+	font-weight: bold;
+}
+.odd { background-color: #EFEFEF; }
