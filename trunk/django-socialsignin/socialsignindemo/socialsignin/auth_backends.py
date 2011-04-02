@@ -77,7 +77,7 @@ class OpenIDBackend(LocalUserBackend):
 			if ax:
 				if provider == 'Google':
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
-					username   = generate_username('fb:', params['first_name'], params['last_name'])
+					username   = generate_username('gm:', params['first_name'], params['last_name'])
 					first_name = ax.getSingle(params['first_name'])[:30]
 					last_name  = ax.getSingle(params['last_name'])[:30]
 					email      = ax.getSingle(params['email'])[:75]
