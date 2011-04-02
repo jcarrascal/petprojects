@@ -20,7 +20,7 @@ if not LOCAL_USER_MODEL:
 
 
 def generate_username(prefix, first_name, last_name):
-	return prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', (first_name + last_name).lower(), flags=re.IGNORECASE)[:30]
+	return (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', (first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
 
 
 class LocalUserBackend(ModelBackend):
