@@ -9,10 +9,15 @@
 	$.fn.tagSelector = function(source, name) {
 		return this.each(function() {
 				var selector = $(this),
-					input = $('input[type=text]', this);
+					input = $('input[type=text]', this),
+					limitTags = function() {
+						if ($('input[type=hidden]', selector).length >= 5)
+							input.hide();
+					};
 				selector.click(function() { input.focus(); })
 					.delegate('.tag a', 'click', function() {
 						$(this).parent().remove();
+						input.show();
 					});
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active)
@@ -24,17 +29,18 @@
 						select: function(event, ui) {
 							//<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
 							var tag = $('<span class="tag"/>')
-								.text(ui.item.toString() + ' ')
+								.text((ui.item.name || ui.item.toString()) + ' ')
 								.append('<a>×</a>')
 								.append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
 								.insertBefore(input);
+							limitTags();
 							return true;
 						}
 					});
 				input.data('autocomplete')._renderItem = function(ul, item) {
 						return $('<li/>')
 							.data('item.autocomplete', item)
-							.append($('<a/>').text(item.toString()))
+							.append($('<a/>').text(item.name || item.toString()))
 							.appendTo(ul);
 					};
 				input.data('autocomplete')._resizeMenu = function(ul, item) {
@@ -44,6 +50,7 @@
 							selector.outerWidth()
 						));
 					};
+				limitTags();
 			});
 	};
 
