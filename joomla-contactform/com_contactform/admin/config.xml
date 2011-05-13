@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params>
+		<param name="recipient" type="text" default="com_contactform@mailinator.com" label="CT_RECIPIENT" description="CT_DESCRIPTION_RECIPIENT" />
+		<param name="prefix" type="text" default="[ContactForm]" label="CF_PREFIX" description="CF_DESCRIPTION_PREFIX" />
+
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="showHomePhone" type="radio" default="0" label="CF_SHOW_HOME_PHONE" description="CF_DESCRIPTION_SHOW_HOME_PHONE">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="showCellPhone" type="radio" default="0" label="CF_SHOW_CELL_PHONE" description="CF_DESCRIPTION_SHOW_CELL_PHONE">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="showCompany" type="radio" default="0" label="CF_SHOW_COMPANY" description="CF_DESCRIPTION_SHOW_COMPANY">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="showAddress" type="radio" default="0" label="CF_SHOW_ADDRESS" description="CF_DESCRIPTION_SHOW_ADDRESS">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="showCity" type="radio" default="0" label="CF_SHOW_CITY" description="CF_DESCRIPTION_SHOW_CITY">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+	</params>
+</config>
