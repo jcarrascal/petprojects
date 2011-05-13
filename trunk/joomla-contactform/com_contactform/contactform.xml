@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+	<name>ContactForm</name>
+	<creationDate>2007-07-23</creationDate>
+	<author>Julio César Carrascal Urquijo</author>
+	<authorEmail>jcarrascal@gmail.com</authorEmail>
+	<authorUrl>http://code.google.com/p/joomphase/</authorUrl>
+	<copyright>Copyright © 2007 - Julio César Carrascal Urquijo</copyright>
+	<license>GNU/LGPL</license>
+	<version>1.0.0</version>
+	<description>A simple contact form.</description>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>contactform.php</filename>
+		<filename>controller.php</filename>
+		<filename>models/index.html</filename>
+		<filename>models/contactform.php</filename>
+		<filename>views/index.html</filename>
+		<filename>views/contactform/index.html</filename>
+		<filename>views/contactform/view.html.php</filename>
+		<filename>views/contactform/tmpl/index.html</filename>
+		<filename>views/contactform/tmpl/default.php</filename>
+		<filename>views/contactform/tmpl/default_success.php</filename>
+	</files>
+
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_contactform.ini</language>
+		<language tag="es-ES">language/es-ES/es-ES.com_contactform.ini</language>
+	</languages>
+
+	<administration>
+		<menu img="components/com_contactform/assets/icon-16-contactform.png">Contact Form</menu>
+
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>admin.contactform.php</filename>
+			<filename>config.xml</filename>
+			<filename>README.html</filename>
+			<filename>assets/index.html</filename>
+			<filename>assets/icon-16-contactform.png</filename>
+		</files>
+
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_contactform.ini</language>
+			<language tag="es-ES">language/es-ES/es-ES.com_contactform.ini</language>
+		</languages>
+	</administration>
+</install>
