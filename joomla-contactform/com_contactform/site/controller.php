@@ -27,28 +27,13 @@ jimport('joomla.application.component.controller');
 
 class ContactFormController extends JController
 {
-	function __construct()
+	function display()
 	{
-		parent::__construct();
-
-		$this->registerTask('send', 'send');
-		$this->registerTask('success', 'success');
+		JRequest::setVar('view', JRequest::getCmd('view', 'ContactForm'));
+		parent::display();
 	}
 
-    function display()
-    {
-		$model = $this->getModel('ContactForm');
-
-		$article_id = JRequest::getInt('article_id');
-		if ($article_id > 0)
-			$model->setArticleId($article_id);
-
-		$view = $this->getView('ContactForm', 'html');
-		$view->assign('model', $model);
-		$view->display();
-    }
-
-	function send()
+/*	function send()
 	{
 		$model = $this->getModel('ContactForm');
 		if ($model->send())
@@ -66,7 +51,7 @@ class ContactFormController extends JController
 	{
 		$view = $this->getView('ContactForm', 'html');
 		$view->display('success');
-	}
+	}*/
 }
 
 
