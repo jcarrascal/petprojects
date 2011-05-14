@@ -101,16 +101,15 @@ class ContactFormModelContactForm extends JModel
 	function send()
 	{
 		jimport('joomla.mail.helper');
-		$this->fullname = JMailHelper::cleanLine(JRequest::getString('fullname', ''));
-		$this->email    = JMailHelper::cleanAddress(JRequest::getString('email', ''));
-		$this->subject  = JMailHelper::cleanSubject(JRequest::getString('subject', ''));
-		$this->message  = JMailHelper::cleanBody(JRequest::getString('message', ''));
+		$this->fullname  = JMailHelper::cleanLine(JRequest::getString('fullname', ''));
+		$this->email     = JMailHelper::cleanAddress(JRequest::getString('email', ''));
+		$this->subject   = JMailHelper::cleanSubject(JRequest::getString('subject', ''));
+		$this->message   = JMailHelper::cleanBody(JRequest::getString('message', ''));
 		$this->homePhone = JMailHelper::cleanBody(JRequest::getString('homePhone', ''));
 		$this->cellPhone = JMailHelper::cleanBody(JRequest::getString('cellPhone', ''));
-		$this->company = JMailHelper::cleanBody(JRequest::getString('company', ''));
-		$this->address = JMailHelper::cleanBody(JRequest::getString('address', ''));
-		$this->city = JMailHelper::cleanBody(JRequest::getString('city', ''));
-
+		$this->company   = JMailHelper::cleanBody(JRequest::getString('company', ''));
+		$this->address   = JMailHelper::cleanBody(JRequest::getString('address', ''));
+		$this->city      = JMailHelper::cleanBody(JRequest::getString('city', ''));
 		if ('' == $this->fullname)
 		{
 			$this->setError(JText::_('CF_INVALID_NAME'));
@@ -143,9 +142,8 @@ class ContactFormModelContactForm extends JModel
 			;
 
 		jimport('joomla.utilities.utility');
-
-		$result = JUtility::sendMail($this->email, $this->fullname, $this->_recipient, "$this->_prefix $this->subject",
-			$body, false);
+		$subject = "$this->prefix $this->subject";
+		$result = JUtility::sendMail($this->email, $this->fullname, $this->recipient, $subject, $body, false);
 		if (JError::isError($result))
 		{
 			$this->setError($result->message);
