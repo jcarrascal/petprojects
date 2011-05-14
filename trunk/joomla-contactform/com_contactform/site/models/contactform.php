@@ -30,6 +30,7 @@ class ContactFormModelContactForm extends JModel
 	{
 		parent::__construct();
 		$this->article_id = JRequest::getInt('article_id', 0);
+		$this->shouldDisplayArticle = $this->article_id > 0;
 		$this->recipient = JRequest::getString('recipient', 'com_contactform@mailinator.com');
 		$this->prefix = JRequest::getString('prefix', '[ContactForm]');
 		$this->showHomePhone = JRequest::getBool('showHomePhone', false);
@@ -39,28 +40,25 @@ class ContactFormModelContactForm extends JModel
 		$this->showCity = JRequest::getBool('showCity', false);
 	}
 
+	var $article = null;
+	var $showArticle = false;
+	var $showHomePhone = false;
+	var $showCellPhone = false;
+	var $showCompany = false;
+	var $showAddress = false;
+	var $showCity = false;
+
+	var $fullname;
+	var $email;
+	var $subject;
+	var $message;
+	var $homePhone;
+	var $cellPhone;
+	var $company;
+	var $address;
+	var $city;
+
 	private $article_id = 0;
-	private $article = null;
-	private $showHomePhone = false;
-	private $showCellPhone = false;
-	private $showCompany = false;
-	private $showAddress = false;
-	private $showCity = false;
-
-	var $name = '';
-	var $email = '';
-	var $subject = '';
-	var $message = '';
-	var $company = '';
-	var $homePhone = '';
-	var $address = '';
-	var $city = '';
-	var $cellPhone = '';
-
-	function getShouldDisplayArticle()
-	{
-		return $this->_article_id > 0;
-	}
 
 	function getArticle()
 	{
@@ -95,22 +93,25 @@ class ContactFormModelContactForm extends JModel
 		return $this->article;
 	}
 
-    function send()
-    {
-		jimport('joomla.mail.helper');
+	function getForm()
+	{
+		return $this->form;
+	}
 
-		$this->name     = JMailHelper::cleanLine(JRequest::getString('name', ''));
+	function send()
+	{
+		jimport('joomla.mail.helper');
+		$this->fullname = JMailHelper::cleanLine(JRequest::getString('fullname', ''));
 		$this->email    = JMailHelper::cleanAddress(JRequest::getString('email', ''));
 		$this->subject  = JMailHelper::cleanSubject(JRequest::getString('subject', ''));
 		$this->message  = JMailHelper::cleanBody(JRequest::getString('message', ''));
-
 		$this->homePhone = JMailHelper::cleanBody(JRequest::getString('homePhone', ''));
 		$this->cellPhone = JMailHelper::cleanBody(JRequest::getString('cellPhone', ''));
 		$this->company = JMailHelper::cleanBody(JRequest::getString('company', ''));
 		$this->address = JMailHelper::cleanBody(JRequest::getString('address', ''));
 		$this->city = JMailHelper::cleanBody(JRequest::getString('city', ''));
 
-		if ('' == $this->name)
+		if ('' == $this->fullname)
 		{
 			$this->setError(JText::_('CF_INVALID_NAME'));
 			return false;
@@ -131,7 +132,7 @@ class ContactFormModelContactForm extends JModel
 			return false;
 		}
 
-		$body = JText::_('CF_FIELD_NAME') . ': ' . $this->name
+		$body = JText::_('CF_FIELD_NAME') . ': ' . $this->fullname
 			. "\r\n" . JText::_('CF_FIELD_EMAIL') . ': ' . $this->email
 			. "\r\n\r\n$this->message\r\n"
 			. ($this->showHomePhone ? "\r\n" . JText::_('CF_FIELD_HOME_PHONE') . ': ' . $this->homePhone : '')
@@ -143,7 +144,7 @@ class ContactFormModelContactForm extends JModel
 
 		jimport('joomla.utilities.utility');
 
-		$result = JUtility::sendMail($this->email, $this->name, $this->_recipient, "$this->_prefix $this->subject",
+		$result = JUtility::sendMail($this->email, $this->fullname, $this->_recipient, "$this->_prefix $this->subject",
 			$body, false);
 		if (JError::isError($result))
 		{
@@ -152,7 +153,4 @@ class ContactFormModelContactForm extends JModel
 		}
 		return true;
 	}
-
-	var $_recipient;
-	var $_prefix;
 }
