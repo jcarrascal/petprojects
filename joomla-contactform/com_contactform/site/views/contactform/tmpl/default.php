@@ -46,8 +46,8 @@ $model = $this->model;
 			<tbody>
 				<tr>
 					<th width="30%"><label for="cfFullName"><?php echo JText::_('CF_FIELD_FULL_NAME') ?>:</label></th>
-					<td><input class="inputbox" id="cfFullName" name="name" type="text" maxlength="100"
-					value="<?php echo $this->escape($model->name) ?>"/></td>
+					<td><input class="inputbox" id="cfFullName" name="fullname" type="text" maxlength="100"
+					value="<?php echo $this->escape($model->fullname) ?>"/></td>
 				</tr>
 				<tr>
 					<th><label for="cfEmail"><?php echo JText::_('CF_FIELD_EMAIL') ?>:</label></th>

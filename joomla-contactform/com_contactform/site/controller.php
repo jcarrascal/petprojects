@@ -33,7 +33,7 @@ class ContactFormController extends JController
 		parent::display();
 	}
 
-/*	function send()
+	function send()
 	{
 		$model = $this->getModel('ContactForm');
 		if ($model->send())
@@ -49,9 +49,8 @@ class ContactFormController extends JController
 
 	function success()
 	{
-		$view = $this->getView('ContactForm', 'html');
-		$view->display('success');
-	}*/
+		parent::display();
+	}
 }
 
 
