@@ -29,15 +29,9 @@ class ContactFormViewContactForm extends JView
 {
 	function display($tpl = null) 
 	{
-		$this->shouldDisplayArticle = $this->get('shouldDisplayArticle');
-		if ($this->shouldDisplayArticle)
-			$this->article = $this->get('article');
-		$this->showHomePhone = $this->get('showHomePhone');
-		$this->showCellPhone = $this->get('showCellPhone');
-		$this->showCompany = $this->get('showCompany');
-		$this->showAddress = $this->get('showAddress');
-		$this->showCity = $this->get('showCity');
-
+		$this->model = $this->getModel();
+		if ($this->showArticle)
+			$this->article = $this->get('Article');
 		if (count($errors = $this->get('Errors'))) 
 		{
 			JError::raiseError(500, implode('<br />', $errors));
