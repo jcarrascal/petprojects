@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -30,19 +29,23 @@ class ContactFormModelContactForm extends JModel
 	function __construct()
 	{
 		parent::__construct();
-
-		global $mainframe;
-
-		$params = $mainframe->getPageParameters('com_contactform');
-		$this->_recipient = $params->get('recipient', 'com_contactform@mailinator.com');
-		$this->_prefix = $params->get('prefix', '[ContactForm]');
-
-		$this->showHomePhone = $params->get('showHomePhone', false);
-		$this->showCellPhone = $params->get('showCellPhone', false);
-		$this->showCompany = $params->get('showCompany', false);
-		$this->showAddress = $params->get('showAddress', false);
-		$this->showCity = $params->get('showCity', false);
+		$this->article_id = JRequest::getInt('article_id', 0);
+		$this->recipient = JRequest::getString('recipient', 'com_contactform@mailinator.com');
+		$this->prefix = JRequest::getString('prefix', '[ContactForm]');
+		$this->showHomePhone = JRequest::getBool('showHomePhone', false);
+		$this->showCellPhone = JRequest::getBool('showCellPhone', false);
+		$this->showCompany = JRequest::getBool('showCompany', false);
+		$this->showAddress = JRequest::getBool('showAddress', false);
+		$this->showCity = JRequest::getBool('showCity', false);
 	}
+
+	private $article_id = 0;
+	private $article = null;
+	private $showHomePhone = false;
+	private $showCellPhone = false;
+	private $showCompany = false;
+	private $showAddress = false;
+	private $showCity = false;
 
 	var $name = '';
 	var $email = '';
@@ -54,31 +57,21 @@ class ContactFormModelContactForm extends JModel
 	var $city = '';
 	var $cellPhone = '';
 
-	var $_article_id = 0;
-	var $_article = null;
-
-	function shouldDisplayArticle()
+	function getShouldDisplayArticle()
 	{
 		return $this->_article_id > 0;
 	}
 
-	function setArticleId($value)
-	{
-		$this->_article_id = $value;
-	}
-
 	function getArticle()
 	{
-		if ($this->_article_id > 0 && null == $this->_article)
+		if ($this->article_id > 0 && null == $this->article)
 		{
-			$user		=& JFactory::getUser();
-			$aid		= (int) $user->get('aid', 0);
-
 			jimport('joomla.utilities.date');
-			$jnow		= new JDate();
-			$now		= $jnow->toMySQL();
-			$nullDate	= $this->_db->getNullDate();
-
+			$user       =& JFactory::getUser();
+			$aid        = (int) $user->get('aid', 0);
+			$jnow       = new JDate();
+			$now        = $jnow->toMySQL();
+			$nullDate   = $this->_db->getNullDate();
 			$query = 'SELECT a.*, u.name AS author, u.usertype, cc.title AS category, s.title AS section,' 
 				. "\n    CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(':', a.id, a.alias) ELSE a.id END as slug,"
 				. "\n    CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(':', cc.id, cc.alias) ELSE cc.id END as catslug,"
@@ -94,13 +87,12 @@ class ContactFormModelContactForm extends JModel
 				. "\n      AND ( a.publish_down = " . $this->_db->Quote($nullDate) . ' OR a.publish_down >= ' . $this->_db->Quote($now) . ' ) )'
 				;
 			$this->_db->setQuery($query);
-			$this->_article = $this->_db->loadObject();
-			$this->_article->event = new stdClass();
-			$this->_article->event->afterDisplayTitle = null;
-			$this->_article->event->beforeDisplayContent = null;
+			$this->article = $this->_db->loadObject();
+			$this->article->event = new stdClass();
+			$this->article->event->afterDisplayTitle = null;
+			$this->article->event->beforeDisplayContent = null;
 		}
-
-		return $this->_article;
+		return $this->article;
 	}
 
     function send()
@@ -164,6 +156,3 @@ class ContactFormModelContactForm extends JModel
 	var $_recipient;
 	var $_prefix;
 }
-
-
-?>

@@ -27,11 +27,22 @@ jimport('joomla.application.component.view');
 
 class ContactFormViewContactForm extends JView
 {
-    function display($tpl = null)
-    {
-        parent::display($tpl);
-    }
+	function display($tpl = null) 
+	{
+		$this->shouldDisplayArticle = $this->get('shouldDisplayArticle');
+		if ($this->shouldDisplayArticle)
+			$this->article = $this->get('article');
+		$this->showHomePhone = $this->get('showHomePhone');
+		$this->showCellPhone = $this->get('showCellPhone');
+		$this->showCompany = $this->get('showCompany');
+		$this->showAddress = $this->get('showAddress');
+		$this->showCity = $this->get('showCity');
+
+		if (count($errors = $this->get('Errors'))) 
+		{
+			JError::raiseError(500, implode('<br />', $errors));
+			return false;
+		}
+		parent::display($tpl);
+	}
 }
-
-
-?>

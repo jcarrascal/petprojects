@@ -21,80 +21,78 @@
 defined('_JEXEC') or die('Restricted access');
 
 ?>
+<form action="<?php echo JRoute::_('index.php?option=com_contactform&task=send') ?>" id="ContactForm" method="post">
+	<?php if ($this->shouldDisplayArticle) {
+		echo '<h2>', $this->article->title, "</h2>\n";
+	} else {
+		echo '<h2>', JText::_('CF_FORM_TITLE'), "</h2>\n";
+	} ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_contactform&task=send') ?>" method="post" id="ContactForm">
-<?php if ($this->model->shouldDisplayArticle()) {
-	$article = $this->model->getArticle();
-	echo '<div class="componentheading">', $article->title, "</div>\n";
-} else {
-	echo '<div class="componentheading">', JText::_('CF_FORM_TITLE'), "</div>\n";
-} ?>
+	<?php if (isset($this->message)) { ?>
+		<div class="message">
+			<?php echo $this->message ?>
+		</div>
+	<?php } ?>
 
-<?php if (isset($this->message)) { ?>
-	<div class="message">
-		<?php echo $this->message ?>
-	</div>
-<?php } ?>
+	<?php if ($this->shouldDisplayArticle) {
+		echo '<div class="article-text">', $article->introtext, "\n", $article->fulltext, "</div>\n";
+	} ?>
 
-<?php if ($this->model->shouldDisplayArticle()) {
-	echo '<div class="article-text">', $article->introtext, "\n", $article->fulltext, "</div>\n";
-} ?>
-
-	<fieldset title="<?php echo JText::_('CF_SECTION_TITLE_CONTACT') ?>">
+	<fieldset>
 		<legend><?php echo JText::_('CF_SECTION_TITLE_CONTACT') ?></legend>
 		<table cellspacing="0" cellpadding="0" border="0" width="100%">
 			<tbody>
 				<tr>
 					<th width="30%"><label for="cfName"><?php echo JText::_('CF_FIELD_NAME') ?>:</label></th>
 					<td><input class="inputbox" id="cfName" name="name" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->name) ?>"/></td>
+					value="<?php echo $this->escape($this->name) ?>"/></td>
 				</tr>
 				<tr>
 					<th><label for="cfEmail"><?php echo JText::_('CF_FIELD_EMAIL') ?>:</label></th>
 					<td><input class="inputbox" id="cfEmail" name="email" type="text" 
-					maxlength="200" value="<?php echo $this->escape($this->model->email) ?>"/></td>
+					maxlength="200" value="<?php echo $this->escape($this->email) ?>"/></td>
 				</tr>
-<?php if ($this->model->showHomePhone) { ?>
+<?php if ($this->showHomePhone) { ?>
 				<tr>
 					<th width="30%"><label for="cfHomePhone"><?php echo JText::_('CF_FIELD_HOME_PHONE') ?>:</label></th>
 					<td><input class="inputbox" id="cfHomePhone" name="homePhone" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->homePhone) ?>"/></td>
+					value="<?php echo $this->escape($this->homePhone) ?>"/></td>
 				</tr>
 <?php
 }
-if ($this->model->showCellPhone) {
+if ($this->showCellPhone) {
 ?>
 				<tr>
 					<th width="30%"><label for="cfCellPhone"><?php echo JText::_('CF_FIELD_CELL_PHONE') ?>:</label></th>
 					<td><input class="inputbox" id="cfCellPhone" name="cellPhone" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->cellPhone) ?>"/></td>
+					value="<?php echo $this->escape($this->cellPhone) ?>"/></td>
 				</tr>
 <?php
 }
-if ($this->model->showCompany) {
+if ($this->showCompany) {
 ?>
 				<tr>
 					<th width="30%"><label for="cfCompany"><?php echo JText::_('CF_FIELD_COMPANY') ?>:</label></th>
 					<td><input class="inputbox" id="cfCompany" name="company" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->company) ?>"/></td>
+					value="<?php echo $this->escape($this->company) ?>"/></td>
 				</tr>
 <?php
 }
-if ($this->model->showAddress) {
+if ($this->showAddress) {
 ?>
 				<tr>
 					<th width="30%"><label for="cfAddress"><?php echo JText::_('CF_FIELD_ADDRESS') ?>:</label></th>
 					<td><input class="inputbox" id="cfAddress" name="address" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->address) ?>"/></td>
+					value="<?php echo $this->escape($this->address) ?>"/></td>
 				</tr>
 <?php
 }
-if ($this->model->showCity) {
+if ($this->showCity) {
 ?>
 				<tr>
 					<th width="30%"><label for="cfCity"><?php echo JText::_('CF_FIELD_CITY') ?>:</label></th>
 					<td><input class="inputbox" id="cfCity" name="city" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->city) ?>"/></td>
+					value="<?php echo $this->escape($this->city) ?>"/></td>
 				</tr>
 <?php } ?>
 			</tbody>
@@ -108,14 +106,14 @@ if ($this->model->showCity) {
 				<tr>
 					<th width="30%"><label for="cfSubject"><?php echo JText::_('CF_FIELD_SUBJECT') ?>:</label></th>
 					<td><input class="inputbox" id="cfSubject" name="subject" type="text" maxlength="100"
-					value="<?php echo $this->escape($this->model->subject) ?>"/></td>
+					value="<?php echo $this->escape($this->subject) ?>"/></td>
 				</tr>
 				<tr>
 					<th colspan="2"><label for="cfMessage"><?php echo JText::_('CF_FIELD_MESSAGE') ?>:</label></th>
 				</tr>
 				<tr>
 					<td colspan="2"><textarea id="cfMessage" class="inputbox" name="message" 
-					style="width:90%;height:120px"><?php echo $this->escape($this->model->message) ?></textarea></td>
+					style="width:90%;height:120px"><?php echo $this->escape($this->message) ?></textarea></td>
 				</tr>
 			</tbody>
 		</table>
