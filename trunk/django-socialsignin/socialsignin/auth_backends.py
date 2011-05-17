@@ -10,6 +10,7 @@ from urllib2 import Request, build_opener, HTTPError
 from urllib import unquote
 from xml.dom import Node
 from xml.dom.minidom import parseString
+import unicodedata
 import re
 
 
@@ -19,8 +20,11 @@ if not LOCAL_USER_MODEL:
 	raise ImproperlyConfigured('Could not get local user model.')
 
 
+def strip_accents(s):
+	return ''.join((c for c in unicodedata.normalize('NFD', unicode(s)) if unicodedata.category(c) != 'Mn'))
+
 def generate_username(prefix, first_name, last_name):
-	return (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', (first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
+	return (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', strip_accents(first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
 
 
 class LocalUserBackend(ModelBackend):
@@ -168,7 +172,7 @@ class LinkedInBackend(LocalUserBackend):
 			profile = LinkedInProfile.objects.get(linkedin_uid=linkedin_uid)
 			user = profile.user
 		except LinkedInProfile.DoesNotExist:
-			username = generate_username('tw:', me.first_name, me.last_name)
+			username = generate_username('li:', me.first_name, me.last_name)
 			user = LOCAL_USER_MODEL(username=username, first_name=me.first_name, last_name=me.last_name)
 			user.save()
 			profile = LinkedInProfile(linkedin_uid=linkedin_uid, user=user)
