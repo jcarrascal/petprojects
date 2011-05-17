@@ -1,7 +1,0 @@
-{% extends "default.html" %}
-{% block title %}Logged out{% endblock %}
-{% block main_content %}
-	<h1>Your account has been locked</h1>
-	<p>Sorry, but this account has been locked until {{ intended.locked_until|date }} at {{ intended.locked_until|time }}.</p>
-	<p><a href="/">Log in again &raquo;</a></p>
-{% endblock %}
