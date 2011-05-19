@@ -53,8 +53,10 @@ class FacebookBackend(LocalUserBackend):
 			profile = FacebookProfile.objects.get(facebook_uid=facebook_uid)
 			user = profile.user
 		except FacebookProfile.DoesNotExist:
-			username = generate_username('fb:', me['first_name'], me['last_name'])
-			user = LOCAL_USER_MODEL(username=username, first_name=me['first_name'], last_name=me['last_name'])
+			first_name = me['first_name']
+			last_name = me['last_name']
+			username = generate_username('fb:', first_name, last_name)
+			user = LOCAL_USER_MODEL(username=username, first_name=first_name, last_name=last_name)
 			user.save()
 			profile = FacebookProfile(facebook_uid=facebook_uid, user=user)
 		profile.access_token = access_token
@@ -71,7 +73,7 @@ class OpenIDBackend(LocalUserBackend):
 			return profile.user
 		except OpenIDProfile.DoesNotExist:
 			first_name, last_name, email = '', '', ''
-			username = generate_username('oi:', openid_response.identity_url, '')
+			username = generate_username('oi:', openid_response.identity_url[-27:], '')
 			access_token = None
 			if hasattr(openid_response, 'sreg'):
 				email = openid_response.sreg.get('email')[:75]
@@ -81,10 +83,10 @@ class OpenIDBackend(LocalUserBackend):
 			if ax:
 				if provider == 'Google':
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
-					username   = generate_username('gm:', params['first_name'], params['last_name'])
 					first_name = ax.getSingle(params['first_name'])[:30]
 					last_name  = ax.getSingle(params['last_name'])[:30]
 					email      = ax.getSingle(params['email'])[:75]
+					username   = generate_username('gm:', first_name, last_name)
 				elif provider in OPENID_AX_PARAMS_BY_PROVIDER:
 					params = OPENID_AX_PARAMS_BY_PROVIDER[provider]
 					email = ax.getSingle(params['email'])[:75]
