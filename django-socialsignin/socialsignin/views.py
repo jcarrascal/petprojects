@@ -66,7 +66,7 @@ def default_on_inactive(request, user):
 def redirect_if_authenticated(request, on_inactive=default_on_inactive, *args, **kwargs):
 	user = authenticate(*args, **kwargs)
 	if user is not None:
-		if user.is_active:
+		if not user.is_active:
 			return on_inactive(request, user)
 		login(request, user)
 		if request.GET.has_key('next') and is_local_redirect(request.GET['next']):
@@ -136,7 +136,7 @@ def facebook_done(request, on_inactive=default_on_inactive):
 		return HttpResponseRedirect(reverse(LOGIN_VIEW))
 	access_token = response_qs['access_token'][-1]
 	facebook = GraphAPI(access_token)
-	return redirect_if_authenticated(request, facebook=facebook, access_token=access_token, on_inactive=on_inactive)
+	return redirect_if_authenticated(request, on_inactive, facebook=facebook, access_token=access_token)
 
 
 def openid_login(request, openid_url=None, return_to=None, provider='Default'):
@@ -157,22 +157,16 @@ def openid_login(request, openid_url=None, return_to=None, provider='Default'):
 	return HttpResponseRedirect(auth_request.redirectURL(realm, return_to))
 
 @transaction.commit_on_success
-def openid_done(request, current_url=None, on_success=default_on_success, on_failure=default_on_failure,
-                on_inactive=default_on_inactive, provider='Default'):
+def openid_done(request, current_url=None, on_inactive=default_on_inactive, provider='Default'):
 	current_url = current_url or reverse_absolute_uri(request, openid_done)
 	consumer = Consumer(request.session, None)
 	openid_response = consumer.complete(request.GET, current_url)
 	if openid_response.status == SUCCESS:
-		return on_success(request, provider, openid_response, default_on_inactive)
-	elif openid_response.status == CANCEL:
-		return on_failure(request, provider, _('The authentication was cancelled'), openid_response)
-	elif openid_response.status == FAILURE:
-		return on_failure(request, provider, openid_response.message, openid_response)
-
-def default_on_success(request, provider, openid_response,on_inactive=default_on_inactive):
-	return redirect_if_authenticated(request, provider, openid_response, on_inactive)
-
-def default_on_failure(request, provider, message, openid_response):
+		return redirect_if_authenticated(request, on_inactive, provider=provider, openid_response=openid_response)
+	if openid_response.status == CANCEL or openid_response.status == FAILURE:
+		message = _('The authentication was cancelled')
+	else:
+		message = openid_response.message
 	messages.error(request, message)
 	return HttpResponseRedirect(reverse(LOGIN_VIEW))
 
@@ -193,7 +187,6 @@ def liveid_login(request):
 	policyurl = request.build_absolute_uri(reverse(LIVEID_POLICY_VIEW))
 	liveid = WindowsLiveLogin(LIVEID_APP_ID, LIVEID_SECRET_KEY, policyurl=policyurl)
 	liveid.setDebug(True)
-	print liveid.getConsentUrl(LIVEID_OFFERS)
 	return HttpResponseRedirect(liveid.getConsentUrl(LIVEID_OFFERS))
 
 @csrf_exempt
@@ -203,7 +196,7 @@ def liveid_done(request, on_inactive=default_on_inactive):
 	policyurl = request.build_absolute_uri(reverse(LIVEID_POLICY_VIEW))
 	liveid = WindowsLiveLogin(LIVEID_APP_ID, LIVEID_SECRET_KEY, policyurl=policyurl, returnurl=returnurl)
 	field_storage = dict([(n, MiniFieldStorage(n, v)) for n, v in request.POST.items()])
-	return redirect_if_authenticated(request, liveid=liveid, field_storage=field_storage, on_inactive=on_inactive)
+	return redirect_if_authenticated(request, on_inactive, liveid=liveid, field_storage=field_storage)
 
 
 def twitter_login(request):
@@ -231,7 +224,7 @@ def twitter_done(request, on_inactive=default_on_inactive):
 	except TweepError, e:
 		messages.error(request, e)
 		return HttpResponseRedirect(reverse(LOGIN_VIEW))
-	return redirect_if_authenticated(request, twitter=twitter, access_token=access_token, on_inactive=on_inactive)
+	return redirect_if_authenticated(request, on_inactive, twitter=twitter, access_token=access_token)
 
 
 def linkedin_login(request):
@@ -259,7 +252,7 @@ def linkedin_done(request, on_inactive=default_on_inactive):
 	if not linkedin.accessToken(request_token[0], request_token[1], oauth_verifier):
 		messages.error(request, 'Invalid token.')
 		return None
-	return redirect_if_authenticated(request, linkedin=linkedin, on_inactive=on_inactive)
+	return redirect_if_authenticated(request, on_inactive, linkedin=linkedin)
 
 
 def yahoo_login(request):
@@ -314,7 +307,6 @@ def email_available(request):
 @csrf_protect
 @transaction.commit_on_success
 def activate(request, user_id, activation_key, template_name='socialsignin/activate_invalid.html'):
-	print user_id, activation_key
 	try:
 		user = get_object_or_404(LOCAL_USER_MODEL, id=user_id, activation_key=activation_key)
 		user.activation_key = None
