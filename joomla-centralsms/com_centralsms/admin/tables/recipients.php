@@ -6,9 +6,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.database.table');
  
 /**
- * CentralCMS Table class
+ * CentralCMS Recipients Table.
  */
-class CentralCMSTableCentralCMS extends JTable
+class CentralSMSTableRecipients extends JTable
 {
 	/**
 	 * Constructor
@@ -17,6 +17,6 @@ class CentralCMSTableCentralCMS extends JTable
 	 */
 	function __construct(&$db) 
 	{
-		parent::__construct('#__centralcms', 'id', $db);
+		parent::__construct('#__recipients', 'id', $db);
 	}
 }
