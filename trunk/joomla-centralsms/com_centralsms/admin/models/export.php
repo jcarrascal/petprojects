@@ -29,12 +29,14 @@ class CentralSMSModelExport extends CentralSMSModelRecipients
 			'"'.str_replace('"','""',JText::_('COM_CENTRALSMS_RECIPIENT_HEADING_FIRSTNAME')).'";"'.
 				str_replace('"','""',JText::_('COM_CENTRALSMS_RECIPIENT_HEADING_LASTNAME')).'";"'.
 				str_replace('"','""',JText::_('COM_CENTRALSMS_RECIPIENT_HEADING_NEIGHBORHOOD')).'";"'.
+				str_replace('"','""',JText::_('COM_CENTRALSMS_RECIPIENT_HEADING_COUNTRY')).'";"'.
 				str_replace('"','""',JText::_('COM_CENTRALSMS_RECIPIENT_HEADING_CELLPHONE'))."\"\n";
 			foreach($this->getItems() as $item) {
 				$this->content.=
 				'"'.str_replace('"','""',$item->firstname).'";"'.
 					str_replace('"','""',$item->lastname).'";"'.
 					str_replace('"','""',$item->neighborhood).'";"'.
+					str_replace('"','""',$item->country).'";"'.
 					str_replace('"','""',$item->cellphone).'"'."\n";
 			}
 		}
