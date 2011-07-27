@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
-	<name>COM_CENTRALSMS_NAME</name>
+	<name>COM_CENTRALSMS</name>
 	<creationDate>2011-07-25</creationDate>
 	<author>Julio César Carrascal Urquijo</author>
 	<authorEmail>jcarrascal@gmail.com</authorEmail>
