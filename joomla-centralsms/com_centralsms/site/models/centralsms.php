@@ -10,20 +10,16 @@ jimport('joomla.application.component.modelitem');
 class CentralSMSModelCentralSMS extends JModelItem
 {
 	/**
-	 * @var string msg
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
 	 */
-	protected $msg;
- 
-	/**
-	 * Get the message
-	 * @return string The message to be displayed to the user
-	 */
-	public function getMsg()
+	public function getTable($type = 'CentralSMS', $prefix = 'CentralSMSTable', $config = array()) 
 	{
-		if (!$this->msg)
-		{
-			$this->msg = 'Hello World! from model';
-		}
-		return $this->msg;
+		return JTable::getInstance($type, $prefix, $config);
 	}
 }
