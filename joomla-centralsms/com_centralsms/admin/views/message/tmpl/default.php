@@ -14,6 +14,9 @@ JHtml::_('behavior.formvalidation');
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED')) ?>');
 		}
 	}
+	<?php if ($this->item->id > 0) : ?>
+		window.top.setTimeout('window.parent.SqueezeBox.close()', 5000);
+	<?php endif ?>
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_centralsms&view=save&layout=save&tmpl=component&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<fieldset class="adminform">
@@ -25,7 +28,7 @@ JHtml::_('behavior.formvalidation');
 		</ul>
 	</fieldset>
 	<div class="clr"></div>
-	<button type="button" onclick="this.form.submit();window.top.setTimeout('window.parent.SqueezeBox.close()', 700);"><?php echo JText::_('COM_CENTRALSMS_BUTTON_SEND') ?></button>
+	<button type="button" onclick="this.form.submit();"><?php echo JText::_('COM_CENTRALSMS_BUTTON_SEND') ?></button>
 	<button type="button" onclick="window.parent.SqueezeBox.close();"><?php echo JText::_('COM_CENTRALSMS_BUTTON_CANCEL') ?></button>
 	<div>
 		<input type="hidden" name="task" value="message.apply" />
