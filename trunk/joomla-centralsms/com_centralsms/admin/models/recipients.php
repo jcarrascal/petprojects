@@ -39,7 +39,7 @@ class CentralSMSModelRecipients extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('id, firstname, lastname, neighborhood, country, cellphone');
-		$query->from('#__centralsms_recipients');
+		$query->from('#__centralsms_recipients a');
 
 		// Filter by search by names
 		$search = $this->getState('filter.search');
@@ -48,7 +48,7 @@ class CentralSMSModelRecipients extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('(a.firstname LIKE '.$search.' OR a.lastname LIKE '.$search.')');
+				$query->where('(a.firstname LIKE '.$search.' OR a.lastname LIKE '.$search.' OR a.cellphone LIKE '.$search.')');
 			}
 		}
 
