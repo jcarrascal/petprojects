@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS `#__centralsms`;
+DROP TABLE IF EXISTS `#__recipients`;

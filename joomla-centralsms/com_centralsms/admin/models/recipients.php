@@ -7,7 +7,7 @@ jimport('joomla.application.component.modellist');
 /**
  * CentralSMS List Model.
  */
-class CentralSMSModelCentralSMSs extends JModelList
+class CentralSMSModelRecipients extends JModelList
 {
 	/**
 	 * Method to build an SQL query to load the list data.
@@ -15,11 +15,11 @@ class CentralSMSModelCentralSMSs extends JModelList
 	 * @return	string	An SQL query
 	 */
 	protected function getListQuery()
-	{DIE('foo');
+	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('id, firstname, lastname, neighborhood, cellphone');
-		$query->from('#__centralsms');
+		$query->from('#__recipients');
 		return $query;
 	}
 }

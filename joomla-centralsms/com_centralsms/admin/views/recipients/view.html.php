@@ -7,7 +7,7 @@ jimport('joomla.application.component.view');
 /**
  * CentralSMSs View
  */
-class CentralSMSViewCentralSMSs extends JView
+class CentralSMSViewRecipients extends JView
 {
 	/**
 	 * CentralSMSs view display method
