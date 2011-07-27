@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="credentials"
+	          label="COM_CENTRALSMS_CONFIG_CREDENTIALS_SETTINGS_LABEL"
+	          description="COM_CENTRALSMS_CONFIG_CREDENTIALS_SETTINGS_DESC">
+		<field name="login"
+		       label="COM_CENTRALSMS_CENTRALSMS_FIELD_LOGIN_LABEL"
+		       description="COM_CENTRALSMS_CENTRALSMS_FIELD_LOGIN_DESC"
+		       class="required"
+		       type="text">
+		</field>
+		<field name="password"
+		       label="COM_CENTRALSMS_CENTRALSMS_FIELD_PASSWORD_LABEL"
+		       description="COM_CENTRALSMS_CENTRALSMS_FIELD_PASSWORD_DESC"
+		       class="required"
+		       type="password">
+		</field>
+	</fieldset>
+</config>
