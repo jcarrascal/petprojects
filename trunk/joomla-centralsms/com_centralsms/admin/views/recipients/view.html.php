@@ -23,6 +23,18 @@ class CentralSMSViewRecipients extends JView
 		}
 		$this->items = $items;
 		$this->pagination = $pagination;
+		$this->addToolBar();
 		parent::display($tpl);
+	}
+ 
+	/**
+	 * Setting the toolbar
+	 */
+	protected function addToolBar() 
+	{
+		JToolBarHelper::title(JText::_('COM_CENTRALSMS_MANAGER_RECIPIENTS'));
+		JToolBarHelper::addNew('recipient.add');
+		JToolBarHelper::editList('recipient.edit');
+		JToolBarHelper::deleteList('', 'recipients.delete');
 	}
 }

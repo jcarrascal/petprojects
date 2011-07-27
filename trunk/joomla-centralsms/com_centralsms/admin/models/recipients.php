@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.modellist');
 
 /**
- * CentralSMS List Model.
+ * CentralSMS Recipients List Model.
  */
 class CentralSMSModelRecipients extends JModelList
 {

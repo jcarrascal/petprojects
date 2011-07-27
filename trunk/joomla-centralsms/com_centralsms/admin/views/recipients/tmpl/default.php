@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_centralcms'); ?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_centralsms'); ?>" method="post" name="adminForm">
 	<table class="adminlist">
 		<thead>
 			<tr>
@@ -57,4 +57,9 @@ JHtml::_('behavior.tooltip');
 			</tr>
 		<?php endforeach ?>
 	</table>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>
