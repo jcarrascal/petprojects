@@ -17,7 +17,7 @@ class CentralSMSController extends JController
 	function display($cachable = false) 
 	{
 		// set default view if not set
-		JRequest::setVar('view', JRequest::getCmd('view', 'CentralSMSs'));
+		JRequest::setVar('view', JRequest::getCmd('view', 'Recipients'));
  
 		// call parent behavior
 		parent::display($cachable);

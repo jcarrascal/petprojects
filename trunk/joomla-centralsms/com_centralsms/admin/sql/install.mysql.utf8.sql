@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `#__centralsms`;
-CREATE TABLE  `#__centralsms` (
+DROP TABLE IF EXISTS `#__recipients`;
+CREATE TABLE  `#__recipients` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `firstname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
