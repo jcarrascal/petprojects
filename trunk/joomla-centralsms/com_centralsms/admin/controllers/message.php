@@ -5,8 +5,8 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.controllerform');
 
 /**
- * Recipient Controller
+ * Message Controller
  */
-class CentralSMSControllerRecipient extends JControllerForm
+class CentralSMSControllerMessage extends JControllerForm
 {
 }

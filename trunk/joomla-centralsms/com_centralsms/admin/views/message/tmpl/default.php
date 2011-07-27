@@ -28,7 +28,7 @@ JHtml::_('behavior.formvalidation');
 	<button type="button" onclick="this.form.submit();window.top.setTimeout('window.parent.SqueezeBox.close()', 700);"><?php echo JText::_('COM_CENTRALSMS_BUTTON_SEND') ?></button>
 	<button type="button" onclick="window.parent.SqueezeBox.close();"><?php echo JText::_('COM_CENTRALSMS_BUTTON_CANCEL') ?></button>
 	<div>
-		<input type="hidden" name="task" value="centralsms.send" />
+		<input type="hidden" name="task" value="message.apply" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>
