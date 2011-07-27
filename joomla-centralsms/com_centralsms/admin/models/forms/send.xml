@@ -27,25 +27,6 @@
 		       maxlength="100"
 		       size="40"
 		       type="text" />
-		<field name="country"
-		       label="COM_CENTRALSMS_RECIPIENT_COUNTRY_LABEL"
-		       description="COM_CENTRALSMS_RECIPIENT_COUNTRY_DESC"
-		       class="inputbox required"
-		       default="57"
-		       size="1"
-		       type="list">
-			<option value="54">Argentina</option>
-			<option value="591">Bolivia</option>
-			<option value="56">Chile</option>
-			<option value="57">Colombia</option>
-			<option value="593">Ecuador</option>
-			<option value="52">Mexico</option>
-			<option value="507">Panamá</option>
-			<option value="595">Paraguay</option>
-			<option value="51">Perú</option>
-			<option value="598">Uruguay</option>
-			<option value="58">Venezuela</option>
-		</field>
 		<field name="cellphone"
 		       label="COM_CENTRALSMS_RECIPIENT_CELLPHONE_LABEL"
 		       description="COM_CENTRALSMS_RECIPIENT_CELLPHONE_DESC"

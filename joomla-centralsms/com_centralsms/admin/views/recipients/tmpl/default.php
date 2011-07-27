@@ -4,8 +4,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.multiselect');
-$listOrder	= $this->escape($this->state->get('list.ordering'));
-$listDirn	= $this->escape($this->state->get('list.direction'));
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn  = $this->escape($this->state->get('list.direction'));
+$countries = $this->countries;
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_centralsms'); ?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
@@ -34,13 +35,16 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_NEIGHBORHOOD', 'neighborhood', $listDirn, $listOrder); ?>
 				</th>
 				<th>
+					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_COUNTRY', 'country', $listDirn, $listOrder); ?>
+				</th>
+				<th>
 					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_CELLPHONE', 'cellphone', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="5"><?php echo $this->pagination->getListFooter(); ?></td>
+				<td colspan="6"><?php echo $this->pagination->getListFooter(); ?></td>
 			</tr>
 		</tfoot>
 		<?php foreach($this->items as $i => $item): ?>
@@ -60,6 +64,9 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 				</td>
 				<td>
 					<?php echo $this->escape($item->neighborhood) ?>
+				</td>
+				<td>
+					<?php echo $this->countries[$item->country] ?>
 				</td>
 				<td>
 					<?php echo $this->escape($item->cellphone) ?>
