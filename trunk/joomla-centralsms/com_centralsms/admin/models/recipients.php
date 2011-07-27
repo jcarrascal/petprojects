@@ -38,7 +38,7 @@ class CentralSMSModelRecipients extends JModelList
 	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('id, firstname, lastname, neighborhood, cellphone');
+		$query->select('id, firstname, lastname, neighborhood, country, cellphone');
 		$query->from('#__centralsms_recipients');
 
 		// Filter by search by names
@@ -82,5 +82,22 @@ class CentralSMSModelRecipients extends JModelList
 
 		// List state information.
 		parent::populateState('firstname', 'asc');
+	}
+
+	public function getCountries()
+	{
+		return array(
+			54  => 'Argentina',
+			591 => 'Bolivia',
+			56  => 'Chile',
+			57  => 'Colombia',
+			593 => 'Ecuador',
+			52  => 'Mexico',
+			507 => 'Panamá',
+			595 => 'Paraguay',
+			51  => 'Perú',
+			598 => 'Uruguay',
+			58  => 'Venezuela',
+		);
 	}
 }

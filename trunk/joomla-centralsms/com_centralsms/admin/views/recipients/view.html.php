@@ -18,6 +18,7 @@ class CentralSMSViewRecipients extends JView
 		$this->items      = $this->get('Items');
 		$this->pagination = $this->get('Pagination');
 		$this->state      = $this->get('State');
+		$this->countries  = $this->get('Countries');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
