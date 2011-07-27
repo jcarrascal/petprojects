@@ -8,7 +8,9 @@ JHtml::_('behavior.formvalidation');
 ?>
 <script language="javascript">
 	Joomla.submitbutton = function(task) {
-		if (document.formvalidator.isValid(document.id('item-form'))) {
+		if (task == 'recipient.cancel') {
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else if (document.formvalidator.isValid(document.id('item-form'))) {
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
