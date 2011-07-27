@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.modeladmin');
 
 /**
- * CentralSMS Recipient Model.
+ * CentralSMS Message Model.
  */
-class CentralSMSModelRecipient extends JModelAdmin
+class CentralSMSModelMessage extends JModelAdmin
 {
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -18,7 +18,7 @@ class CentralSMSModelRecipient extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Recipients', $prefix = 'CentralSMSTable', $config = array())
+	public function getTable($type = 'Messages', $prefix = 'CentralSMSTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -34,7 +34,7 @@ class CentralSMSModelRecipient extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_centralsms.recipients', 'recipients', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_centralsms.message', 'message', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
@@ -51,11 +51,16 @@ class CentralSMSModelRecipient extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_centralsms.edit.recipients.data', array());
+		$data = JFactory::getApplication()->getUserState('com_centralsms.edit.messages.data', array());
 		if (empty($data))
 		{
 			$data = $this->getItem();
 		}
 		return $data;
+	}
+
+	function getParams()
+	{
+		return JComponentHelper::getParams('com_centralsms');
 	}
 }
