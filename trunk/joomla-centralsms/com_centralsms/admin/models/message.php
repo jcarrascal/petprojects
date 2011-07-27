@@ -3,6 +3,7 @@
 defined('_JEXEC') or die('Restricted access');// no direct access
 
 jimport('joomla.application.component.modeladmin');
+require_once dirname(__FILE__) . DS . 'recipients.php';
 
 /**
  * CentralSMS Message Model.
@@ -62,5 +63,25 @@ class CentralSMSModelMessage extends JModelAdmin
 	function getParams()
 	{
 		return JComponentHelper::getParams('com_centralsms');
+	}
+
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success, False on error.
+	 * @since   11.1
+	 */
+	public function save($data)
+	{
+		$recipientsModel = new CentralSMSModelRecipients();
+		$recipients = array();
+		foreach ($recipientsModel->getItems() as $item)
+			$recipients[] = $item->country . $item->cellphone;
+		$data['code'] = 0;
+		$data['recipients'] = implode(' ', $recipients);
+		$data['sent_on'] = date('Y-m-d H:i:s');
+		return parent::save($data);
 	}
 }
