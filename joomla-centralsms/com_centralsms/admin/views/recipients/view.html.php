@@ -1,11 +1,11 @@
 <?php
 
 defined('_JEXEC') or die('Restricted access');// no direct access
- 
+
 jimport('joomla.application.component.view');
- 
+
 /**
- * CentralSMSs View
+ * Recipients View
  */
 class CentralSMSViewRecipients extends JView
 {
@@ -13,10 +13,10 @@ class CentralSMSViewRecipients extends JView
 	 * Recipients view display method
 	 * @return void
 	 */
-	function display($tpl = null) 
+	function display($tpl = null)
 	{
 		$this->items      = $this->get('Items');
-		$this->pagination = $this->get('Pagination'); 
+		$this->pagination = $this->get('Pagination');
 		$this->state      = $this->get('State');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
@@ -25,15 +25,18 @@ class CentralSMSViewRecipients extends JView
 		$this->addToolBar();
 		parent::display($tpl);
 	}
- 
+
 	/**
 	 * Setting the toolbar
 	 */
-	protected function addToolBar() 
+	protected function addToolBar()
 	{
 		JToolBarHelper::title(JText::_('COM_CENTRALSMS_MANAGER_RECIPIENTS'));
 		JToolBarHelper::addNew('recipient.add');
 		JToolBarHelper::editList('recipient.edit');
 		JToolBarHelper::deleteList('', 'recipients.delete');
+		JToolBarHelper::divider();
+		$bar = JToolBar::getInstance();
+		$bar->appendButton('Link', 'export', 'JTOOLBAR_EXPORT', 'index.php?option=com_centralsms&amp;view=export&amp;format=raw');
 	}
 }
