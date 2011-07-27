@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fieldset>
-		<field name="id" type="hidden"/>
-		<field name="firstname" type="text" label="COM_CENTRALSMS_RECIPIENT_FIRSTNAME_LABEL" description="COM_CENTRALSMS_RECIPIENT_FIRSTNAME_DESC" size="40" class="inputbox" default="" />
-		<field name="lastname" type="text" label="COM_CENTRALSMS_RECIPIENT_LASTNAME_LABEL" description="COM_CENTRALSMS_RECIPIENT_LASTNAME_DESC" size="40" class="inputbox" default="" />
-		<field name="neighborhood" type="text" label="COM_CENTRALSMS_RECIPIENT_NEIGHBORHOOD_LABEL" description="COM_CENTRALSMS_RECIPIENT_NEIGHBORHOOD_DESC" size="40" class="inputbox" default="" />
-		<field name="cellphone" type="text" label="COM_CENTRALSMS_RECIPIENT_CELLPHONE_LABEL" description="COM_CENTRALSMS_RECIPIENT_CELLPHONE_DESC" size="40" class="inputbox" default="" />
+		<field name="id"
+		       type="hidden"/>
+		<field name="firstname"
+		       label="COM_CENTRALSMS_RECIPIENT_FIRSTNAME_LABEL"
+		       description="COM_CENTRALSMS_RECIPIENT_FIRSTNAME_DESC"
+		       class="inputbox"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
+		<field name="lastname"
+		       label="COM_CENTRALSMS_RECIPIENT_LASTNAME_LABEL"
+		       description="COM_CENTRALSMS_RECIPIENT_LASTNAME_DESC"
+		       class="inputbox"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
+		<field name="neighborhood"
+		       label="COM_CENTRALSMS_RECIPIENT_NEIGHBORHOOD_LABEL"
+		       description="COM_CENTRALSMS_RECIPIENT_NEIGHBORHOOD_DESC"
+		       class="inputbox"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
+		<field name="cellphone"
+		       label="COM_CENTRALSMS_RECIPIENT_CELLPHONE_LABEL"
+		       description="COM_CENTRALSMS_RECIPIENT_CELLPHONE_DESC"
+		       class="inputbox"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
 	</fieldset>
 </form>

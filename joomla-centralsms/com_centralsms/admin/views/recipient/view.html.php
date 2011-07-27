@@ -35,9 +35,9 @@ class CentralSMSViewRecipient extends JView
 		JRequest::setVar('hidemainmenu', true);
 		$isNew = ($this->item->id == 0);
 		JToolBarHelper::title($isNew ? JText::_('COM_CENTRALSMS_MANAGER_RECIPIENT_NEW') : JText::_('COM_CENTRALSMS_MANAGER_RECIPIENT_EDIT'));
-		JToolBarHelper::apply('category.apply');
-		JToolBarHelper::save('centralsms.save');
-		JToolBarHelper::save2new('category.save2new');
-		JToolBarHelper::cancel('centralsms.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+		JToolBarHelper::apply('recipient.apply');
+		JToolBarHelper::save('recipient.save');
+		JToolBarHelper::save2new('recipient.save2new');
+		JToolBarHelper::cancel('recipient.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}
 }

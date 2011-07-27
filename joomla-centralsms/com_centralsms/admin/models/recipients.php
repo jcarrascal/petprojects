@@ -19,7 +19,7 @@ class CentralSMSModelRecipients extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('id, firstname, lastname, neighborhood, cellphone');
-		$query->from('#__recipients');
+		$query->from('#__centralsms_recipients');
 		return $query;
 	}
 }
