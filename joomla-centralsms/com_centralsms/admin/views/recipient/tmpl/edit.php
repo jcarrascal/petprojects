@@ -4,8 +4,18 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
+JHtml::_('behavior.formvalidation');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_centralsms&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="centralsms-form">
+<script language="javascript">
+	Joomla.submitbutton = function(task) {
+		if (document.formvalidator.isValid(document.id('item-form'))) {
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else {
+			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+		}
+	}
+</script>
+<form action="<?php echo JRoute::_('index.php?option=com_centralsms&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_( 'COM_CENTRALSMS_RECIPIENT_DETAILS' ); ?></legend>
 		<ul class="adminformlist">
