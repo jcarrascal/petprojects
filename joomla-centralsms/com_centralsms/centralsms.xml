@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
-	<name>CentralSMS</name>
+	<name>COM_CENTRALSMS_NAME</name>
 	<creationDate>2011-07-25</creationDate>
 	<author>Julio César Carrascal Urquijo</author>
 	<authorEmail>jcarrascal@gmail.com</authorEmail>
@@ -8,7 +8,7 @@
 	<copyright>Copyright 2011 ArteLógico - All rights reserved.</copyright>
 	<license>GNU Leser General Public License</license>
 	<version>0.0.1</version>
-	<description></description>
+	<description>COM_CENTRALSMS_DESC</description>
 
 	<install>
 		<sql>
