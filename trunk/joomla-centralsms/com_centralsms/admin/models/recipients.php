@@ -1,7 +1,7 @@
 <?php
 
 defined('_JEXEC') or die('Restricted access');// no direct access
- 
+
 jimport('joomla.application.component.modellist');
 
 /**
@@ -58,5 +58,29 @@ class CentralSMSModelRecipients extends JModelList
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		return $query;
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState($ordering = null, $direction = null)
+	{
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
+
+		// Load the filter state.
+		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
+
+		// Load the parameters.
+		$params = JComponentHelper::getParams('com_centralsms');
+		$this->setState('params', $params);
+
+		// List state information.
+		parent::populateState('firstname', 'asc');
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 
 defined('_JEXEC') or die('Restricted access');// no direct access
- 
+
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.multiselect');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
@@ -34,7 +34,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_NEIGHBORHOOD', 'neighborhood', $listDirn, $listOrder); ?>
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_LASTNAME', 'cellphone', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CENTRALSMS_RECIPIENT_HEADING_CELLPHONE', 'cellphone', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>

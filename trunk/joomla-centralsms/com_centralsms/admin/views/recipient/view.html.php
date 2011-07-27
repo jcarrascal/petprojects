@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.view');
 
 /**
- * CentralSMSs View
+ * Recipient View
  */
 class CentralSMSViewRecipient extends JView
 {
@@ -13,7 +13,7 @@ class CentralSMSViewRecipient extends JView
 	 * CentralSMSs view display method
 	 * @return void
 	 */
-	function display($tpl = null) 
+	function display($tpl = null)
 	{
 		$form = $this->get('Form');
 		$item = $this->get('Item');
@@ -26,11 +26,11 @@ class CentralSMSViewRecipient extends JView
 		$this->addToolBar();
 		parent::display($tpl);
 	}
- 
+
 	/**
 	 * Setting the toolbar
 	 */
-	protected function addToolBar() 
+	protected function addToolBar()
 	{
 		JRequest::setVar('hidemainmenu', true);
 		$isNew = ($this->item->id == 0);
