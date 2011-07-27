@@ -38,5 +38,6 @@ class CentralSMSViewRecipients extends JView
 		JToolBarHelper::divider();
 		$bar = JToolBar::getInstance();
 		$bar->appendButton('Link', 'export', 'JTOOLBAR_EXPORT', 'index.php?option=com_centralsms&amp;view=export&amp;format=raw');
+		$bar->appendButton('Popup', 'send', 'COM_CENTRALSMS_TOOLBAR_SEND', 'index.php?option=com_centralsms&amp;view=send&amp;tmpl=component', 600, 300);
 	}
 }
