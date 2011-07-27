@@ -17,6 +17,6 @@ class CentralSMSTableRecipients extends JTable
 	 */
 	function __construct(&$db) 
 	{
-		parent::__construct('#__recipients', 'id', $db);
+		parent::__construct('#__centralsms_recipients', 'id', $db);
 	}
 }
