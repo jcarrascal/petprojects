@@ -7,10 +7,12 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the CentralSMS Component
  */
-class CentralSMSViewRecipient extends JView
+class CentralSMSViewCentralSMS extends JView
 {
 	function display($tpl = null) 
 	{
+		$application = JFactory::getApplication();
+		$this->params = $application->getParams('com_centralsms');
 		$this->form = $this->get('Form');
 		if (count($errors = $this->get('Errors'))) 
 		{

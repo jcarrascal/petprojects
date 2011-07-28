@@ -7,7 +7,7 @@ jimport('joomla.application.component.modeladmin');
 /**
  * CentralSMS Model
  */
-class CentralSMSModelRecipient extends JModelAdmin
+class CentralSMSModelCentralSMS extends JModelAdmin
 {
 	/**
 	 * Returns a reference to the a Table object, always creating it.
