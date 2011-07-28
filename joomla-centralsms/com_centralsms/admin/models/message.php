@@ -81,7 +81,7 @@ class CentralSMSModelMessage extends JModelAdmin
 			$recipients[] = $item->country . $item->cellphone;
 		$data['code'] = 0;
 		$data['text'] = trim($data['text']);
-		$data['recipients'] = implode(' ', $recipients);
+		$data['recipients'] = implode(',', $recipients);
 		$data['sent_on'] = date('Y-m-d H:i:s');
 		if (!parent::save($data))
 			return false;
