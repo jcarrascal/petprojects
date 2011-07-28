@@ -7,7 +7,7 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the CentralSMS Component
  */
-class CentralSMSViewCentralSMS extends JView
+class CentralSMSViewRecipient extends JView
 {
 	// Overwriting JView display method
 	function display($tpl = null) 
