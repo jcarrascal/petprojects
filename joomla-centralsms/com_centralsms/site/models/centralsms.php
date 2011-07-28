@@ -27,17 +27,18 @@ class CentralSMSModelCentralSMS extends JModelAdmin
 		if (($data = parent::validate($form, $data, $group)) === false)
 			return false;
 
-		if (!preg_match('^[0-9]+$', $data['cellphone'])) {
-			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_CELLPHONE'));
+		if (!preg_match('/^[0-9]{10}$/', $data['cellphone'])) {
+			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_CELLPHONE') . var_export($data['cellphone'], true));
 			return false;
 		}
 
-		$query = 'select count(*) counter
-			from #__jos_centralsms_recipients
-			where cellphone = ' . $db->quote($data['cellphone']));
 		$db = $this->getDBO();
+		$query = 'select count(*) counter
+			from #__centralsms_recipients
+			where cellphone = ' . $db->quote($data['cellphone']);
 		$db->setQuery($query);
-		if ($db->loadRow()[0] > 0) {
+		$row = $db->loadRow();
+		if ($row[0] > 0) {
 			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_REGISTERED'));
 			return false;
 		}
