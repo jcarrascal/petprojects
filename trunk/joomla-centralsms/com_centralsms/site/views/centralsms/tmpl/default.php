@@ -9,16 +9,6 @@ JHtml::_('behavior.formvalidation');
 $form = $this->form;
 
 ?>
-<div id="system-message-container">
-	<dl id="system-message">
-		<dt class="message">Mensaje</dt>
-		<dd class="message message">
-			<ul>
-				<li>El elemento ha sido enviado correctamente.</li>
-			</ul>
-		</dd>
-	</dl>
-</div>
 <div id="com_centralsms">
 <?php
 // Page Heading if needed
@@ -28,9 +18,7 @@ if ($this->params->get('show_page_heading'))
 <p><?php echo JText::_('COM_CENTRALSMS_INTRO_TEXT') ?></p>
 	<script language="javascript">
 		Joomla.submitbutton = function(task) {
-			if (task == 'recipient.cancel') {
-				Joomla.submitform(task, document.getElementById('item-form'));
-			} else if (document.formvalidator.isValid(document.id('item-form'))) {
+			if (document.formvalidator.isValid(document.id('item-form'))) {
 				Joomla.submitform(task, document.getElementById('item-form'));
 			} else {
 				alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -48,7 +36,7 @@ if ($this->params->get('show_page_heading'))
 			<?php echo $form->getInput('country') ?></p>
 		<p><?php echo $form->getLabel('cellphone') ?><br/>
 			<?php echo $form->getInput('cellphone') ?></p>
-		<p><button type="submit"><span><?php echo JText::_('COM_CENTRALSMS_BUTTON_SUBMIT') ?></span></button></p>
+		<p><button type="submit" onclick="Joomla.submitbutton('centralsms.save')"><span><?php echo JText::_('COM_CENTRALSMS_BUTTON_SUBMIT') ?></span></button></p>
 		<p><?php echo JText::_('COM_CENTRALSMS_PRIVACY_TEXT') ?></p>
 		<div>
 			<input type="hidden" name="task" value="centralsms.save" />
