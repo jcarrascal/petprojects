@@ -7,8 +7,13 @@ jimport('joomla.application.component.modelitem');
 /**
  * CentralSMS Model
  */
-class CentralSMSModelCentralSMS extends JModelItem
+class CentralSMSModelRecipient extends JModelItem
 {
+	function getMsg()
+	{
+		return 'Hello, from model';
+	}
+
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
