@@ -10,6 +10,42 @@ jimport('joomla.application.component.modeladmin');
 class CentralSMSModelCentralSMS extends JModelAdmin
 {
 	/**
+	 * Method to validate the form data.
+	 *
+	 * @param   object  $form   The form to validate against.
+	 * @param   array   $data   The data to validate.
+	 * @param   string  $group  The name of the field group to validate.
+	 *
+	 * @return  mixed  Array of filtered data if valid, false otherwise.
+	 *
+	 * @see     JFormRule
+	 * @see     JFilterInput
+	 * @since   11.1
+	 */
+	function validate($form, $data, $group = null)
+	{
+		if (($data = parent::validate($form, $data, $group)) === false)
+			return false;
+
+		if (!preg_match('^[0-9]+$', $data['cellphone'])) {
+			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_CELLPHONE'));
+			return false;
+		}
+
+		$query = 'select count(*) counter
+			from #__jos_centralsms_recipients
+			where cellphone = ' . $db->quote($data['cellphone']));
+		$db = $this->getDBO();
+		$db->setQuery($query);
+		if ($db->loadRow()[0] > 0) {
+			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_REGISTERED'));
+			return false;
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
