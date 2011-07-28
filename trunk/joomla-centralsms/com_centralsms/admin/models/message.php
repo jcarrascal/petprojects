@@ -80,8 +80,29 @@ class CentralSMSModelMessage extends JModelAdmin
 		foreach ($recipientsModel->getItems() as $item)
 			$recipients[] = $item->country . $item->cellphone;
 		$data['code'] = 0;
+		$data['text'] = trim($data['text']);
 		$data['recipients'] = implode(' ', $recipients);
 		$data['sent_on'] = date('Y-m-d H:i:s');
-		return parent::save($data);
+		if (!parent::save($data))
+			return false;
+		$data['id'] = $this->getState($this->getName().'.id');
+
+		$params = $this->getParams();
+		try {
+			$client = @new SoapClient('http://panel.centralsms.co/ws/sms.wsdl',
+				array('exceptions' => 1, 'trace' => true));
+		} catch (SoapFault $e) {
+			die($e->toString());
+			return false;
+		}
+		$result = $client->smsEnviar($data['recipients'], $data['text'],
+			$params->get('login'), $params->get('password'));
+		$data['code'] = $result['codigo'];
+		$data['status_message'] = $result['mensaje'];
+		$data['request'] = $client->__getLastRequest();
+		$data['response'] = $client->__getLastResponse();
+		if ($data['code'] < 0)
+			$this->setError($data['status_message']);
+		return parent::save($data) && $data['code'] >= 0;
 	}
 }
