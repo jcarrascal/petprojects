@@ -99,8 +99,8 @@ class CentralSMSModelMessage extends JModelAdmin
 			$params->get('login'), $params->get('password'));
 		$data['code'] = $result['codigo'];
 		$data['status_message'] = $result['mensaje'];
-		$data['request'] = $client->__getLastRequest();
-		$data['response'] = $client->__getLastResponse();
+		$data['request'] = $client->__getLastRequestHeaders() . $client->__getLastRequest();
+		$data['response'] = $client->__getLastResponseHeaders() . $client->__getLastResponse();
 		if ($data['code'] < 0)
 			$this->setError($data['status_message']);
 		return parent::save($data) && $data['code'] >= 0;
