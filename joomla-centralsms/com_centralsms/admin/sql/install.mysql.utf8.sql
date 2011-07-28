@@ -17,5 +17,8 @@ CREATE TABLE  `#__centralsms_messages` (
   `text` varchar(700) NOT NULL,
   `recipients` longtext NOT NULL,
   `sent_on` DATETIME NOT NULL,
+  `status_message` varchar(200) NULL,
+  `request` longtext NULL,
+  `response` longtext NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
