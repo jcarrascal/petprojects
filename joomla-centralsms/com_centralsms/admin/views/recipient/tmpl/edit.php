@@ -17,7 +17,7 @@ JHtml::_('behavior.formvalidation');
 		}
 	}
 </script>
-<form action="<?php echo JRoute::_('index.php?option=com_centralsms&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_centralsms&view=recipient&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_( 'COM_CENTRALSMS_RECIPIENT_DETAILS' ); ?></legend>
 		<ul class="adminformlist">
