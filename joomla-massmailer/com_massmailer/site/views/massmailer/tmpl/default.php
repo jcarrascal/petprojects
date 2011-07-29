@@ -15,7 +15,7 @@ $form = $this->form;
 if ($this->params->get('show_page_heading'))
 	echo '<h1><span>', $this->escape($this->params->get('page_heading')), '</span></h1>', PHP_EOL;
 ?>
-<p><?php echo JText::_('COM_CENTRALSMS_INTRO_TEXT') ?></p>
+<p><?php echo JText::_('COM_MASSMAILER_INTRO_TEXT') ?></p>
 	<script language="javascript">
 		Joomla.submitbutton = function(task) {
 			if (document.formvalidator.isValid(document.id('item-form'))) {
@@ -30,12 +30,15 @@ if ($this->params->get('show_page_heading'))
 			<?php echo $form->getInput('firstname') ?></p>
 		<p><?php echo $form->getLabel('lastname') ?><br/>
 			<?php echo $form->getInput('lastname') ?></p>
+		<p><?php echo $form->getLabel('email') ?><br/>
+			<?php echo $form->getInput('email') ?></p>
+		<p><?php echo $form->getLabel('gender') ?><br/>
+			<?php echo $form->getInput('gender') ?></p>
+		<p><?php echo $form->getLabel('date_of_birth') ?><br/>
+			<?php echo $form->getInput('date_of_birth') ?></p>
 		<p><?php echo $form->getLabel('neighborhood') ?><br/>
 			<?php echo $form->getInput('neighborhood') ?></p>
-		<p><?php echo $form->getLabel('cellphone') ?><br/>
-			<?php echo $form->getInput('country') ?> <?php echo $form->getInput('cellphone') ?></p>
-		<p><button type="submit" onclick="Joomla.submitbutton('centralsms.save')"><span><?php echo JText::_('COM_CENTRALSMS_BUTTON_SUBMIT') ?></span></button></p>
-		<p><?php echo JText::_('COM_CENTRALSMS_PRIVACY_TEXT') ?></p>
+		<p><button type="submit" onclick="Joomla.submitbutton('centralsms.save')"><span><?php echo JText::_('COM_MASSMAILER_BUTTON_SUBMIT') ?></span></button></p>
 		<div>
 			<input type="hidden" name="task" value="centralsms.save" />
 			<?php echo JHtml::_('form.token'); ?>

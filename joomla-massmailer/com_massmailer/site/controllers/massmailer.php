@@ -7,7 +7,7 @@ jimport('joomla.application.component.controllerform');
 /**
  * Recipient Controller
  */
-class CentralSMSControllerCentralSMS extends JControllerForm
+class MassMailerControllerMassMailer extends JControllerForm
 {
 	/**
 	 * Method to check if you can add a new record.

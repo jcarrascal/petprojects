@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.modeladmin');
  
 /**
- * CentralSMS Model
+ * MassMailer Model
  */
-class CentralSMSModelCentralSMS extends JModelAdmin
+class MassMailerModelMassMailer extends JModelAdmin
 {
 	/**
 	 * Method to validate the form data.
@@ -28,7 +28,7 @@ class CentralSMSModelCentralSMS extends JModelAdmin
 			return false;
 
 		if (!preg_match('/^[0-9]{10}$/', $data['cellphone'])) {
-			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_CELLPHONE') . var_export($data['cellphone'], true));
+			$this->setError(JText::_('COM_MASSMAILER_VALIDATION_CELLPHONE') . var_export($data['cellphone'], true));
 			return false;
 		}
 
@@ -39,7 +39,7 @@ class CentralSMSModelCentralSMS extends JModelAdmin
 		$db->setQuery($query);
 		$row = $db->loadRow();
 		if ($row[0] > 0) {
-			$this->setError(JText::_('COM_CENTRALSMS_VALIDATION_REGISTERED'));
+			$this->setError(JText::_('COM_MASSMAILER_VALIDATION_REGISTERED'));
 			return false;
 		}
 
@@ -55,7 +55,7 @@ class CentralSMSModelCentralSMS extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Recipients', $prefix = 'CentralSMSTable', $config = array())
+	public function getTable($type = 'Recipients', $prefix = 'MassMailerTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}

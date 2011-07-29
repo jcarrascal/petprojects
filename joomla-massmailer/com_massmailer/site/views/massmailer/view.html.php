@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the CentralSMS Component
+ * HTML View class for the MassMailer Component
  */
-class CentralSMSViewCentralSMS extends JView
+class MassMailerViewMassMailer extends JView
 {
 	function display($tpl = null) 
 	{
