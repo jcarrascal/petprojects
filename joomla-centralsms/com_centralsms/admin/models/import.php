@@ -21,7 +21,7 @@ class CentralSMSModelImport extends JModel
 		}
 		$query = "insert into #__centralsms_recipients (firstname, lastname, neighborhood, country, cellphone) values\n" .
 			implode(",\n", $values) . "\n" .
-			'on duplicate key update firstname=values(firstname), firstname=values(lastname), ' .
+			'on duplicate key update firstname=values(firstname), lastname=values(lastname), ' .
 			'neighborhood=values(neighborhood), country=values(country)';
 		$db->setQuery($query);
 		$result = $db->query();

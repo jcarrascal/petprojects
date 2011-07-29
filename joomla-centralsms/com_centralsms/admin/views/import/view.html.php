@@ -15,6 +15,7 @@ class CentralSMSViewImport extends JView
 	 */
 	function display($tpl = null)
 	{
+		$this->status = JRequest::getString('status', 'normal');
 		parent::display($tpl);
 	}
 }
