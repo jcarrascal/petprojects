@@ -52,7 +52,7 @@
 		       class="inputbox required validate-numeric foxtext"
 		       default=""
 		       maxlength="100"
-		       size="40"
+		       size="22"
 		       type="text" />
 	</fieldset>
 </form>

@@ -32,10 +32,8 @@ if ($this->params->get('show_page_heading'))
 			<?php echo $form->getInput('lastname') ?></p>
 		<p><?php echo $form->getLabel('neighborhood') ?><br/>
 			<?php echo $form->getInput('neighborhood') ?></p>
-		<p><?php echo $form->getLabel('country') ?><br/>
-			<?php echo $form->getInput('country') ?></p>
 		<p><?php echo $form->getLabel('cellphone') ?><br/>
-			<?php echo $form->getInput('cellphone') ?></p>
+			<?php echo $form->getInput('country') ?> <?php echo $form->getInput('cellphone') ?></p>
 		<p><button type="submit" onclick="Joomla.submitbutton('centralsms.save')"><span><?php echo JText::_('COM_CENTRALSMS_BUTTON_SUBMIT') ?></span></button></p>
 		<p><?php echo JText::_('COM_CENTRALSMS_PRIVACY_TEXT') ?></p>
 		<div>
