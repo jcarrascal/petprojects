@@ -16,6 +16,9 @@ JHtml::_('behavior.formvalidation');
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
+	<?php if ($this->status == 'success') : ?>
+		window.top.setTimeout('window.parent.location.reload(true)', 5000);
+	<?php endif ?>
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_centralsms&view=import&layout=upload'); ?>" method="post" name="adminForm" id="item-form" class="form-validate" enctype="multipart/form-data">
 	<fieldset class="adminform">

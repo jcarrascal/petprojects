@@ -11,8 +11,6 @@ class CentralSMSControllerImport extends JController
 {
 	function upload()
 	{
-		//var_dump($_FILES['csv_file']);
-		echo "<pre>";
 		$rows = array();
 		$skipFirst = JRequest::getBool('skip_first');
 		$isFirst = true; $isValid = true;
@@ -52,7 +50,7 @@ class CentralSMSControllerImport extends JController
 		}
 		if ($isValid) {
 			$model = $this->getModel('Import', 'CentralSMSModel');
-			$this->setRedirect('index.php?option=com_centralsms&view=import&tmpl=component');
+			$this->setRedirect('index.php?option=com_centralsms&view=import&tmpl=component&status=success');
 			if ($model->batchImport($rows))
 				$this->setMessage(JText::_('COM_CENTRALSMS_IMPORT_SUCCESS'));
 			else
