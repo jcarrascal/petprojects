@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6.0" method="upgrade">
+	<name>COM_CENTRALSMS</name>
+	<creationDate>2011-07-25</creationDate>
+	<author>Julio César Carrascal Urquijo</author>
+	<authorEmail>jcarrascal@gmail.com</authorEmail>
+	<authorUrl>http://jcesar.artelogico.com/</authorUrl>
+	<copyright>Copyright 2011 ArteLógico - All rights reserved.</copyright>
+	<license>GNU Leser General Public License</license>
+	<version>1.0.0</version>
+	<description>COM_CENTRALSMS_DESC</description>
+
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>language</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<filename>centralsms.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<administration>
+		<menu>CentralSMS</menu>
+		<files folder="admin">
+			<folder>controllers</folder>
+			<folder>languages</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<filename>centralsms.php</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+		</files>
+	</administration>
+</extension>
