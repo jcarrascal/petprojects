@@ -32,19 +32,22 @@ $countries = $this->countries;
 					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_LASTNAME', 'lastname', $listDirn, $listOrder); ?>
 				</th>
 				<th>
+					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_EMAIL', 'email', $listDirn, $listOrder); ?>
+				</th>
+				<th>
+					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_GENDER', 'gender', $listDirn, $listOrder); ?>
+				</th>
+				<th>
+					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_DATE_OF_BIRTH', 'date_of_birth', $listDirn, $listOrder); ?>
+				</th>
+				<th>
 					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_NEIGHBORHOOD', 'neighborhood', $listDirn, $listOrder); ?>
-				</th>
-				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_COUNTRY', 'country', $listDirn, $listOrder); ?>
-				</th>
-				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_MASSMAILER_RECIPIENT_HEADING_CELLPHONE', 'cellphone', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="6"><?php echo $this->pagination->getListFooter(); ?></td>
+				<td colspan="7"><?php echo $this->pagination->getListFooter(); ?></td>
 			</tr>
 		</tfoot>
 		<?php foreach($this->items as $i => $item): ?>
@@ -63,13 +66,16 @@ $countries = $this->countries;
 					</a>
 				</td>
 				<td>
+					<?php echo $this->escape($item->email) ?>
+				</td>
+				<td>
+					<?php echo $this->escape($item->gender) ?>
+				</td>
+				<td>
+					<?php echo $this->escape($item->date_of_birth) ?>
+				</td>
+				<td>
 					<?php echo $this->escape($item->neighborhood) ?>
-				</td>
-				<td>
-					<?php echo $this->countries[$item->country] ?>
-				</td>
-				<td>
-					<?php echo $this->escape($item->cellphone) ?>
 				</td>
 			</tr>
 		<?php endforeach ?>

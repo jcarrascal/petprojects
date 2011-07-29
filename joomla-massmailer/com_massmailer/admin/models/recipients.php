@@ -22,8 +22,8 @@ class MassMailerModelRecipients extends JModelList
 			$config['filter_fields'] = array(
 				'firstname', 'a.firstname',
 				'lastname', 'a.lastname',
+				'neighborhood', 'a.email',
 				'neighborhood', 'a.neighborhood',
-				'cellphone', 'a.cellphone',
 			);
 		}
 		parent::__construct($config);
@@ -38,7 +38,7 @@ class MassMailerModelRecipients extends JModelList
 	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('id, firstname, lastname, neighborhood, country, cellphone');
+		$query->select('id, firstname, lastname, email, gender, date_of_birth, neighborhood');
 		$query->from('#__massmailer_recipients a');
 
 		// Filter by search by names
@@ -48,7 +48,8 @@ class MassMailerModelRecipients extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('(a.firstname LIKE '.$search.' OR a.lastname LIKE '.$search.' OR a.cellphone LIKE '.$search.')');
+				$query->where('(a.firstname LIKE '.$search.' OR a.lastname LIKE '.$search.' OR a.email LIKE '.
+					$search.' OR a.neighborhood LIKE '.$search.')');
 			}
 		}
 
