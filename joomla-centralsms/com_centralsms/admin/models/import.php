@@ -13,15 +13,16 @@ class CentralSMSModelImport extends JModel
 	function batchImport($rows)
 	{
 		$db = $this->getDBO();
-		$query = "insert into #__centralsms_recipients (firstname, lastname, neighborhood, country, cellphone) values\n";
+		$values = array();
 		foreach ($rows as $row) {
-			$query .= '(' . $db->quote($row['firstname']) . ', ' . $db->quote($row['lastname']) . ', ' .
+			$values[] = '(' . $db->quote($row['firstname']) . ', ' . $db->quote($row['lastname']) . ', ' .
 				$db->quote($row['neighborhood']) . ', ' . $db->quote($row['country']) . ', ' .
-				$db->quote($row['cellphone']) . ")\n";
+				$db->quote($row['cellphone']) . ")";
 		}
-		$query .= 'on duplicate key update firstname=values(firstname), firstname=values(lastname), ' .
+		$query = "insert into #__centralsms_recipients (firstname, lastname, neighborhood, country, cellphone) values\n" .
+			implode(",\n", $values) . "\n" .
+			'on duplicate key update firstname=values(firstname), firstname=values(lastname), ' .
 			'neighborhood=values(neighborhood), country=values(country)';
-		var_dump($query);
 		$db->setQuery($query);
 		$result = $db->query();
 		if ($result === false) {
