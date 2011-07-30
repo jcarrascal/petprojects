@@ -9,6 +9,7 @@ jimport('joomla.application.component.controllerform');
  */
 class MassMailerControllerMassMailer extends JControllerForm
 {
+	protected $view_list = 'massmailer';
 	/**
 	 * Method to check if you can add a new record.
 	 *

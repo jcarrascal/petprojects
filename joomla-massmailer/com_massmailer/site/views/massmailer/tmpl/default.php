@@ -9,7 +9,7 @@ JHtml::_('behavior.formvalidation');
 $form = $this->form;
 
 ?>
-<div id="com_centralsms">
+<div id="com_massmailer">
 <?php
 // Page Heading if needed
 if ($this->params->get('show_page_heading'))
@@ -25,7 +25,7 @@ if ($this->params->get('show_page_heading'))
 			}
 		}
 	</script>
-	<form action="<?php echo JRoute::_('index.php?option=com_centralsms&layout=save'); ?>" method="post" name="adminForm" id="item-form" class="form-validate foxform">
+	<form action="<?php echo JRoute::_('index.php?option=com_massmailer&layout=save'); ?>" method="post" name="adminForm" id="item-form" class="form-validate foxform">
 		<p><?php echo $form->getLabel('firstname') ?><br/>
 			<?php echo $form->getInput('firstname') ?></p>
 		<p><?php echo $form->getLabel('lastname') ?><br/>
@@ -38,9 +38,9 @@ if ($this->params->get('show_page_heading'))
 			<?php echo $form->getInput('date_of_birth') ?></p>
 		<p><?php echo $form->getLabel('neighborhood') ?><br/>
 			<?php echo $form->getInput('neighborhood') ?></p>
-		<p><button type="submit" onclick="Joomla.submitbutton('centralsms.save')"><span><?php echo JText::_('COM_MASSMAILER_BUTTON_SUBMIT') ?></span></button></p>
+		<p><button type="submit" onclick="Joomla.submitbutton('massmailer.save')"><span><?php echo JText::_('COM_MASSMAILER_BUTTON_SUBMIT') ?></span></button></p>
 		<div>
-			<input type="hidden" name="task" value="centralsms.save" />
+			<input type="hidden" name="task" value="massmailer.save" />
 			<?php echo JHtml::_('form.token'); ?>
 		</div>
 	</form>

@@ -27,15 +27,10 @@ class MassMailerModelMassMailer extends JModelAdmin
 		if (($data = parent::validate($form, $data, $group)) === false)
 			return false;
 
-		if (!preg_match('/^[0-9]{10}$/', $data['cellphone'])) {
-			$this->setError(JText::_('COM_MASSMAILER_VALIDATION_CELLPHONE') . var_export($data['cellphone'], true));
-			return false;
-		}
-
 		$db = $this->getDBO();
 		$query = 'select count(*) counter
-			from #__centralsms_recipients
-			where cellphone = ' . $db->quote($data['cellphone']);
+			from #__massmailer_recipients
+			where email = ' . $db->quote($data['email']);
 		$db->setQuery($query);
 		$row = $db->loadRow();
 		if ($row[0] > 0) {
@@ -71,7 +66,7 @@ class MassMailerModelMassMailer extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_centralsms.recipients', 'recipients', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_massmailer.recipients', 'recipients', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
@@ -88,7 +83,7 @@ class MassMailerModelMassMailer extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_centralsms.edit.recipients.data', array());
+		$data = JFactory::getApplication()->getUserState('com_massmailer.edit.recipients.data', array());
 		if (empty($data))
 		{
 			$data = $this->getItem();
