@@ -18,6 +18,7 @@
 <?php if ($helper->isFacebookVisible() && ($facebook = $helper->fetchLatestFacebook())) { ?>
 	<div class="facebook column<?php if (!$helper->isYoutubeVisible() && !$helper->isFacebookVisible()) { ?> first<?php } ?>">
 		<div class="text">
+			<?php echo htmlentities($facebook->text, ENT_COMPAT, 'UTF-8') ?>
 		</div>
 	</div>
 <?php } ?>

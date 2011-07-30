@@ -70,11 +70,12 @@ class ModSocialNetworks
 
 	function fetchLatestFacebook()
 	{
-		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
+		$facebook = false;//$this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
 		if ($facebook === false)
 		{
-			return $this->facebook = $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}");
+			//return $this->facebook = $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}");
 			$facebook = new stdClass();
+			$facebook->text = 'Queremos impulsar un plan específico para cuidar a nuestros adultos mayores que últimamente en forma frecuente han quedado expuestos a hechos de violencia cometidos con mucha crueldad, por eso nos comprometimos a entregar 60.000 botones antipánico para Junio';
 			$this->cacheSet($this->facebook = $facebook, "fetchLatestFacebook_{$this->facebookUser}");
 		}
 		return $facebook;
@@ -106,7 +107,7 @@ class ModSocialNetworks
 		$serialized = $db->quote(serialize($data));
 		$sql = "insert into #__socialnetworks_cache (type, updated_at, serialized) values
 			($type, $updated_at, $serialized)
-			on duplicate key update updated_at = $updated_at, serialized = $serialized";
+			on duplicate key update updated_at = values(updated_at), serialized = values(serialized)";
 		$db->setQuery($sql);
 		$db->query();
 		if ($error = $db->getErrorMsg())
