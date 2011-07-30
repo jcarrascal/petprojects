@@ -70,12 +70,14 @@ class ModSocialNetworks
 
 	function fetchLatestFacebook()
 	{
-		$facebook = false;//$this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
+		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
 		if ($facebook === false)
 		{
-			//return $this->facebook = $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}");
+			$fb = new SimpleXmlElement(file_get_contents('http://fbrss.com/f/7340158d7fea181828cdd3b59244c69c.xml?me'));
 			$facebook = new stdClass();
-			$facebook->text = 'Queremos impulsar un plan específico para cuidar a nuestros adultos mayores que últimamente en forma frecuente han quedado expuestos a hechos de violencia cometidos con mucha crueldad, por eso nos comprometimos a entregar 60.000 botones antipánico para Junio';
+			$facebook->text = (string)($fb->channel->item[0]->description);
+			$facebook->link = (string)($fb->channel->item[0]->link);
+			$facebook->pubDate = date('Y-m-d', strtotime($fb->channel->item[0]->pubDate));
 			$this->cacheSet($this->facebook = $facebook, "fetchLatestFacebook_{$this->facebookUser}");
 		}
 		return $facebook;
