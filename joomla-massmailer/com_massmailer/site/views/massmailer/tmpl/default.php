@@ -45,3 +45,21 @@ if ($this->params->get('show_page_heading'))
 		</div>
 	</form>
 </div>
+<link rel=stylesheet href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css"/>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	Calendar = undefined;
+	$('#jform_date_of_birth')
+		.unbind()
+		.datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy-mm-dd',
+			maxDate: new Date(),
+			showAnim: 'fadeIn',
+			yearRange: '-100:+100'
+		})
+		.css('background', 'url(<?php echo $this->baseurl ?>/media/system/images/calendar.png) no-repeat 98% 50%');
+	$('#jform_date_of_birth_img').remove();
+</script>
