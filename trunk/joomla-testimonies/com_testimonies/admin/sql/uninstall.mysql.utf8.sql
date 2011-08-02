@@ -1,2 +1,1 @@
-DROP TABLE IF EXISTS `#__messages`;
-DROP TABLE IF EXISTS `#__recipients`;
+DROP TABLE IF EXISTS `#__testimonies_posts`;
