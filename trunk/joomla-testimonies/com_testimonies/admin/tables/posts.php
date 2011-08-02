@@ -6,9 +6,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.database.table');
 
 /**
- * Testimonies Messages Table.
+ * Testimonies Posts Table.
  */
-class TestimoniesTableMessages extends JTable
+class TestimoniesTablePosts extends JTable
 {
 	/**
 	 * Constructor
@@ -17,6 +17,6 @@ class TestimoniesTableMessages extends JTable
 	 */
 	function __construct(&$db)
 	{
-		parent::__construct('#__testimonies_messages', 'id', $db);
+		parent::__construct('#__testimonies_posts', 'id', $db);
 	}
 }

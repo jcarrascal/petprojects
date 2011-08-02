@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id"
+		       type="hidden"/>
+		<field name="name"
+		       label="COM_TESTIMONIES_POST_NAME_LABEL"
+		       description="COM_TESTIMONIES_POST_NAME_DESC"
+		       class="inputbox required"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
+		<field name="email"
+		       label="COM_TESTIMONIES_POST_EMAIL_LABEL"
+		       description="COM_TESTIMONIES_POST_EMAIL_DESC"
+		       class="inputbox required"
+		       default=""
+		       maxlength="200"
+		       size="40"
+		       type="text" />
+		<field name="neighborhood"
+		       label="COM_TESTIMONIES_POST_NEIGHBORHOOD_LABEL"
+		       description="COM_TESTIMONIES_POST_NEIGHBORHOOD_DESC"
+		       class="inputbox"
+		       default=""
+		       maxlength="100"
+		       size="40"
+		       type="text" />
+		<field name="message"
+		       label="COM_TESTIMONIES_POST_MESSAGE_LABEL"
+		       description="COM_TESTIMONIES_POST_MESSAGE_DESC"
+		       class="inputbox required"
+		       default=""
+		       maxlength="400"
+		       size="40"
+		       type="text" />
+	</fieldset>
+</form>
