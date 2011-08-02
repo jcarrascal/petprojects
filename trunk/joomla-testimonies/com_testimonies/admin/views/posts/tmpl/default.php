@@ -6,7 +6,6 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.multiselect');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
-$countries = $this->countries;
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_testimonies'); ?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
@@ -26,25 +25,22 @@ $countries = $this->countries;
 					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_RECIPIENT_HEADING_FIRSTNAME', 'firstname', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_POST_HEADING_NAME', 'name', $listDirn, $listOrder); ?>
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_RECIPIENT_HEADING_LASTNAME', 'lastname', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_POST_HEADING_EMAIL', 'email', $listDirn, $listOrder); ?>
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_RECIPIENT_HEADING_NEIGHBORHOOD', 'neighborhood', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_POST_HEADING_NEIGHBORHOOD', 'neighborhood', $listDirn, $listOrder); ?>
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_RECIPIENT_HEADING_COUNTRY', 'country', $listDirn, $listOrder); ?>
-				</th>
-				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_RECIPIENT_HEADING_CELLPHONE', 'cellphone', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_TESTIMONIES_POST_HEADING_MESSAGE', 'message', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="6"><?php echo $this->pagination->getListFooter(); ?></td>
+				<td colspan="5"><?php echo $this->pagination->getListFooter(); ?></td>
 			</tr>
 		</tfoot>
 		<?php foreach($this->items as $i => $item): ?>
@@ -53,23 +49,18 @@ $countries = $this->countries;
 					<?php echo JHtml::_('grid.id', $i, $item->id) ?>
 				</td>
 				<td>
-					<a href="<?php echo JRoute::_('index.php?option=com_testimonies&task=recipient.edit&id='. (int)$item->id) ?>">
-						<?php echo $this->escape($item->firstname); ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_testimonies&task=post.edit&id='. (int)$item->id) ?>">
+						<?php echo $this->escape($item->name); ?>
 					</a>
 				</td>
 				<td>
-					<a href="<?php echo JRoute::_('index.php?option=com_testimonies&task=recipient.edit&id='. (int)$item->id) ?>">
-						<?php echo $this->escape($item->lastname) ?>
-					</a>
+					<?php echo $this->escape($item->email) ?>
 				</td>
 				<td>
 					<?php echo $this->escape($item->neighborhood) ?>
 				</td>
 				<td>
-					<?php echo $this->countries[$item->country] ?>
-				</td>
-				<td>
-					<?php echo $this->escape($item->cellphone) ?>
+					<?php echo $this->escape($item->neighborhood) ?>
 				</td>
 			</tr>
 		<?php endforeach ?>

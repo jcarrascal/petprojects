@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.modellist');
 
 /**
- * Testimonies Recipients List Model.
+ * Testimonies Posts List Model.
  */
-class TestimoniesModelRecipients extends JModelList
+class TestimoniesModelPosts extends JModelList
 {
 	/**
 	 * Constructor.
@@ -20,10 +20,10 @@ class TestimoniesModelRecipients extends JModelList
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
-				'firstname', 'a.firstname',
-				'lastname', 'a.lastname',
+				'name', 'a.name',
+				'email', 'a.email',
 				'neighborhood', 'a.neighborhood',
-				'cellphone', 'a.cellphone',
+				'message', 'a.message',
 			);
 		}
 		parent::__construct($config);
@@ -38,8 +38,8 @@ class TestimoniesModelRecipients extends JModelList
 	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('id, firstname, lastname, neighborhood, country, cellphone');
-		$query->from('#__testimonies_recipients a');
+		$query->select('id, name, email, neighborhood, message');
+		$query->from('#__testimonies_posts a');
 
 		// Filter by search by names
 		$search = $this->getState('filter.search');
@@ -48,7 +48,7 @@ class TestimoniesModelRecipients extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('(a.firstname LIKE '.$search.' OR a.lastname LIKE '.$search.' OR a.cellphone LIKE '.$search.')');
+				$query->where('(a.name LIKE '.$search.' OR a.email LIKE '.$search.' OR a.neighborhood LIKE '.$search.' OR a.message LIKE '.$search.')');
 			}
 		}
 
@@ -81,23 +81,6 @@ class TestimoniesModelRecipients extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('firstname', 'asc');
-	}
-
-	public function getCountries()
-	{
-		return array(
-			54  => 'Argentina',
-			591 => 'Bolivia',
-			56  => 'Chile',
-			57  => 'Colombia',
-			593 => 'Ecuador',
-			52  => 'Mexico',
-			507 => 'Panamá',
-			595 => 'Paraguay',
-			51  => 'Perú',
-			598 => 'Uruguay',
-			58  => 'Venezuela',
-		);
+		parent::populateState('name', 'asc');
 	}
 }

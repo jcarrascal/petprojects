@@ -7,7 +7,7 @@ jimport('joomla.application.component.view');
 /**
  * Recipients View
  */
-class TestimoniesViewRecipients extends JView
+class TestimoniesViewPosts extends JView
 {
 	/**
 	 * Recipients view display method
@@ -18,7 +18,6 @@ class TestimoniesViewRecipients extends JView
 		$this->items      = $this->get('Items');
 		$this->pagination = $this->get('Pagination');
 		$this->state      = $this->get('State');
-		$this->countries  = $this->get('Countries');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
@@ -32,16 +31,9 @@ class TestimoniesViewRecipients extends JView
 	 */
 	protected function addToolBar()
 	{
-		JToolBarHelper::title(JText::_('COM_TESTIMONIES_MANAGER_RECIPIENTS'));
+		JToolBarHelper::title(JText::_('COM_TESTIMONIES_MANAGER_POSTS'));
 		JToolBarHelper::addNew('recipient.add');
 		JToolBarHelper::editList('recipient.edit');
 		JToolBarHelper::deleteList('', 'recipients.delete');
-		JToolBarHelper::divider();
-		$bar = JToolBar::getInstance();
-		$bar->appendButton('Popup', 'send', 'COM_TESTIMONIES_TOOLBAR_SEND', 'index.php?option=com_testimonies&amp;view=message&amp;tmpl=component', 450, 180);
-		$bar->appendButton('Link', 'export', 'JTOOLBAR_EXPORT', 'index.php?option=com_testimonies&amp;view=export&amp;format=raw');
-		$bar->appendButton('Popup', 'upload', 'COM_TESTIMONIES_TOOLBAR_IMPORT', 'index.php?option=com_testimonies&amp;view=import&amp;tmpl=component', 450, 180);
-		JToolBarHelper::divider();
-		JToolBarHelper::preferences('com_testimonies');
 	}
 }
