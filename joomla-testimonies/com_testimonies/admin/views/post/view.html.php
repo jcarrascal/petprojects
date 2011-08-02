@@ -5,24 +5,22 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.view');
 
 /**
- * Recipient View
+ * Post View
  */
-class TestimoniesViewRecipient extends JView
+class TestimoniesViewPost extends JView
 {
 	/**
-	 * Testimoniess view display method
+	 * Post view display method
 	 * @return void
 	 */
 	function display($tpl = null)
 	{
-		$form = $this->get('Form');
-		$item = $this->get('Item');
+		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
 		}
-		$this->form = $form;
-		$this->item = $item;
 		$this->addToolBar();
 		parent::display($tpl);
 	}
@@ -34,7 +32,7 @@ class TestimoniesViewRecipient extends JView
 	{
 		JRequest::setVar('hidemainmenu', true);
 		$isNew = ($this->item->id == 0);
-		JToolBarHelper::title($isNew ? JText::_('COM_TESTIMONIES_MANAGER_RECIPIENT_NEW') : JText::_('COM_TESTIMONIES_MANAGER_RECIPIENT_EDIT'));
+		JToolBarHelper::title($isNew ? JText::_('COM_TESTIMONIES_MANAGER_POST_NEW') : JText::_('COM_TESTIMONIES_MANAGER_RECIPIENT_EDIT'));
 		JToolBarHelper::apply('recipient.apply');
 		JToolBarHelper::save('recipient.save');
 		JToolBarHelper::save2new('recipient.save2new');

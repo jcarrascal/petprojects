@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.modeladmin');
 
 /**
- * Testimonies Recipient Model.
+ * Testimonies Post Model.
  */
-class TestimoniesModelRecipient extends JModelAdmin
+class TestimoniesModelPost extends JModelAdmin
 {
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -18,7 +18,7 @@ class TestimoniesModelRecipient extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Recipients', $prefix = 'TestimoniesTable', $config = array())
+	public function getTable($type = 'Posts', $prefix = 'TestimoniesTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -34,7 +34,7 @@ class TestimoniesModelRecipient extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_testimonies.recipients', 'recipients', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_testimonies.posts', 'posts', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
@@ -51,7 +51,7 @@ class TestimoniesModelRecipient extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_testimonies.edit.recipients.data', array());
+		$data = JFactory::getApplication()->getUserState('com_testimonies.edit.posts.data', array());
 		if (empty($data))
 		{
 			$data = $this->getItem();
