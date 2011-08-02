@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="text"
+		       label="COM_TESTIMONIES_MESSAGE_TEXT_LABEL"
+		       description="COM_TESTIMONIES_MESSAGE_TEXT_DESC"
+		       class="inputbox required"
+		       default=""
+		       maxlength="140"
+		       size="40"
+		       type="textarea" />
+	</fieldset>
+</form>
