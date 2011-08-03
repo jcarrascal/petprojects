@@ -21,9 +21,7 @@
 			<fieldset name="basic">
 				<field name="youtubeUser" type="string" label="YouTube user" description="" />
 				<field name="twitterUser" type="string" label="Twitter user" description="" />
-				<field name="facebookUser" type="string" label="Facebook user" description="" />
-				<field name="facebookAppId" type="string" label="Facebook Application ID" description="" />
-				<field name="facebookSecret" type="string" label="Facebook Secret" description="" />
+				<field name="facebookFeed" type="string" label="Facebook Feed" description="" />
 				<field name="cacheSeconds" type="number" label="Cache in seconds" default="3600" description="" />
 			</fieldset>
 			<fieldset name="advanced">
