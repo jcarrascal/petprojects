@@ -38,7 +38,7 @@ class TestimoniesModelPosts extends JModelList
 	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('id, name, email, neighborhood, message');
+		$query->select('id, name, email, neighborhood, message, picture');
 		$query->from('#__testimonies_posts a');
 
 		// Filter by search by names
@@ -81,6 +81,6 @@ class TestimoniesModelPosts extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('name', 'asc');
+		parent::populateState('id', 'desc');
 	}
 }
