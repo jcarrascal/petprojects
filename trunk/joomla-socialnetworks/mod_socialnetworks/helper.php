@@ -8,8 +8,7 @@ class ModSocialNetworks
 	{
 		$this->youtubeUser = $params->get('youtubeUser');
 		$this->twitterUser = $params->get('twitterUser');
-		$this->facebookUser = $params->get('facebookUser');
-		$this->facebookPassword = $params->get('facebookAppId');
+		$this->facebookFeed = $params->get('facebookFeed');
 		$this->cacheSeconds = (int)$params->get('cacheSeconds', 3600);
 		$this->youtube = false;
 		$this->twitter = false;
@@ -66,19 +65,19 @@ class ModSocialNetworks
 		return $twitter;
 	}
 
-	function isFacebookVisible() { return $this->facebookUser != '' && $this->facebookPassword != ''; }
+	function isFacebookVisible() { return $this->facebookFeed != ''; }
 
 	function fetchLatestFacebook()
 	{
 		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
 		if ($facebook === false)
 		{
-			$fb = new SimpleXmlElement(file_get_contents('http://fbrss.com/f/7340158d7fea181828cdd3b59244c69c.xml?me'));
+			$fb = new SimpleXmlElement(file_get_contents($this->facebookFeed));
 			$facebook = new stdClass();
 			$facebook->text = (string)($fb->channel->item[0]->description);
 			$facebook->link = (string)($fb->channel->item[0]->link);
 			$facebook->pubDate = date('Y-m-d', strtotime($fb->channel->item[0]->pubDate));
-			$this->cacheSet($this->facebook = $facebook, "fetchLatestFacebook_{$this->facebookUser}");
+			$this->cacheSet($this->facebook = $facebook, 'fetchLatestFacebook_' . substr($this->facebookFeed, 19));
 		}
 		return $facebook;
 	}
