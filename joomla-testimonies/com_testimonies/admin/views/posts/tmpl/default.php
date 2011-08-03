@@ -7,7 +7,7 @@ JHtml::_('behavior.multiselect');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_testimonies'); ?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_testimonies&view=posts'); ?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
@@ -60,7 +60,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 					<?php echo $this->escape($item->neighborhood) ?>
 				</td>
 				<td>
-					<?php echo $this->escape($item->neighborhood) ?>
+					<?php echo $this->escape($item->message) ?>
 				</td>
 			</tr>
 		<?php endforeach ?>

@@ -34,6 +34,6 @@ class TestimoniesViewPosts extends JView
 		JToolBarHelper::title(JText::_('COM_TESTIMONIES_MANAGER_POSTS'));
 		JToolBarHelper::addNew('post.add');
 		JToolBarHelper::editList('post.edit');
-		JToolBarHelper::deleteList('', 'posts.delete');
+		JToolBarHelper::deleteList('', 'post.delete');
 	}
 }
