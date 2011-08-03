@@ -53,8 +53,8 @@ class TestimoniesModelPosts extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
+		$orderCol  = $this->state->get('list.ordering', 'name');
+		$orderDirn = $this->state->get('list.direction', 'asc');
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		return $query;
