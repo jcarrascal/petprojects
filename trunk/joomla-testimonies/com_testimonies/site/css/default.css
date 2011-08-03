@@ -1,0 +1,47 @@
+body {
+	background: #ED3237;
+}
+
+/* Tooltips */
+.tip-wrap {
+	float: left;
+	background: #ffc;
+	border: 1px solid #D4D5AA;
+	padding: 5px;
+	max-width: 200px;
+}
+
+.tip-title {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	font-weight: bold;
+	margin-top: -15px;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	background: url(../images/selector-arrow.png) no-repeat;
+}
+
+.tip-text {
+	font-size: 100%;
+	margin: 0;
+}
+
+#com_testimonies {
+	background: url(../images/bubble.png) no-repeat 50% 0;
+	max-width: 965px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 5px;
+}
+
+#testimonies {
+	border: 0 none;
+	border-collapse: collapse;
+	margin: 124px auto 340px;
+	width: 684px;
+}
+#testimonies td {
+	border: 10px solid #FFF;
+	padding: 0;
+}

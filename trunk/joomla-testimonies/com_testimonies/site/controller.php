@@ -9,4 +9,14 @@ jimport('joomla.application.component.controller');
  */
 class TestimoniesController extends JController
 {
+	/**
+	 * Display task
+	 *
+	 * @return void
+	 */
+	function display($cachable = false)
+	{
+		JRequest::setVar('view', JRequest::getCmd('view', 'Posts'));
+		parent::display($cachable);
+	}
 }
