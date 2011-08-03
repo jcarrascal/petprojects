@@ -7,7 +7,7 @@ jimport('joomla.application.component.controllerform');
 /**
  * Recipient Controller
  */
-class TestimoniesControllerTestimonies extends JControllerForm
+class TestimoniesControllerPosts extends JControllerForm
 {
 	/**
 	 * Method to check if you can add a new record.
