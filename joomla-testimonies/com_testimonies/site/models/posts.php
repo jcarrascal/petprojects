@@ -84,7 +84,7 @@ class TestimoniesModelPosts extends JModelList
 		$this->setState('list.limit', 48);
 
 		// List state information.
-		parent::populateState('name', 'asc');
+		parent::populateState('id', 'desc');
 	}
 
 	/**
@@ -137,5 +137,61 @@ class TestimoniesModelPosts extends JModelList
 			$data = $this->getItem();
 		}
 		return $data;
+	}
+
+	function validate($form, $data) {
+		if (trim($data['message']) == '') {
+			$this->setError('Por favor ingrese su mensaje.');
+			return false;
+		}
+		if (trim($data['name']) == '') {
+			$this->setError('Por favor ingrese su nombre.');
+			return false;
+		}
+		if (trim($data['email']) == '') {
+			$this->setError('Por favor ingrese su email.');
+			return false;
+		}
+		if (!preg_match('/^[A-Za-z0-9._\-]+@[A-Za-z0-9._\-]+\.[A-Za-z]{2,6}$/', $data['email'])) {
+			$this->setError('Por favor ingrese una dirección de email válida.');
+			return false;
+		}
+		$db = $this->getDBO();
+		$query = 'select count(*) counter from #__testimonies_posts where email = ' . $db->quote($data['email']);
+		$db->setQuery($query);
+		$row = $db->loadRow();
+		if ($row[0] > 0) {
+			$this->setError('La dirección de email ya existe.');
+			return false;
+		}
+		if (!is_uploaded_file($filename = $_FILES['jform']['tmp_name']['picture'])) {
+			$this->setError('Debe seleccionar una imagen JPG, GIF o PNG.');
+			return false;
+		}
+		switch ($_FILES['jform']['error']['picture'])
+		{
+			case 1: $this->setError(JText::_( 'FILE TO LARGE THAN PHP INI ALLOWS' )); return false;
+			case 2: $this->setError(JText::_( 'FILE TO LARGE THAN HTML FORM ALLOWS' )); return false;
+			case 3: $this->setError(JText::_( 'ERROR PARTIAL UPLOAD' )); return false;
+			case 4: $this->setError(JText::_( 'ERROR NO FILE' )); return false;
+		}
+		if (($size = getimagesize($filename)) === false) {
+			$this->setError('Solo se permiten imágenes JPG, GIF o PNG.');
+			return false;
+		}
+		list($w, $h) = $size;
+		$side = min($w, $h);
+		$data['picture'] = md5($data['email']) . '.png';
+		$src = imagecreatefromstring(file_get_contents($filename));
+		$dest = imagecreatetruecolor(66, 66);
+		imagecopyresized($dest, $src, 0, 0, ($w - $side) / 2, ($h - $side) / 2, 66, 66, $side, $side);
+		imagepng($dest, JPATH_SITE . '/images/com_testimonies/' . $data['picture'], 9, PNG_ALL_FILTERS);
+		return $data;
+	}
+
+	function save($data)
+	{
+		$table = $this->getTable();
+		return $table->save($data);
 	}
 }
