@@ -1,4 +1,10 @@
-body { background: #ED3237 }
+body {
+	background: #CA3438;
+	font: 11px Helvetica, Arial, sans-serif;
+}
+table.form th {
+	text-align: left;
+}
 
 /* Tooltips */
 .tip-wrap {
@@ -33,14 +39,40 @@ body { background: #ED3237 }
 	padding-bottom: 250px;
 }
 
-#header { margin-bottom: 20px }
+#header { margin-bottom: 70px }
+
+#form {
+	margin: 0 auto;
+	width: 400px;
+	height: 50px;
+}
+#form_extended {
+	border: 1px solid #CCC;
+	background: #FFF;
+	display: none;
+	margin: 0 -51px;
+	padding: 5px 10px;
+	position: relative;
+	width: 492px;
+	z-index: 1000;
+}
+#jform_message {
+	height: 40px;
+	width: 382px;
+}
+#jform_name, #jform_email, #jform_neighborhood, #jform_picture {
+	width: 223px;
+	overflow: hidden;
+}
 
 #testimonies {
+	height: 466px;
+	margin: 40px auto 33px;
+	width: 694px;
+}
+#testimonies table {
 	border: 0 none;
 	border-collapse: collapse;
-	height: 466px;
-	margin: 130px auto 33px;
-	width: 694px;
 }
 #testimonies tr { vertical-align: top }
 #testimonies td {
