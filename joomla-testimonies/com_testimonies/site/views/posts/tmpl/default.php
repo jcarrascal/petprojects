@@ -14,6 +14,7 @@ JHtml::_('behavior.formvalidation');
 	});
 </script>
 <div id="com_testimonies">
+	<div id="header"><a href="<?php echo $this->baseurl ?>/index.php"><img alt="" height="149" src="<?php echo $this->baseurl ?>/components/com_testimonies/images/header.png" width="965"></a></div>
 	<?php
 	// Page Heading if needed
 	if ($this->params->get('show_page_heading'))
@@ -31,4 +32,5 @@ JHtml::_('behavior.formvalidation');
 		<?php ++$i; endforeach; ?>
 		</tr>
 	</table>
+	<div id="pagination"><?php echo $this->pagination->getPagesLinks(); ?></div>
 </div>
