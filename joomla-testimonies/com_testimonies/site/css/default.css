@@ -68,6 +68,7 @@ table.form th {
 #testimonies {
 	height: 466px;
 	margin: 40px auto 33px;
+	padding: 0 !important;
 	width: 694px;
 }
 #testimonies table {
