@@ -3,6 +3,7 @@
 defined('_JEXEC') or die('Restricted access');// no direct access
  
 jimport('joomla.application.component.modellist');
+jimport('joomla.form.form');
  
 /**
  * Testimonies Model
@@ -84,5 +85,57 @@ class TestimoniesModelPosts extends JModelList
 
 		// List state information.
 		parent::populateState('name', 'asc');
+	}
+
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Posts', $prefix = 'TestimoniesTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to get the record form.
+	 *
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
+	 * @since	1.6
+	 */
+	public function getForm($data = array(), $loadData = true)
+	{
+		JForm::addFormPath(JPATH_COMPONENT.'/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT.'/models/fields');
+		// Get the form.
+		$form = JForm::getInstance('com_testimonies.posts', 'posts', array('control' => 'jform', 'load_data' => $loadData), false, false);
+		if (empty($form))
+		{
+			return false;
+		}
+		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_testimonies.edit.posts.data', array());
+		if (empty($data))
+		{
+			$data = $this->getItem();
+		}
+		return $data;
 	}
 }

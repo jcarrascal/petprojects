@@ -15,6 +15,7 @@ class TestimoniesViewPosts extends JView
 		$this->items      = $this->get('Items');
 		$this->pagination = $this->get('Pagination');
 		$this->state      = $this->get('State');
+		$this->form       = $this->get('Form');
 		$this->params     = $application->getParams('com_testimonies');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
