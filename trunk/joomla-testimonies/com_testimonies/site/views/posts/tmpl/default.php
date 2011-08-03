@@ -23,12 +23,15 @@ $form = $this->form;
 		$('#cancel_form').click(function() {
 			$('#form_extended').slideUp();
 		});
+		setTimeout(function() {
+			$('#system-message-container').slideUp();
+		}, 5000);
 	});
 </script>
 <div id="com_testimonies">
 	<div id="header"><a href="<?php echo $this->baseurl ?>/index.php"><img alt="" height="149" src="<?php echo $this->baseurl ?>/components/com_testimonies/images/header.png" width="965"></a></div>
 	<div id="form">
-		<form action="" class="foxform" method="post">
+		<form action="" class="foxform" method="post" enctype="multipart/form-data">
 			<?php echo $form->getInput('message') ?>
 			<div id="form_extended">
 				<table class="form">
@@ -50,6 +53,10 @@ $form = $this->form;
 					</tr>
 				</table>
 				<div style="text-align:center">
+					<input name="task" type="hidden" value="posts.save">
+					<input name="layout" type="hidden" value="save">
+					<input name="tmpl" type="hidden" value="component">
+					<?php echo JHtml::_('form.token'); ?>
 					<button class="foxbutton" type="submit"><span><?php echo JText::_('COM_TESTIMONIES_BUTTON_SUBMIT') ?></span></button>
 					<button class="foxbutton" id="cancel_form" type="button"><span><?php echo JText::_('COM_TESTIMONIES_BUTTON_CANCEL') ?></span></button>
 				</div>

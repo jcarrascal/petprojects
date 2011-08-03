@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');// no direct access
 jimport('joomla.application.component.controllerform');
 
 /**
- * Recipient Controller
+ * Posts Controller
  */
 class TestimoniesControllerPosts extends JControllerForm
 {
