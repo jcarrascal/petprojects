@@ -192,6 +192,9 @@ class TestimoniesModelPosts extends JModelList
 	function save($data)
 	{
 		$table = $this->getTable();
+		$this->setState('list.start', 0);
+		$store = $this->getStoreId('getstart');
+		$this->cache[$store] = 0;
 		return $table->save($data);
 	}
 }
