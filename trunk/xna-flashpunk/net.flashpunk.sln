@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net.flashpunk.splash", "net.flashpunk.splash\net.flashpunk.splash\net.flashpunk.splash.csproj", "{20929D4B-8A5D-4985-A384-8238AE42E247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net.flashpunk.splashContent", "net.flashpunk.splash\net.flashpunk.splashContent\net.flashpunk.splashContent.contentproj", "{36954C6D-CCDC-4B47-9053-7C34A384D041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net.flashpunk", "net.flashpunk\net.flashpunk.csproj", "{56870386-C6F6-4CDF-8A42-D86627CD7B82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net.flashpunk.primitives", "net.flashpunk.primitives\net.flashpunk.primitives\net.flashpunk.primitives.csproj", "{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "net.flashpunk.primitivesContent", "net.flashpunk.primitives\net.flashpunk.primitivesContent\net.flashpunk.primitivesContent.contentproj", "{4E254D27-0C20-4CCB-ABBF-DD20CAB00471}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Windows Phone = Debug|Windows Phone
+		Release|Windows Phone = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Debug|Windows Phone.Deploy.0 = Debug|Windows Phone
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Release|Windows Phone.Build.0 = Release|Windows Phone
+		{20929D4B-8A5D-4985-A384-8238AE42E247}.Release|Windows Phone.Deploy.0 = Release|Windows Phone
+		{36954C6D-CCDC-4B47-9053-7C34A384D041}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{36954C6D-CCDC-4B47-9053-7C34A384D041}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{56870386-C6F6-4CDF-8A42-D86627CD7B82}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{56870386-C6F6-4CDF-8A42-D86627CD7B82}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
+		{56870386-C6F6-4CDF-8A42-D86627CD7B82}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{56870386-C6F6-4CDF-8A42-D86627CD7B82}.Release|Windows Phone.Build.0 = Release|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Debug|Windows Phone.Deploy.0 = Debug|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Release|Windows Phone.Build.0 = Release|Windows Phone
+		{6F142913-BA04-476B-9ED5-7D2B86D8B4A5}.Release|Windows Phone.Deploy.0 = Release|Windows Phone
+		{4E254D27-0C20-4CCB-ABBF-DD20CAB00471}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{4E254D27-0C20-4CCB-ABBF-DD20CAB00471}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
