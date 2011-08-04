@@ -12,7 +12,7 @@ class MassMailerModelExport extends MassMailerModelRecipients
 {
 	function getBaseName()
 	{
-		return strftime('CentralCMS_Recipients_%Y-%m-%d-%H-%M-%S');
+		return strftime('MassMailer_Recipients_%Y-%m-%d-%H-%M-%S');
 	}
 
 	/**
@@ -28,9 +28,10 @@ class MassMailerModelExport extends MassMailerModelRecipients
 			$this->content.=
 			'"'.str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_FIRSTNAME')).'";"'.
 				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_LASTNAME')).'";"'.
-				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_NEIGHBORHOOD')).'";"'.
-				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_COUNTRY')).'";"'.
-				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_CELLPHONE'))."\"\n";
+				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_EMAIL')).'";"'.
+				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_GENDER')).'";"'.
+				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_DATE_OF_BIRTH')).'";"'.
+				str_replace('"','""',JText::_('COM_MASSMAILER_RECIPIENT_HEADING_NEIGHBORHOOD'))."\"\n";
 			foreach($this->getItems() as $item) {
 				$this->content.=
 				'"'.str_replace('"','""',$item->firstname).'";"'.
