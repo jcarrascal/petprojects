@@ -38,7 +38,7 @@ class MassMailerViewRecipients extends JView
 		JToolBarHelper::deleteList('', 'recipients.delete');
 		JToolBarHelper::divider();
 		$bar = JToolBar::getInstance();
-		$bar->appendButton('Popup', 'send', 'COM_MASSMAILER_TOOLBAR_SEND', 'index.php?option=com_massmailer&amp;view=message&amp;tmpl=component', 450, 180);
+		$bar->appendButton('Popup', 'send', 'COM_MASSMAILER_TOOLBAR_SEND', 'index.php?option=com_massmailer&amp;view=message&amp;tmpl=component', 650, 450);
 		$bar->appendButton('Link', 'export', 'JTOOLBAR_EXPORT', 'index.php?option=com_massmailer&amp;view=export&amp;format=raw');
 		$bar->appendButton('Popup', 'upload', 'COM_MASSMAILER_TOOLBAR_IMPORT', 'index.php?option=com_massmailer&amp;view=import&amp;tmpl=component', 450, 180);
 		JToolBarHelper::divider();
