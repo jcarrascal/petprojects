@@ -33,9 +33,9 @@ class TestimoniesViewPost extends JView
 		JRequest::setVar('hidemainmenu', true);
 		$isNew = ($this->item->id == 0);
 		JToolBarHelper::title($isNew ? JText::_('COM_TESTIMONIES_MANAGER_POST_NEW') : JText::_('COM_TESTIMONIES_MANAGER_RECIPIENT_EDIT'));
-		JToolBarHelper::apply('recipient.apply');
-		JToolBarHelper::save('recipient.save');
-		JToolBarHelper::save2new('recipient.save2new');
-		JToolBarHelper::cancel('recipient.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+		JToolBarHelper::apply('post.apply');
+		JToolBarHelper::save('post.save');
+		JToolBarHelper::save2new('post.save2new');
+		JToolBarHelper::cancel('post.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}
 }
