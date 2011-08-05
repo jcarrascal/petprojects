@@ -18,7 +18,7 @@ class MassMailerControllerMessage extends JController
 		}
 		$saved = $model->save($form);
 		$this->setMessage($saved ? JText::_('COM_MASSMAILER_MESSAGE_SAVE_SUCCESS') : $model->getError());
-		$this->setRedirect(JRoute::_('index.php?option=com_massmailer&view=message&tmpl=component', false));
+		$this->setRedirect(JRoute::_('index.php?option=com_massmailer&view=message&tmpl=component&success=1', false));
 	}
 
 	/**

@@ -83,8 +83,8 @@ class MassMailerModelMessage extends JModel
 				$this->setError($db->getErrorMsg());
 				return false;
 			}
-			$this->setState('com_massmailer.message', $form);
 		}
+		$this->setState('com_massmailer.message', $form);
 		return true;
 	}
 }

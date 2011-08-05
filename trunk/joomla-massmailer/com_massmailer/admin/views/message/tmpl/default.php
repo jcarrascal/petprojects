@@ -17,7 +17,7 @@ $form = $this->form;
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED')) ?>');
 		}
 	}
-	<?php if ($form->id > 0) : ?>
+	<?php if ($this->success) : ?>
 		window.top.setTimeout('window.parent.SqueezeBox.close()', 5000);
 	<?php endif ?>
 </script>
