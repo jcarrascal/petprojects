@@ -16,6 +16,7 @@ class MassMailerViewMessage extends JView
 	function display($tpl = null)
 	{
 		$this->form = $this->get('Form');
+		$this->success = JRequest::getBool('success');
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
