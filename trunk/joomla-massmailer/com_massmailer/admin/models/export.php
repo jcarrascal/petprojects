@@ -36,9 +36,10 @@ class MassMailerModelExport extends MassMailerModelRecipients
 				$this->content.=
 				'"'.str_replace('"','""',$item->firstname).'";"'.
 					str_replace('"','""',$item->lastname).'";"'.
-					str_replace('"','""',$item->neighborhood).'";"'.
-					str_replace('"','""',$item->country).'";"'.
-					str_replace('"','""',$item->cellphone).'"'."\n";
+					str_replace('"','""',$item->email).'";"'.
+					str_replace('"','""',$item->gender).'";"'.
+					str_replace('"','""',$item->date_of_birth).'";"'.
+					str_replace('"','""',$item->neighborhood).'"'."\n";
 			}
 		}
 		return $this->content;
