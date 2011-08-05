@@ -12,7 +12,6 @@ class MassMailerTableMessages extends JTable
 {
 	/**
 	 * Constructor
-	 *
 	 * @param object Database connector object
 	 */
 	function __construct(&$db)
