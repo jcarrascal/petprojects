@@ -14,12 +14,21 @@ CREATE TABLE  `#__massmailer_recipients` (
 DROP TABLE IF EXISTS `#__massmailer_messages`;
 CREATE TABLE  `#__massmailer_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(100) NOT NULL,
-  `text` varchar(700) NOT NULL,
-  `recipients` longtext NOT NULL,
-  `sent_on` DATETIME NOT NULL,
-  `status_message` varchar(200) NULL,
-  `request` longtext NULL,
-  `response` longtext NULL,
+  `from_email` varchar(200) NOT NULL,
+  `from_name` varchar(100) NOT NULL,
+  `subject` varchar(200) NULL,
+  `content` longtext NULL,
+  `created_on` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+DROP TABLE IF EXISTS `#__massmailer_emails`;
+CREATE TABLE  `#__massmailer_emails` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `message_id` int(10) NOT NULL,
+  `recipient` varchar(200) NOT NULL,
+  `variables` longtext NULL,
+  `process` varchar(100) NULL,
+  `started_on` DATETIME NULL,
   PRIMARY KEY (`id`)
 );
