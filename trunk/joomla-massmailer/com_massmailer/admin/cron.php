@@ -15,11 +15,6 @@ $sql = "update {$dbprefix}massmailer_emails set process = '$process', started_on
 	where sent_on is null and (process is null or started_on < addtime(CURRENT_TIMESTAMP, '-01:00:00'))
 	order by id
 	limit 3";
-
-$sql = "update {$dbprefix}massmailer_emails set process = '$process', started_on = CURRENT_TIMESTAMP
-	where sent_on is null
-	order by id
-	limit 3";
 $conn->query($sql) or die($conn->error);
 
 $sql = "select *
@@ -30,14 +25,14 @@ $sql = "select *
 $result = $conn->query($sql) or die($conn->error);
 $template = file_get_contents(dirname(__FILE__) . '/template/index.html');
 $messages_count = 0;
-while (($email = $result->fetch_object()) != null) {
-	$message = prepareMail($email, $template);
+while (($row = $result->fetch_object()) != null) {
+	$message = prepareMail($row, $template);
 	try {
 		$message->send();
 		$sql = "update {$dbprefix}massmailer_emails
 			set sent_on = CURRENT_TIMESTAMP
 			where id = {$row->id}";
-		$db->query($sql) or die($conn->error);
+		$conn->query($sql) or die($conn->error . " $sql");
 		++$messages_count;
 	} catch (Exception $ex) {
 		echo $ex->getMessage(), "<br/>\n", $ex->getTraceAsString();
@@ -71,7 +66,9 @@ function prepareMail($row, $template)
 
 function template($text, $variables)
 {
-	$keys = array_map(function($s) { return "{{$s}}"; }, array_keys($variables));
+	$keys = array();
+	foreach (array_keys($variables) as $key)
+		$keys[] = "{{$key}}";
 	$values = array_values($variables);
 	return str_replace($keys, $values, $text);
 }
