@@ -24,7 +24,6 @@ $sql = "select *
 	order by e.id";
 $result = $conn->query($sql) or die($conn->error);
 $template = file_get_contents(dirname(__FILE__) . '/template/index.html');
-$messages_count = 0;
 while (($row = $result->fetch_object()) != null) {
 	$message = prepareMail($row, $template);
 	try {
@@ -33,7 +32,6 @@ while (($row = $result->fetch_object()) != null) {
 			set sent_on = CURRENT_TIMESTAMP
 			where id = {$row->id}";
 		$conn->query($sql) or die($conn->error . " $sql");
-		++$messages_count;
 	} catch (Exception $ex) {
 		echo $ex->getMessage(), "<br/>\n", $ex->getTraceAsString();
 	}

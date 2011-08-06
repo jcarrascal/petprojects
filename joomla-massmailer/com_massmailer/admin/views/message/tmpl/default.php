@@ -38,7 +38,10 @@ $form = $this->form;
 				<input id="jform_subject" class="inputbox required" name="subject" type="text" style="width:350px" value="<?php echo $this->escape($form->subject) ?>"/>
 			</li>
 			<li>
-				<label class="hasTip" title="<?php echo JText::_('COM_MASSMAILER_MESSAGE_CONTENT_DESC') ?>" for="jform_content"><?php echo JText::_('COM_MASSMAILER_MESSAGE_CONTENT_LABEL') ?></label>
+				<label class="hasTip" title="<?php echo JText::_('COM_MASSMAILER_MESSAGE_CONTENT_DESC') ?>" for="jform_content">
+					<?php echo JText::_('COM_MASSMAILER_MESSAGE_CONTENT_LABEL') ?>
+					{firstname} {lastname} {email} {gender} {date_of_birth} {neighborhood}
+				</label>
 				<div style="clear:both"></div>
 				<?php
 					$editor =& JFactory::getEditor();
