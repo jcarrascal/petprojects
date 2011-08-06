@@ -14,7 +14,7 @@ $process = md5(microtime());
 $sql = "update {$dbprefix}massmailer_emails set process = '$process', started_on = CURRENT_TIMESTAMP
 	where sent_on is null and (process is null or started_on < addtime(CURRENT_TIMESTAMP, '-01:00:00'))
 	order by id
-	limit 3";
+	limit 15";
 $conn->query($sql) or die($conn->error);
 
 $sql = "select *
