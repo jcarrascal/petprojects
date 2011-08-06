@@ -35,5 +35,13 @@
 		       maxlength="400"
 		       size="40"
 		       type="text" />
+		<field name="picture"
+		       label="COM_TESTIMONIES_POST_PICTURE_LABEL"
+		       description="COM_TESTIMONIES_POST_PICTURE_DESC"
+		       class="inputbox required"
+		       default=""
+		       maxlength="400"
+		       size="40"
+		       type="file" />
 	</fieldset>
 </form>
