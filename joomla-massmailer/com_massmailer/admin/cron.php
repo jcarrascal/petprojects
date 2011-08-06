@@ -1,6 +1,8 @@
 ﻿<?php
 
-require_once dirname(__FILE__) . '/../../../configuration.php';
+define('BASE_PATH', dirname(__FILE__));
+require_once BASE_PATH . '/../../../configuration.php';
+require_once BASE_PATH . '/Zend/Mail.php';
 
 $config = new JConfig();
 $dbprefix = $config->dbprefix;
@@ -27,14 +29,45 @@ $sql = "select *
 	order by e.id";
 $result = $conn->query($sql) or die($conn->error);
 $template = file_get_contents(dirname(__FILE__) . '/template/index.html');
+$messages_count = 0;
 while (($email = $result->fetch_object()) != null) {
-	$variables = unserialize($email->variables);
-	$variables['subject'] = $email->subject;
-	$variables['content'] = template($email->content, $variables);
-	$body = template($template, $variables);
-	var_dump($body);
+	$message = prepareMail($email, $template);
+	try {
+		$message->send();
+		$sql = "update {$dbprefix}massmailer_emails
+			set sent_on = CURRENT_TIMESTAMP
+			where id = {$row->id}";
+		$db->query($sql) or die($conn->error);
+		++$messages_count;
+	} catch (Exception $ex) {
+		echo $ex->getMessage(), "<br/>\n", $ex->getTraceAsString();
+	}
 }
 $result->close();
+
+function prepareMail($row, $template)
+{
+	$variables = unserialize($row->variables);
+	$variables['subject'] = $row->subject;
+	$variables['content'] = template($row->content, $variables);
+	$mail = new Zend_Mail('UTF-8');
+	$mail->setType(Zend_Mime::MULTIPART_RELATED);
+	$mail->setFrom($row->from_email, $row->from_name);
+	$mail->setSubject($row->subject);
+	$mail->addTo($row->recipient, "{$variables['firstname']} {$variables['lastname']}");
+	$htmlMessage = template($template, $variables);
+	if (preg_match_all('/src="([^"]+)"/i', $htmlMessage, $images, PREG_SET_ORDER))
+	foreach ($images as $image)
+	{
+		$att = $mail->createAttachment(file_get_contents(BASE_PATH . '/template/' . $image[1]),
+			'image/' . trim(strrchr($image[1], '.'), '.'), Zend_Mime::DISPOSITION_INLINE,
+			Zend_Mime::ENCODING_BASE64);
+		$att->id = md5($image[1]);
+		$htmlMessage = str_replace($image[0], "src=\"cid:$att->id\"", $htmlMessage);
+	}
+	$mail->setBodyHtml($htmlMessage, null, Zend_Mime::MULTIPART_RELATED);
+	return $mail;
+}
 
 function template($text, $variables)
 {
