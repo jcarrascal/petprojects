@@ -78,7 +78,7 @@ class MassMailerModelMessage extends JModel
 			$email = new stdClass();
 			$email->message_id = $form->id;
 			$email->recipient = $item->email;
-			$email->variables = serialize($item);
+			$email->variables = serialize(get_object_vars($item));
 			if (!$db->insertObject('#__massmailer_emails', $email)) {
 				$this->setError($db->getErrorMsg());
 				return false;

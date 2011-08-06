@@ -30,5 +30,6 @@ CREATE TABLE  `#__massmailer_emails` (
   `variables` longtext NULL,
   `process` varchar(100) NULL,
   `started_on` DATETIME NULL,
+  `sent_on` DATETIME NULL,
   PRIMARY KEY (`id`)
 );
