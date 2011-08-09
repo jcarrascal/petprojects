@@ -69,8 +69,10 @@
     <Compile Include="flash\display\Sprite.cs" />
     <Compile Include="FP.cs" />
     <Compile Include="Graphic.cs" />
+    <Compile Include="graphics\Anim.cs" />
     <Compile Include="graphics\Graphiclist.cs" />
     <Compile Include="graphics\Image.cs" />
+    <Compile Include="graphics\Spritemap.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="Mask.cs" />
     <Compile Include="masks\Hitbox.cs">
