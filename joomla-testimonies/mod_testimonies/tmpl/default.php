@@ -3,6 +3,9 @@
 $testimony = $helper->fetchLatestTestimony();
 
 ?>
+<h4>
+	<a href="/index.php/testimonios"><img alt="Vivir mejor" height="58" src="/templates/barrancabermejaquiere/images/vivirmejor_s1.png" width="193"></a>
+</h4>
 <ul class="category-module testimonies">
 	<li>
 		<h4>
