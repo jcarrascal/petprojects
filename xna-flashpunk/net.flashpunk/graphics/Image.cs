@@ -69,7 +69,7 @@ namespace net.flashpunk.graphics
         /// Initializes a new instance of the <see cref="Image"/> class.
         /// </summary>
         public Image()
-            : this((Texture2D)null, Rectangle.Empty)
+            : this(null, Rectangle.Empty)
         {
         }
 
@@ -79,25 +79,6 @@ namespace net.flashpunk.graphics
         /// <param name="source">Source image.</param>
         public Image(Texture2D source)
             : this(source, Rectangle.Empty)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Image"/> class.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        public Image(Embed source)
-            : this(source.bitmapData, Rectangle.Empty)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Image"/> class.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="clipRect">The clip rect.</param>
-        public Image(Embed source, Rectangle clipRect)
-            : this(source.bitmapData, clipRect)
         {
         }
 

@@ -22,5 +22,10 @@ namespace net.flashpunk
         {
             get { return FP.content.Load<Texture2D>(GetContentFile()); }
         }
+
+        public static implicit operator Texture2D(Embed file)
+        {
+            return FP.content.Load<Texture2D>(file.GetContentFile());
+        }
     }
 }
