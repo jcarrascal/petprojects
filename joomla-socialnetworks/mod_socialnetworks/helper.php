@@ -69,7 +69,7 @@ class ModSocialNetworks
 
 	function fetchLatestFacebook()
 	{
-		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookUser}", $this->cacheSeconds);
+		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookFeed}", $this->cacheSeconds);
 		if ($facebook === false)
 		{
 			$fb = new SimpleXmlElement(file_get_contents($this->facebookFeed));
