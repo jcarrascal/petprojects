@@ -214,7 +214,7 @@ namespace net.flashpunk.graphics
         /// </value>
         public bool flipped
         {
-            get { return spriteEffects == SpriteEffects.None; }
+            get { return spriteEffects != SpriteEffects.None; }
             set { spriteEffects = value ? SpriteEffects.FlipHorizontally : SpriteEffects.None; }
         }
 

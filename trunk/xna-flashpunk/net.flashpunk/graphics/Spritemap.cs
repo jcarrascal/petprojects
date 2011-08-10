@@ -72,76 +72,66 @@ namespace net.flashpunk.graphics
         public Spritemap(Texture2D source, uint frameWidth, uint frameHeight, Action callback)
             : base(source, new Rectangle(0, 0, (int)frameWidth, (int)frameHeight))
         {
-            _rect = base._sourceRect;
-            if (frameWidth == 0) _rect.Width = this.source.Width;
-            if (frameHeight == 0) _rect.Height = this.source.Height;
+            if (frameWidth == 0) _sourceRect.Width = this.source.Width;
+            if (frameHeight == 0) _sourceRect.Height = this.source.Height;
             _width = this.source.Width;
             _height = this.source.Height;
-            _columns = _width / _rect.Width;
-            _rows = _height / _rect.Height;
+            _columns = _width / _sourceRect.Width;
+            _rows = _height / _sourceRect.Height;
             _frameCount = _columns * _rows;
             this.callback = callback;
-            //updateBuffer();
+            updateBuffer();
             active = true;
         }
 
-        ///// <summary>
-        ///// Updates the spritemap's buffer.
-        ///// </summary>
-        //override public void updateBuffer()
-        //{
-        //    updateBuffer(false);
-        //}
+        /// <summary>
+        /// Updates the spritemap's buffer.
+        /// </summary>
+        public void updateBuffer()
+        {
+            // get position of the current frame
+            _sourceRect.X = _sourceRect.Width * _frame;
+            _sourceRect.Y = (_sourceRect.X / _width) * _sourceRect.Height;
+            _sourceRect.X %= _width;
+            if (flipped) _sourceRect.X = (_width - _sourceRect.Width) - _sourceRect.X;
 
-        ///// <summary>
-        ///// Updates the spritemap's buffer.
-        ///// </summary>
-        ///// <param name="clearBefore">if set to <c>true</c> [clear before].</param>
-        //override public void updateBuffer(bool clearBefore)
-        //{
-        //    // get position of the current frame
-        //    _rect.X = _rect.Width * _frame;
-        //    _rect.Y = (_rect.X / _width) * _rect.Height;
-        //    _rect.X %= _width;
-        //    if (flipped) _rect.X = (_width - _rect.Width) - _rect.X;
-
-        //    // update the buffer
-        //    //base.updateBuffer(clearBefore);
-        //}
+            // update the buffer
+            //base.updateBuffer(clearBefore);
+        }
 
         /** @private Updates the animation. */
-        override public void update() 
-		{
-			if (_anim != null && !complete)
-			{
-				_timer += (FP.isFixed ? _anim._frameRate : _anim._frameRate * FP.elapsed) * rate;
-				if (_timer >= 1)
-				{
-					while (_timer >= 1)
-					{
-						_timer --;
-						_index ++;
-						if (_index == _anim._frameCount)
-						{
-							if (_anim._loop)
-							{
-								_index = 0;
-								if (callback != null) callback();
-							}
-							else
-							{
-								_index = _anim._frameCount - 1;
-								complete = true;
-								if (callback != null) callback();
-								break;
-							}
-						}
-					}
-					if (_anim != null) _frame = _anim._frames[_index];
-					//updateBuffer();
-				}
-			}
-		}
+        override public void update()
+        {
+            if (_anim != null && !complete)
+            {
+                _timer += (FP.isFixed ? _anim._frameRate : _anim._frameRate * FP.elapsed) * rate;
+                if (_timer >= 1)
+                {
+                    while (_timer >= 1)
+                    {
+                        _timer--;
+                        _index++;
+                        if (_index == _anim._frameCount)
+                        {
+                            if (_anim._loop)
+                            {
+                                _index = 0;
+                                if (callback != null) callback();
+                            }
+                            else
+                            {
+                                _index = _anim._frameCount - 1;
+                                complete = true;
+                                if (callback != null) callback();
+                                break;
+                            }
+                        }
+                    }
+                    if (_anim != null) _frame = _anim._frames[_index];
+                    updateBuffer();
+                }
+            }
+        }
 
         /// <summary>
         /// Add an Animation.
@@ -218,14 +208,14 @@ namespace net.flashpunk.graphics
             {
                 _frame = _index = 0;
                 complete = true;
-                //updateBuffer();
+                updateBuffer();
                 return null;
             }
             _index = 0;
             _timer = 0;
             _frame = _anim._frames[0];
             complete = false;
-            //updateBuffer();
+            updateBuffer();
             return _anim;
         }
 
@@ -294,7 +284,7 @@ namespace net.flashpunk.graphics
             int frame = (row % _rows) * _columns + (column % _columns);
             if (_frame == frame) return;
             _frame = frame;
-            //updateBuffer();
+            updateBuffer();
         }
 
         /// <summary>
@@ -335,7 +325,7 @@ namespace net.flashpunk.graphics
                 if (value < 0) value = _frameCount + value;
                 if (_frame == value) return;
                 _frame = value;
-                //updateBuffer();
+                updateBuffer();
             }
         }
 
@@ -349,14 +339,14 @@ namespace net.flashpunk.graphics
         {
             get { return _anim != null ? _index : 0; }
             set
-		{
-			if (_anim == null) return;
-			value %= _anim._frameCount;
-			if (_index == value) return;
-			_index = value;
-			_frame = _anim._frames[_index];
-			//updateBuffer();
-		}
+            {
+                if (_anim == null) return;
+                value %= _anim._frameCount;
+                if (_index == value) return;
+                _index = value;
+                _frame = _anim._frames[_index];
+                updateBuffer();
+            }
         }
 
         /// <summary>
@@ -380,7 +370,6 @@ namespace net.flashpunk.graphics
         public string currentAnim { get { return _anim != null ? _anim._name : ""; } }
 
         // Spritemap information.
-        protected Rectangle _rect;
         protected int _width;
         protected int _height;
         private int _columns;
