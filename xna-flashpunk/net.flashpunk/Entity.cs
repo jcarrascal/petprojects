@@ -533,7 +533,7 @@ namespace net.flashpunk
             else
             {
                 Graphiclist list = new Graphiclist();
-                if (graphic != null) list.add(graphic);
+                if (g != null) list.add(g);
                 graphic = list;
             }
             return g;
@@ -762,6 +762,7 @@ namespace net.flashpunk
         {
             _point.X = x - this.x;
             _point.Y = y - this.y;
+            if (_point != Vector2.Zero) _point.Normalize();
             _point *= amount;
             moveBy(_point.X, _point.Y, solidType, sweep);
         }
