@@ -109,14 +109,14 @@ namespace net.flashpunk.graphics
         override public void render(SpriteBatch target, Vector2 point, Vector2 camera)
         {
             if (blend == null)
-                target.Draw(source, point + position + origin - camera * scroll, clipRect, _tint, angle, origin, scale, spriteEffects, 0);
+                target.Draw(source, point + position + origin - camera * scroll, clipRect, _tint, angle * FP.RAD, origin, scale, spriteEffects, 0);
             else
             {
                 try
                 {
                     target.End();
                     target.Begin(SpriteSortMode.Deferred, blend);
-                    target.Draw(source, point + position + origin + camera * scroll, clipRect, _tint, angle, origin, scale, spriteEffects, 0);
+                    target.Draw(source, point + position + origin + camera * scroll, clipRect, _tint, angle * FP.RAD, origin, scale, spriteEffects, 0);
                     target.End();
                 }
                 finally
