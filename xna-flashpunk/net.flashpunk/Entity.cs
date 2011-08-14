@@ -533,7 +533,8 @@ namespace net.flashpunk
             else
             {
                 Graphiclist list = new Graphiclist();
-                if (g != null) list.add(g);
+                if (graphic != null) list.add(graphic);
+                list.add(g);
                 graphic = list;
             }
             return g;
