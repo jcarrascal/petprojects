@@ -22,23 +22,27 @@ class ModSocialNetworks
 		$youtube = $this->youtube or $this->cacheGet("fetchLatestYoutube_{$this->youtubeUser}", $this->cacheSeconds);
 		if ($youtube === false)
 		{
-			$youtubeUser = urlencode($this->youtubeUser);
-			$url = "http://gdata.youtube.com/feeds/api/users/{$this->youtubeUser}/playlists?max-results=1&alt=json";
-			$playlists = json_decode(file_get_contents($url));
-			$playlistId = $playlists->feed->entry[0]->{'yt$playlistId'}->{'$t'};
-			if ($playlistId == '')
-				return $this->youtube = $this->cacheGet("fetchLatestYoutube_{$this->youtubeUser}");
-			$url = 'http://gdata.youtube.com/feeds/api/playlists/' . urlencode($playlistId);
-			$playlist = new SimpleXMLElement(str_replace('yt:', '', str_replace('media:', '', file_get_contents($url))));
-			$youtube = new stdclass();
-			$youtube->content_url = (string)$playlist->entry->group->content['url'];
-			$youtube->videoid = substr($youtube->content_url, strlen('http://www.youtube.com/v/'), 11);
-			$youtube->title = (string)$playlist->entry->group->title;
-			$youtube->description = (string)$playlist->entry->group->description;
-			$youtube->keywords = (string)$playlist->entry->group->keywords;
-			$youtube->player = (string)$playlist->entry->group->player['url'];
-			$youtube->thumbnail = (string)$playlist->entry->group->thumbnail[0]['url'];
-			$this->cacheSet($this->youtube = $youtube, "fetchLatestYoutube_{$this->youtubeUser}");
+			try {
+				$youtubeUser = urlencode($this->youtubeUser);
+				$url = "http://gdata.youtube.com/feeds/api/users/{$this->youtubeUser}/playlists?max-results=1&alt=json";
+				$playlists = json_decode(file_get_contents($url));
+				$playlistId = $playlists->feed->entry[0]->{'yt$playlistId'}->{'$t'};
+				if ($playlistId == '')
+					return $this->youtube = $this->cacheGet("fetchLatestYoutube_{$this->youtubeUser}");
+				$url = 'http://gdata.youtube.com/feeds/api/playlists/' . urlencode($playlistId);
+				$playlist = new SimpleXMLElement(str_replace('yt:', '', str_replace('media:', '', file_get_contents($url))));
+				$youtube = new stdclass();
+				$youtube->content_url = (string)$playlist->entry->group->content['url'];
+				$youtube->videoid = substr($youtube->content_url, strlen('http://www.youtube.com/v/'), 11);
+				$youtube->title = (string)$playlist->entry->group->title;
+				$youtube->description = (string)$playlist->entry->group->description;
+				$youtube->keywords = (string)$playlist->entry->group->keywords;
+				$youtube->player = (string)$playlist->entry->group->player['url'];
+				$youtube->thumbnail = (string)$playlist->entry->group->thumbnail[0]['url'];
+				$this->cacheSet($this->youtube = $youtube, "fetchLatestYoutube_{$this->youtubeUser}");
+			} catch (Exception $ex) {
+				$youtube = $this->cacheGet("fetchLatestYoutube_{$this->youtubeUser}");
+			}
 		}
 		return $youtube;
 	}
@@ -50,17 +54,21 @@ class ModSocialNetworks
 		$twitter = $this->twitter or $this->cacheGet("fetchLatestTwitter_{$this->twitterUser}", $this->cacheSeconds);
 		if ($twitter === false)
 		{
-			$url = 'https://api.twitter.com/1/statuses/user_timeline.json?count=1&screen_name=' .
-				urlencode($this->twitterUser);
-			$json = json_decode(file_get_contents($url));
-			if (count($json) == 0)
-				return $this->twitter = $this->cacheGet("fetchLatestTwitter_{$this->twitterUser}");
-			$twitter = new stdClass();
-			$twitter->screen_name = $json[0]->user->screen_name;
-			$twitter->name = $json[0]->user->name;
-			$twitter->text = $json[0]->text;
-			$twitter->created_at = strtotime($json[0]->created_at);
-			$this->cacheSet($this->twitter = $twitter, "fetchLatestTwitter_{$this->twitterUser}");
+			try {
+				$url = 'https://api.twitter.com/1/statuses/user_timeline.json?count=1&screen_name=' .
+					urlencode($this->twitterUser);
+				$json = json_decode(file_get_contents($url));
+				if (count($json) == 0)
+					return $this->twitter = $this->cacheGet("fetchLatestTwitter_{$this->twitterUser}");
+				$twitter = new stdClass();
+				$twitter->screen_name = $json[0]->user->screen_name;
+				$twitter->name = $json[0]->user->name;
+				$twitter->text = $json[0]->text;
+				$twitter->created_at = strtotime($json[0]->created_at);
+				$this->cacheSet($this->twitter = $twitter, "fetchLatestTwitter_{$this->twitterUser}");
+			} catch (Exception $ex) {
+				$twitter = $this->cacheGet("fetchLatestTwitter_{$this->twitterUser}");
+			}
 		}
 		return $twitter;
 	}
@@ -72,12 +80,18 @@ class ModSocialNetworks
 		$facebook = $this->facebook or $this->cacheGet("fetchLatestFacebook_{$this->facebookFeed}", $this->cacheSeconds);
 		if ($facebook === false)
 		{
-			$fb = new SimpleXmlElement(file_get_contents($this->facebookFeed));
-			$facebook = new stdClass();
-			$facebook->text = (string)($fb->channel->item[0]->description);
-			$facebook->link = (string)($fb->channel->item[0]->link);
-			$facebook->pubDate = date('Y-m-d', strtotime($fb->channel->item[0]->pubDate));
-			$this->cacheSet($this->facebook = $facebook, 'fetchLatestFacebook_' . substr($this->facebookFeed, 19));
+			try
+			{
+				$content = file_get_contents($this->facebookFeed);
+				$fb = new SimpleXmlElement($content);
+				$facebook = new stdClass();
+				$facebook->text = (string)($fb->channel->item[0]->description);
+				$facebook->link = (string)($fb->channel->item[0]->link);
+				$facebook->pubDate = date('Y-m-d', strtotime($fb->channel->item[0]->pubDate));
+				$this->cacheSet($this->facebook = $facebook, 'fetchLatestFacebook_' . substr($this->facebookFeed, 19));
+			} catch (Exception $ex) {
+				$facebook = $this->cacheGet("fetchLatestFacebook_{$this->facebookFeed}");
+			}
 		}
 		return $facebook;
 	}
