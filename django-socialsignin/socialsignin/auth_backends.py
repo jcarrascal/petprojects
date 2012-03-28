@@ -24,7 +24,14 @@ def strip_accents(s):
 	return ''.join((c for c in unicodedata.normalize('NFD', unicode(s)) if unicodedata.category(c) != 'Mn'))
 
 def generate_username(prefix, first_name, last_name):
-	return (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', strip_accents(first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
+	username = (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', strip_accents(first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
+	index = 0
+	while True:
+		try:
+			user = LOCAL_USER_MODEL.objects.get(username=username)
+			
+		except LOCAL_USER_MODEL.DoesNotExist:
+			return username
 
 
 class LocalUserBackend(ModelBackend):
