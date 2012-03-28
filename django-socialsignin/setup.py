@@ -7,7 +7,7 @@ from setuptools import setup
 
 setup(
 	name = 'socialsignin',
-	version = '1.3.0',
+	version = '1.3.1',
 	packages = ['socialsignin', 'socialsignin.templatetags'],
 
 	# Declare your packages' dependencies here, for eg:
