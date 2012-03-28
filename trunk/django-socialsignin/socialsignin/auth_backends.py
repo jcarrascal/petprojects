@@ -25,11 +25,13 @@ def strip_accents(s):
 
 def generate_username(prefix, first_name, last_name):
 	username = (prefix + re.sub(u'[^a-z0-9áéíóúÁÉÍÓÚ]+', '', strip_accents(first_name + last_name).lower(), flags=re.IGNORECASE))[:30]
-	index = 0
+	index = 1
 	while True:
 		try:
 			user = LOCAL_USER_MODEL.objects.get(username=username)
-			
+			index_str = str(index)
+			username = username[:30 - len(index_str)] + index_str
+			index += 1
 		except LOCAL_USER_MODEL.DoesNotExist:
 			return username
 
