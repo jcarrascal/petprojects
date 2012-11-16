@@ -1,4 +1,4 @@
-﻿namespace SolucionEjercicios.Ejercicios
+﻿namespace SolucionEjercicios
 {
     partial class BaseEjercicio
     {
