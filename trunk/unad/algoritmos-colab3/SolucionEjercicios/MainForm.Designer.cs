@@ -31,11 +31,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ejerciciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejerciciosDfdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcularTriánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aumentoAEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelContenido = new System.Windows.Forms.Panel();
             this.porcentajeDeHombresYMujeresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelContenido = new System.Windows.Forms.Panel();
+            this.puntosParaExamenFinalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.ejerciciosToolStripMenuItem});
+            this.ejerciciosDfdToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -65,15 +66,16 @@
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
-            // ejerciciosToolStripMenuItem
+            // ejerciciosDfdToolStripMenuItem
             // 
-            this.ejerciciosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ejerciciosDfdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.calcularTriánguloToolStripMenuItem,
             this.aumentoAEmpleadosToolStripMenuItem,
-            this.porcentajeDeHombresYMujeresToolStripMenuItem});
-            this.ejerciciosToolStripMenuItem.Name = "ejerciciosToolStripMenuItem";
-            this.ejerciciosToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
-            this.ejerciciosToolStripMenuItem.Text = "Ejercicios";
+            this.porcentajeDeHombresYMujeresToolStripMenuItem,
+            this.puntosParaExamenFinalToolStripMenuItem});
+            this.ejerciciosDfdToolStripMenuItem.Name = "ejerciciosDfdToolStripMenuItem";
+            this.ejerciciosDfdToolStripMenuItem.Size = new System.Drawing.Size(93, 19);
+            this.ejerciciosDfdToolStripMenuItem.Text = "Ejercicios DFD";
             // 
             // calcularTriánguloToolStripMenuItem
             // 
@@ -89,6 +91,13 @@
             this.aumentoAEmpleadosToolStripMenuItem.Text = "02 Aumento a empleados";
             this.aumentoAEmpleadosToolStripMenuItem.Click += new System.EventHandler(this.aumentoAEmpleadosToolStripMenuItem_Click);
             // 
+            // porcentajeDeHombresYMujeresToolStripMenuItem
+            // 
+            this.porcentajeDeHombresYMujeresToolStripMenuItem.Name = "porcentajeDeHombresYMujeresToolStripMenuItem";
+            this.porcentajeDeHombresYMujeresToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.porcentajeDeHombresYMujeresToolStripMenuItem.Text = "03 Porcentaje de hombres y mujeres";
+            this.porcentajeDeHombresYMujeresToolStripMenuItem.Click += new System.EventHandler(this.porcentajeDeHombresYMujeresToolStripMenuItem_Click);
+            // 
             // panelContenido
             // 
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -98,12 +107,12 @@
             this.panelContenido.Size = new System.Drawing.Size(728, 512);
             this.panelContenido.TabIndex = 1;
             // 
-            // porcentajeDeHombresYMujeresToolStripMenuItem
+            // puntosParaExamenFinalToolStripMenuItem
             // 
-            this.porcentajeDeHombresYMujeresToolStripMenuItem.Name = "porcentajeDeHombresYMujeresToolStripMenuItem";
-            this.porcentajeDeHombresYMujeresToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
-            this.porcentajeDeHombresYMujeresToolStripMenuItem.Text = "03 Porcentaje de hombres y mujeres";
-            this.porcentajeDeHombresYMujeresToolStripMenuItem.Click += new System.EventHandler(this.porcentajeDeHombresYMujeresToolStripMenuItem_Click);
+            this.puntosParaExamenFinalToolStripMenuItem.Name = "puntosParaExamenFinalToolStripMenuItem";
+            this.puntosParaExamenFinalToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.puntosParaExamenFinalToolStripMenuItem.Text = "04 Puntos para Examen Final";
+            this.puntosParaExamenFinalToolStripMenuItem.Click += new System.EventHandler(this.puntosParaExamenFinalToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -129,11 +138,12 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ejerciciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ejerciciosDfdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularTriánguloToolStripMenuItem;
         private System.Windows.Forms.Panel panelContenido;
         private System.Windows.Forms.ToolStripMenuItem aumentoAEmpleadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem porcentajeDeHombresYMujeresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem puntosParaExamenFinalToolStripMenuItem;
     }
 }
 

@@ -42,5 +42,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new HombresMujeres());
         }
+
+        private void puntosParaExamenFinalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new PuntosExamen());
+        }
     }
 }
