@@ -62,6 +62,12 @@
     <Compile Include="Ejercicios\CalcularTriangulo.Designer.cs">
       <DependentUpon>CalcularTriangulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ejercicios\DescuentoVentas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ejercicios\DescuentoVentas.Designer.cs">
+      <DependentUpon>DescuentoVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ejercicios\HombresMujeres.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ejercicios\CalcularTriangulo.resx">
       <DependentUpon>CalcularTriangulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ejercicios\DescuentoVentas.resx">
+      <DependentUpon>DescuentoVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ejercicios\HombresMujeres.resx">
       <DependentUpon>HombresMujeres.cs</DependentUpon>

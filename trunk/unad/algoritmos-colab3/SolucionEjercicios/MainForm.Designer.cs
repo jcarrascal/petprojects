@@ -37,6 +37,7 @@
             this.porcentajeDeHombresYMujeresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.puntosParaExamenFinalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descuentoAVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +73,8 @@
             this.calcularTriánguloToolStripMenuItem,
             this.aumentoAEmpleadosToolStripMenuItem,
             this.porcentajeDeHombresYMujeresToolStripMenuItem,
-            this.puntosParaExamenFinalToolStripMenuItem});
+            this.puntosParaExamenFinalToolStripMenuItem,
+            this.descuentoAVentasToolStripMenuItem});
             this.ejerciciosDfdToolStripMenuItem.Name = "ejerciciosDfdToolStripMenuItem";
             this.ejerciciosDfdToolStripMenuItem.Size = new System.Drawing.Size(93, 19);
             this.ejerciciosDfdToolStripMenuItem.Text = "Ejercicios DFD";
@@ -114,6 +116,13 @@
             this.puntosParaExamenFinalToolStripMenuItem.Text = "04 Puntos para Examen Final";
             this.puntosParaExamenFinalToolStripMenuItem.Click += new System.EventHandler(this.puntosParaExamenFinalToolStripMenuItem_Click);
             // 
+            // descuentoAVentasToolStripMenuItem
+            // 
+            this.descuentoAVentasToolStripMenuItem.Name = "descuentoAVentasToolStripMenuItem";
+            this.descuentoAVentasToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.descuentoAVentasToolStripMenuItem.Text = "05 Descuento a ventas";
+            this.descuentoAVentasToolStripMenuItem.Click += new System.EventHandler(this.descuentoAVentasToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -144,6 +153,7 @@
         private System.Windows.Forms.ToolStripMenuItem aumentoAEmpleadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem porcentajeDeHombresYMujeresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem puntosParaExamenFinalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem descuentoAVentasToolStripMenuItem;
     }
 }
 
