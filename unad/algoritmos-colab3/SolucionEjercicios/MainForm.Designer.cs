@@ -35,10 +35,12 @@
             this.calcularTriánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aumentoAEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.porcentajeDeHombresYMujeresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelContenido = new System.Windows.Forms.Panel();
             this.puntosParaExamenFinalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descuentoAVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelContenido = new System.Windows.Forms.Panel();
+            this.ejerciciosPseintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nominaDeAlmacenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +48,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.ejerciciosDfdToolStripMenuItem});
+            this.ejerciciosDfdToolStripMenuItem,
+            this.ejerciciosPseintToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -65,7 +68,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
             // ejerciciosDfdToolStripMenuItem
@@ -84,23 +87,44 @@
             // calcularTriánguloToolStripMenuItem
             // 
             this.calcularTriánguloToolStripMenuItem.Name = "calcularTriánguloToolStripMenuItem";
-            this.calcularTriánguloToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.calcularTriánguloToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
             this.calcularTriánguloToolStripMenuItem.Text = "01 Calcular triángulo";
             this.calcularTriánguloToolStripMenuItem.Click += new System.EventHandler(this.calcularTriánguloToolStripMenuItem_Click);
             // 
             // aumentoAEmpleadosToolStripMenuItem
             // 
             this.aumentoAEmpleadosToolStripMenuItem.Name = "aumentoAEmpleadosToolStripMenuItem";
-            this.aumentoAEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.aumentoAEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
             this.aumentoAEmpleadosToolStripMenuItem.Text = "02 Aumento a empleados";
             this.aumentoAEmpleadosToolStripMenuItem.Click += new System.EventHandler(this.aumentoAEmpleadosToolStripMenuItem_Click);
             // 
             // porcentajeDeHombresYMujeresToolStripMenuItem
             // 
             this.porcentajeDeHombresYMujeresToolStripMenuItem.Name = "porcentajeDeHombresYMujeresToolStripMenuItem";
-            this.porcentajeDeHombresYMujeresToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.porcentajeDeHombresYMujeresToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
             this.porcentajeDeHombresYMujeresToolStripMenuItem.Text = "03 Porcentaje de hombres y mujeres";
             this.porcentajeDeHombresYMujeresToolStripMenuItem.Click += new System.EventHandler(this.porcentajeDeHombresYMujeresToolStripMenuItem_Click);
+            // 
+            // puntosParaExamenFinalToolStripMenuItem
+            // 
+            this.puntosParaExamenFinalToolStripMenuItem.Name = "puntosParaExamenFinalToolStripMenuItem";
+            this.puntosParaExamenFinalToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.puntosParaExamenFinalToolStripMenuItem.Text = "04 Puntos para Examen Final";
+            this.puntosParaExamenFinalToolStripMenuItem.Click += new System.EventHandler(this.puntosParaExamenFinalToolStripMenuItem_Click);
+            // 
+            // descuentoAVentasToolStripMenuItem
+            // 
+            this.descuentoAVentasToolStripMenuItem.Name = "descuentoAVentasToolStripMenuItem";
+            this.descuentoAVentasToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.descuentoAVentasToolStripMenuItem.Text = "05 Descuento a ventas";
+            this.descuentoAVentasToolStripMenuItem.Click += new System.EventHandler(this.descuentoAVentasToolStripMenuItem_Click);
+            // 
+            // hipotenusaDeUnTriánguloRectánguloToolStripMenuItem
+            // 
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Name = "hipotenusaDeUnTriánguloRectánguloToolStripMenuItem";
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Text = "06 Hipotenusa de un triángulo rectángulo";
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Click += new System.EventHandler(this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click);
             // 
             // panelContenido
             // 
@@ -111,26 +135,20 @@
             this.panelContenido.Size = new System.Drawing.Size(728, 512);
             this.panelContenido.TabIndex = 1;
             // 
-            // puntosParaExamenFinalToolStripMenuItem
+            // ejerciciosPseintToolStripMenuItem
             // 
-            this.puntosParaExamenFinalToolStripMenuItem.Name = "puntosParaExamenFinalToolStripMenuItem";
-            this.puntosParaExamenFinalToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
-            this.puntosParaExamenFinalToolStripMenuItem.Text = "04 Puntos para Examen Final";
-            this.puntosParaExamenFinalToolStripMenuItem.Click += new System.EventHandler(this.puntosParaExamenFinalToolStripMenuItem_Click);
+            this.ejerciciosPseintToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nominaDeAlmacenToolStripMenuItem});
+            this.ejerciciosPseintToolStripMenuItem.Name = "ejerciciosPseintToolStripMenuItem";
+            this.ejerciciosPseintToolStripMenuItem.Size = new System.Drawing.Size(103, 19);
+            this.ejerciciosPseintToolStripMenuItem.Text = "Ejercicios Pseint";
             // 
-            // descuentoAVentasToolStripMenuItem
+            // nominaDeAlmacenToolStripMenuItem
             // 
-            this.descuentoAVentasToolStripMenuItem.Name = "descuentoAVentasToolStripMenuItem";
-            this.descuentoAVentasToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
-            this.descuentoAVentasToolStripMenuItem.Text = "05 Descuento a ventas";
-            this.descuentoAVentasToolStripMenuItem.Click += new System.EventHandler(this.descuentoAVentasToolStripMenuItem_Click);
-            // 
-            // hipotenusaDeUnTriánguloRectánguloToolStripMenuItem
-            // 
-            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Name = "hipotenusaDeUnTriánguloRectánguloToolStripMenuItem";
-            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Text = "06 Hipotenusa de un triángulo rectángulo";
-            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Click += new System.EventHandler(this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click);
+            this.nominaDeAlmacenToolStripMenuItem.Name = "nominaDeAlmacenToolStripMenuItem";
+            this.nominaDeAlmacenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.nominaDeAlmacenToolStripMenuItem.Text = "07 Nomina de almacén";
+            this.nominaDeAlmacenToolStripMenuItem.Click += new System.EventHandler(this.nominaDeAlmacenToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -164,6 +182,8 @@
         private System.Windows.Forms.ToolStripMenuItem puntosParaExamenFinalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem descuentoAVentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hipotenusaDeUnTriánguloRectánguloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ejerciciosPseintToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nominaDeAlmacenToolStripMenuItem;
     }
 }
 
