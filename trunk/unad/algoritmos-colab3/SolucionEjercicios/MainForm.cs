@@ -1,4 +1,5 @@
 ﻿using SolucionEjercicios.EjerciciosDfd;
+using SolucionEjercicios.EjerciciosPseint;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,6 +57,11 @@ namespace SolucionEjercicios
         private void hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AsignarContenido(new HipotenusaTrianguloRectangulo());
+        }
+
+        private void nominaDeAlmacenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new NominaAlmacen());
         }
     }
 }
