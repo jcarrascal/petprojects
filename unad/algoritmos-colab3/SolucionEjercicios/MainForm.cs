@@ -52,5 +52,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new DescuentoVentas());
         }
+
+        private void hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new HipotenusaTrianguloRectangulo());
+        }
     }
 }

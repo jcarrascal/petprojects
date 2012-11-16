@@ -38,6 +38,7 @@
             this.panelContenido = new System.Windows.Forms.Panel();
             this.puntosParaExamenFinalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descuentoAVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +75,8 @@
             this.aumentoAEmpleadosToolStripMenuItem,
             this.porcentajeDeHombresYMujeresToolStripMenuItem,
             this.puntosParaExamenFinalToolStripMenuItem,
-            this.descuentoAVentasToolStripMenuItem});
+            this.descuentoAVentasToolStripMenuItem,
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem});
             this.ejerciciosDfdToolStripMenuItem.Name = "ejerciciosDfdToolStripMenuItem";
             this.ejerciciosDfdToolStripMenuItem.Size = new System.Drawing.Size(93, 19);
             this.ejerciciosDfdToolStripMenuItem.Text = "Ejercicios DFD";
@@ -123,6 +125,13 @@
             this.descuentoAVentasToolStripMenuItem.Text = "05 Descuento a ventas";
             this.descuentoAVentasToolStripMenuItem.Click += new System.EventHandler(this.descuentoAVentasToolStripMenuItem_Click);
             // 
+            // hipotenusaDeUnTriánguloRectánguloToolStripMenuItem
+            // 
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Name = "hipotenusaDeUnTriánguloRectánguloToolStripMenuItem";
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Text = "06 Hipotenusa de un triángulo rectángulo";
+            this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Click += new System.EventHandler(this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -154,6 +163,7 @@
         private System.Windows.Forms.ToolStripMenuItem porcentajeDeHombresYMujeresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem puntosParaExamenFinalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem descuentoAVentasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hipotenusaDeUnTriánguloRectánguloToolStripMenuItem;
     }
 }
 
