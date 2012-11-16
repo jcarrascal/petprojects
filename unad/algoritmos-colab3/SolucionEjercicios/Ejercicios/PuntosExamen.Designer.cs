@@ -30,6 +30,8 @@
         {
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxPuntosActuales = new System.Windows.Forms.TextBox();
+            this.buttonCalcular = new System.Windows.Forms.Button();
+            this.textBoxResultado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,17 +49,40 @@
             this.textBoxPuntosActuales.Location = new System.Drawing.Point(6, 35);
             this.textBoxPuntosActuales.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPuntosActuales.Name = "textBoxPuntosActuales";
-            this.textBoxPuntosActuales.Size = new System.Drawing.Size(131, 25);
+            this.textBoxPuntosActuales.Size = new System.Drawing.Size(238, 25);
             this.textBoxPuntosActuales.TabIndex = 12;
+            // 
+            // buttonCalcular
+            // 
+            this.buttonCalcular.Location = new System.Drawing.Point(124, 124);
+            this.buttonCalcular.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonCalcular.Name = "buttonCalcular";
+            this.buttonCalcular.Size = new System.Drawing.Size(120, 30);
+            this.buttonCalcular.TabIndex = 14;
+            this.buttonCalcular.Text = "Calcular";
+            this.buttonCalcular.UseVisualStyleBackColor = true;
+            this.buttonCalcular.Click += new System.EventHandler(this.buttonCalcular_Click);
+            // 
+            // textBoxResultado
+            // 
+            this.textBoxResultado.Location = new System.Drawing.Point(6, 68);
+            this.textBoxResultado.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxResultado.Multiline = true;
+            this.textBoxResultado.Name = "textBoxResultado";
+            this.textBoxResultado.ReadOnly = true;
+            this.textBoxResultado.Size = new System.Drawing.Size(238, 48);
+            this.textBoxResultado.TabIndex = 12;
             // 
             // PuntosExamen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonCalcular);
             this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBoxResultado);
             this.Controls.Add(this.textBoxPuntosActuales);
             this.Name = "PuntosExamen";
-            this.Size = new System.Drawing.Size(317, 282);
+            this.Size = new System.Drawing.Size(262, 158);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -68,5 +93,7 @@
 
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxPuntosActuales;
+        private System.Windows.Forms.Button buttonCalcular;
+        private System.Windows.Forms.TextBox textBoxResultado;
     }
 }
