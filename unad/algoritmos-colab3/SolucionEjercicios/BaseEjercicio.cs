@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SolucionEjercicios.Ejercicios
+namespace SolucionEjercicios
 {
     public partial class BaseEjercicio : UserControl
     {

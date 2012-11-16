@@ -1,4 +1,4 @@
-﻿namespace SolucionEjercicios.Ejercicios
+﻿namespace SolucionEjercicios.EjerciciosDfd
 {
     partial class AumentoEmpleados
     {
