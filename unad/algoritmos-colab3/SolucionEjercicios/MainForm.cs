@@ -47,5 +47,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new PuntosExamen());
         }
+
+        private void descuentoAVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new DescuentoVentas());
+        }
     }
 }
