@@ -68,6 +68,12 @@
     <Compile Include="Ejercicios\DescuentoVentas.Designer.cs">
       <DependentUpon>DescuentoVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ejercicios\HipotenusaTrianguloRectangulo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ejercicios\HipotenusaTrianguloRectangulo.Designer.cs">
+      <DependentUpon>HipotenusaTrianguloRectangulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ejercicios\HombresMujeres.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ejercicios\DescuentoVentas.resx">
       <DependentUpon>DescuentoVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ejercicios\HipotenusaTrianguloRectangulo.resx">
+      <DependentUpon>HipotenusaTrianguloRectangulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ejercicios\HombresMujeres.resx">
       <DependentUpon>HombresMujeres.cs</DependentUpon>
