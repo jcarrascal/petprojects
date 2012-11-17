@@ -63,5 +63,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new NominaAlmacen());
         }
+
+        private void ingresoALaFiestaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new IngresoFiesta());
+        }
     }
 }
