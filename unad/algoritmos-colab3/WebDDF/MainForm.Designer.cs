@@ -40,6 +40,7 @@
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.panelLienzo = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -144,12 +145,24 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
+            // panelLienzo
+            // 
+            this.panelLienzo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLienzo.Location = new System.Drawing.Point(0, 25);
+            this.panelLienzo.Name = "panelLienzo";
+            this.panelLienzo.Size = new System.Drawing.Size(715, 367);
+            this.panelLienzo.TabIndex = 1;
+            this.panelLienzo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLienzo_Paint);
+            this.panelLienzo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelLienzo_MouseMove);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 392);
+            this.Controls.Add(this.panelLienzo);
             this.Controls.Add(this.toolStrip1);
+            this.DoubleBuffered = true;
             this.Name = "MainForm";
             this.Text = "WebDDF";
             this.toolStrip1.ResumeLayout(false);
@@ -172,6 +185,7 @@
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.Panel panelLienzo;
     }
 }
 
