@@ -86,6 +86,12 @@
     <Compile Include="EjerciciosDfd\PuntosExamen.Designer.cs">
       <DependentUpon>PuntosExamen.cs</DependentUpon>
     </Compile>
+    <Compile Include="EjerciciosPseint\IngresoFiesta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EjerciciosPseint\IngresoFiesta.Designer.cs">
+      <DependentUpon>IngresoFiesta.cs</DependentUpon>
+    </Compile>
     <Compile Include="EjerciciosPseint\NominaAlmacen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EjerciciosDfd\PuntosExamen.resx">
       <DependentUpon>PuntosExamen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EjerciciosPseint\IngresoFiesta.resx">
+      <DependentUpon>IngresoFiesta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EjerciciosPseint\NominaAlmacen.resx">
       <DependentUpon>NominaAlmacen.cs</DependentUpon>

@@ -38,9 +38,10 @@
             this.puntosParaExamenFinalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descuentoAVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelContenido = new System.Windows.Forms.Panel();
             this.ejerciciosPseintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nominaDeAlmacenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelContenido = new System.Windows.Forms.Panel();
+            this.ingresoALaFiestaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
             // ejerciciosDfdToolStripMenuItem
@@ -126,19 +127,11 @@
             this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Text = "06 Hipotenusa de un triángulo rectángulo";
             this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem.Click += new System.EventHandler(this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem_Click);
             // 
-            // panelContenido
-            // 
-            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(0, 25);
-            this.panelContenido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(728, 512);
-            this.panelContenido.TabIndex = 1;
-            // 
             // ejerciciosPseintToolStripMenuItem
             // 
             this.ejerciciosPseintToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nominaDeAlmacenToolStripMenuItem});
+            this.nominaDeAlmacenToolStripMenuItem,
+            this.ingresoALaFiestaToolStripMenuItem});
             this.ejerciciosPseintToolStripMenuItem.Name = "ejerciciosPseintToolStripMenuItem";
             this.ejerciciosPseintToolStripMenuItem.Size = new System.Drawing.Size(103, 19);
             this.ejerciciosPseintToolStripMenuItem.Text = "Ejercicios Pseint";
@@ -149,6 +142,22 @@
             this.nominaDeAlmacenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.nominaDeAlmacenToolStripMenuItem.Text = "07 Nomina de almacén";
             this.nominaDeAlmacenToolStripMenuItem.Click += new System.EventHandler(this.nominaDeAlmacenToolStripMenuItem_Click);
+            // 
+            // panelContenido
+            // 
+            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenido.Location = new System.Drawing.Point(0, 25);
+            this.panelContenido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(728, 512);
+            this.panelContenido.TabIndex = 1;
+            // 
+            // ingresoALaFiestaToolStripMenuItem
+            // 
+            this.ingresoALaFiestaToolStripMenuItem.Name = "ingresoALaFiestaToolStripMenuItem";
+            this.ingresoALaFiestaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.ingresoALaFiestaToolStripMenuItem.Text = "08 Ingreso a la fiesta";
+            this.ingresoALaFiestaToolStripMenuItem.Click += new System.EventHandler(this.ingresoALaFiestaToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -184,6 +193,7 @@
         private System.Windows.Forms.ToolStripMenuItem hipotenusaDeUnTriánguloRectánguloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ejerciciosPseintToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nominaDeAlmacenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ingresoALaFiestaToolStripMenuItem;
     }
 }
 
