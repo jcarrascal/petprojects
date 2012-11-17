@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
+
 using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace SolucionEjercicios.EjerciciosPseint
@@ -25,9 +25,16 @@ namespace SolucionEjercicios.EjerciciosPseint
         {
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
-                textBoxTotalComisiones.Text = bindingList.Sum(em => em.Comision).ToString("C");
-                textBoxTotalVentas.Text = bindingList.Sum(em => em.TotalVentas).ToString("C");
-                textBoxTotalNomina.Text = bindingList.Sum(em => em.SueldoTotal).ToString("C");
+                decimal sumaComisiones = 0, sumaTotalVentas = 0, sumaSueldoTotal = 0;
+                foreach (Empleado empleado in bindingList)
+                {
+                    sumaComisiones += empleado.Comision;
+                    sumaTotalVentas += empleado.TotalVentas;
+                    sumaSueldoTotal += empleado.SueldoTotal;
+                }
+                textBoxTotalComisiones.Text = sumaComisiones.ToString("C");
+                textBoxTotalVentas.Text = sumaTotalVentas.ToString("C");
+                textBoxTotalNomina.Text = sumaSueldoTotal.ToString("C");
             }
         }
     }
