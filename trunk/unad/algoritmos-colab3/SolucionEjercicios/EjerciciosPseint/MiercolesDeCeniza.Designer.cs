@@ -53,7 +53,7 @@
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(289, 17);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 5;
             this.label1.Text = "¿Cuál es la fecha del Domingo de Resurrección?";
             // 
             // textBoxMes
@@ -61,14 +61,14 @@
             this.textBoxMes.Location = new System.Drawing.Point(113, 56);
             this.textBoxMes.Name = "textBoxMes";
             this.textBoxMes.Size = new System.Drawing.Size(72, 25);
-            this.textBoxMes.TabIndex = 0;
+            this.textBoxMes.TabIndex = 1;
             // 
             // textBoxDía
             // 
             this.textBoxDía.Location = new System.Drawing.Point(191, 56);
             this.textBoxDía.Name = "textBoxDía";
             this.textBoxDía.Size = new System.Drawing.Size(72, 25);
-            this.textBoxDía.TabIndex = 0;
+            this.textBoxDía.TabIndex = 2;
             // 
             // label2
             // 
@@ -76,7 +76,7 @@
             this.label2.Location = new System.Drawing.Point(32, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 17);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 6;
             this.label2.Text = "AA";
             // 
             // label3
@@ -85,7 +85,7 @@
             this.label3.Location = new System.Drawing.Point(110, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 17);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 7;
             this.label3.Text = "MM";
             // 
             // label4
@@ -94,7 +94,7 @@
             this.label4.Location = new System.Drawing.Point(188, 36);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 17);
-            this.label4.TabIndex = 1;
+            this.label4.TabIndex = 8;
             this.label4.Text = "DD";
             // 
             // buttonCalcular
@@ -102,7 +102,7 @@
             this.buttonCalcular.Location = new System.Drawing.Point(164, 98);
             this.buttonCalcular.Name = "buttonCalcular";
             this.buttonCalcular.Size = new System.Drawing.Size(102, 27);
-            this.buttonCalcular.TabIndex = 2;
+            this.buttonCalcular.TabIndex = 3;
             this.buttonCalcular.Text = "Calcular";
             this.buttonCalcular.UseVisualStyleBackColor = true;
             this.buttonCalcular.Click += new System.EventHandler(this.buttonCalcular_Click);
@@ -114,7 +114,7 @@
             this.textBoxResultado.Name = "textBoxResultado";
             this.textBoxResultado.ReadOnly = true;
             this.textBoxResultado.Size = new System.Drawing.Size(221, 70);
-            this.textBoxResultado.TabIndex = 3;
+            this.textBoxResultado.TabIndex = 4;
             // 
             // MiercolesDeCeniza
             // 

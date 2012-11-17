@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewEmpleados = new System.Windows.Forms.DataGridView();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalVentasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salarioBaseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sueldoTotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,10 +42,6 @@
             this.textBoxTotalVentas = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxTotalNomina = new System.Windows.Forms.TextBox();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalVentasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salarioBaseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sueldoTotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
@@ -62,6 +62,32 @@
             this.dataGridViewEmpleados.Name = "dataGridViewEmpleados";
             this.dataGridViewEmpleados.Size = new System.Drawing.Size(508, 150);
             this.dataGridViewEmpleados.TabIndex = 0;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // totalVentasDataGridViewTextBoxColumn
+            // 
+            this.totalVentasDataGridViewTextBoxColumn.DataPropertyName = "TotalVentas";
+            this.totalVentasDataGridViewTextBoxColumn.HeaderText = "Total Ventas";
+            this.totalVentasDataGridViewTextBoxColumn.Name = "totalVentasDataGridViewTextBoxColumn";
+            // 
+            // salarioBaseDataGridViewTextBoxColumn
+            // 
+            this.salarioBaseDataGridViewTextBoxColumn.DataPropertyName = "SalarioBase";
+            this.salarioBaseDataGridViewTextBoxColumn.HeaderText = "Salario Base";
+            this.salarioBaseDataGridViewTextBoxColumn.Name = "salarioBaseDataGridViewTextBoxColumn";
+            // 
+            // sueldoTotalDataGridViewTextBoxColumn
+            // 
+            this.sueldoTotalDataGridViewTextBoxColumn.DataPropertyName = "SueldoTotal";
+            this.sueldoTotalDataGridViewTextBoxColumn.HeaderText = "Sueldo Total";
+            this.sueldoTotalDataGridViewTextBoxColumn.Name = "sueldoTotalDataGridViewTextBoxColumn";
+            this.sueldoTotalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // empleadoBindingSource
             // 
@@ -89,6 +115,7 @@
             // 
             this.textBoxTotalComisiones.Location = new System.Drawing.Point(336, 211);
             this.textBoxTotalComisiones.Name = "textBoxTotalComisiones";
+            this.textBoxTotalComisiones.ReadOnly = true;
             this.textBoxTotalComisiones.Size = new System.Drawing.Size(175, 25);
             this.textBoxTotalComisiones.TabIndex = 3;
             // 
@@ -105,6 +132,7 @@
             // 
             this.textBoxTotalVentas.Location = new System.Drawing.Point(336, 242);
             this.textBoxTotalVentas.Name = "textBoxTotalVentas";
+            this.textBoxTotalVentas.ReadOnly = true;
             this.textBoxTotalVentas.Size = new System.Drawing.Size(175, 25);
             this.textBoxTotalVentas.TabIndex = 3;
             // 
@@ -121,34 +149,9 @@
             // 
             this.textBoxTotalNomina.Location = new System.Drawing.Point(336, 273);
             this.textBoxTotalNomina.Name = "textBoxTotalNomina";
+            this.textBoxTotalNomina.ReadOnly = true;
             this.textBoxTotalNomina.Size = new System.Drawing.Size(175, 25);
             this.textBoxTotalNomina.TabIndex = 3;
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // totalVentasDataGridViewTextBoxColumn
-            // 
-            this.totalVentasDataGridViewTextBoxColumn.DataPropertyName = "TotalVentas";
-            this.totalVentasDataGridViewTextBoxColumn.HeaderText = "Total Ventas";
-            this.totalVentasDataGridViewTextBoxColumn.Name = "totalVentasDataGridViewTextBoxColumn";
-            // 
-            // salarioBaseDataGridViewTextBoxColumn
-            // 
-            this.salarioBaseDataGridViewTextBoxColumn.DataPropertyName = "SalarioBase";
-            this.salarioBaseDataGridViewTextBoxColumn.HeaderText = "Salario Base";
-            this.salarioBaseDataGridViewTextBoxColumn.Name = "salarioBaseDataGridViewTextBoxColumn";
-            // 
-            // sueldoTotalDataGridViewTextBoxColumn
-            // 
-            this.sueldoTotalDataGridViewTextBoxColumn.DataPropertyName = "SueldoTotal";
-            this.sueldoTotalDataGridViewTextBoxColumn.HeaderText = "Sueldo Total";
-            this.sueldoTotalDataGridViewTextBoxColumn.Name = "sueldoTotalDataGridViewTextBoxColumn";
-            this.sueldoTotalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // NominaAlmacen
             // 

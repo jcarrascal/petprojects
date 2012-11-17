@@ -46,7 +46,7 @@
             this.label1.Location = new System.Drawing.Point(4, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 8;
             this.label1.Text = "Claves de ingreso:";
             // 
             // textBoxClave1
@@ -54,21 +54,21 @@
             this.textBoxClave1.Location = new System.Drawing.Point(19, 24);
             this.textBoxClave1.Name = "textBoxClave1";
             this.textBoxClave1.Size = new System.Drawing.Size(127, 25);
-            this.textBoxClave1.TabIndex = 1;
+            this.textBoxClave1.TabIndex = 0;
             // 
             // textBoxClave2
             // 
             this.textBoxClave2.Location = new System.Drawing.Point(19, 55);
             this.textBoxClave2.Name = "textBoxClave2";
             this.textBoxClave2.Size = new System.Drawing.Size(127, 25);
-            this.textBoxClave2.TabIndex = 1;
+            this.textBoxClave2.TabIndex = 2;
             // 
             // textBoxClave3
             // 
             this.textBoxClave3.Location = new System.Drawing.Point(19, 86);
             this.textBoxClave3.Name = "textBoxClave3";
             this.textBoxClave3.Size = new System.Drawing.Size(127, 25);
-            this.textBoxClave3.TabIndex = 1;
+            this.textBoxClave3.TabIndex = 4;
             // 
             // textBoxClave4
             // 
@@ -82,7 +82,7 @@
             this.textBoxClave5.Location = new System.Drawing.Point(152, 55);
             this.textBoxClave5.Name = "textBoxClave5";
             this.textBoxClave5.Size = new System.Drawing.Size(127, 25);
-            this.textBoxClave5.TabIndex = 1;
+            this.textBoxClave5.TabIndex = 3;
             // 
             // textBoxResultado
             // 
@@ -91,21 +91,21 @@
             this.textBoxResultado.Name = "textBoxResultado";
             this.textBoxResultado.ReadOnly = true;
             this.textBoxResultado.Size = new System.Drawing.Size(260, 63);
-            this.textBoxResultado.TabIndex = 1;
+            this.textBoxResultado.TabIndex = 7;
             // 
             // textBoxClave6
             // 
             this.textBoxClave6.Location = new System.Drawing.Point(152, 86);
             this.textBoxClave6.Name = "textBoxClave6";
             this.textBoxClave6.Size = new System.Drawing.Size(127, 25);
-            this.textBoxClave6.TabIndex = 1;
+            this.textBoxClave6.TabIndex = 5;
             // 
             // buttonIngresar
             // 
             this.buttonIngresar.Location = new System.Drawing.Point(152, 117);
             this.buttonIngresar.Name = "buttonIngresar";
             this.buttonIngresar.Size = new System.Drawing.Size(127, 30);
-            this.buttonIngresar.TabIndex = 2;
+            this.buttonIngresar.TabIndex = 6;
             this.buttonIngresar.Text = "Ingresar";
             this.buttonIngresar.UseVisualStyleBackColor = true;
             this.buttonIngresar.Click += new System.EventHandler(this.buttonIngresar_Click);
