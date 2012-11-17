@@ -68,5 +68,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new IngresoFiesta());
         }
+
+        private void sumaDePrimosYNoPrimosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new SumaPrimosNoPrimos());
+        }
     }
 }
