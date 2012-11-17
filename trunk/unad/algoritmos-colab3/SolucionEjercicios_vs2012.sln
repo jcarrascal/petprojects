@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolucionEjercicios", "SolucionEjercicios\SolucionEjercicios.csproj", "{725726A0-23C0-47DF-81FE-46472EDE6EF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolucionEjercicios_vs2012", "SolucionEjercicios\SolucionEjercicios_vs2012.csproj", "{725726A0-23C0-47DF-81FE-46472EDE6EF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
