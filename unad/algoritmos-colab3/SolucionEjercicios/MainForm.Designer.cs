@@ -40,9 +40,10 @@
             this.hipotenusaDeUnTriánguloRectánguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ejerciciosPseintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nominaDeAlmacenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelContenido = new System.Windows.Forms.Panel();
             this.ingresoALaFiestaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sumaDePrimosYNoPrimosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelContenido = new System.Windows.Forms.Panel();
+            this.miércolesDeCenizaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,7 +134,8 @@
             this.ejerciciosPseintToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nominaDeAlmacenToolStripMenuItem,
             this.ingresoALaFiestaToolStripMenuItem,
-            this.sumaDePrimosYNoPrimosToolStripMenuItem});
+            this.sumaDePrimosYNoPrimosToolStripMenuItem,
+            this.miércolesDeCenizaToolStripMenuItem});
             this.ejerciciosPseintToolStripMenuItem.Name = "ejerciciosPseintToolStripMenuItem";
             this.ejerciciosPseintToolStripMenuItem.Size = new System.Drawing.Size(103, 19);
             this.ejerciciosPseintToolStripMenuItem.Text = "Ejercicios Pseint";
@@ -141,9 +143,23 @@
             // nominaDeAlmacenToolStripMenuItem
             // 
             this.nominaDeAlmacenToolStripMenuItem.Name = "nominaDeAlmacenToolStripMenuItem";
-            this.nominaDeAlmacenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.nominaDeAlmacenToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.nominaDeAlmacenToolStripMenuItem.Text = "07 Nomina de almacén";
             this.nominaDeAlmacenToolStripMenuItem.Click += new System.EventHandler(this.nominaDeAlmacenToolStripMenuItem_Click);
+            // 
+            // ingresoALaFiestaToolStripMenuItem
+            // 
+            this.ingresoALaFiestaToolStripMenuItem.Name = "ingresoALaFiestaToolStripMenuItem";
+            this.ingresoALaFiestaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.ingresoALaFiestaToolStripMenuItem.Text = "08 Ingreso a la fiesta";
+            this.ingresoALaFiestaToolStripMenuItem.Click += new System.EventHandler(this.ingresoALaFiestaToolStripMenuItem_Click);
+            // 
+            // sumaDePrimosYNoPrimosToolStripMenuItem
+            // 
+            this.sumaDePrimosYNoPrimosToolStripMenuItem.Name = "sumaDePrimosYNoPrimosToolStripMenuItem";
+            this.sumaDePrimosYNoPrimosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.sumaDePrimosYNoPrimosToolStripMenuItem.Text = "09 Suma de primos y no primos";
+            this.sumaDePrimosYNoPrimosToolStripMenuItem.Click += new System.EventHandler(this.sumaDePrimosYNoPrimosToolStripMenuItem_Click);
             // 
             // panelContenido
             // 
@@ -154,19 +170,12 @@
             this.panelContenido.Size = new System.Drawing.Size(728, 512);
             this.panelContenido.TabIndex = 1;
             // 
-            // ingresoALaFiestaToolStripMenuItem
+            // miércolesDeCenizaToolStripMenuItem
             // 
-            this.ingresoALaFiestaToolStripMenuItem.Name = "ingresoALaFiestaToolStripMenuItem";
-            this.ingresoALaFiestaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.ingresoALaFiestaToolStripMenuItem.Text = "08 Ingreso a la fiesta";
-            this.ingresoALaFiestaToolStripMenuItem.Click += new System.EventHandler(this.ingresoALaFiestaToolStripMenuItem_Click);
-            // 
-            // sumaDePrimosYNoPrimosToolStripMenuItem
-            // 
-            this.sumaDePrimosYNoPrimosToolStripMenuItem.Name = "sumaDePrimosYNoPrimosToolStripMenuItem";
-            this.sumaDePrimosYNoPrimosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.sumaDePrimosYNoPrimosToolStripMenuItem.Text = "09 Suma de primos y no primos";
-            this.sumaDePrimosYNoPrimosToolStripMenuItem.Click += new System.EventHandler(this.sumaDePrimosYNoPrimosToolStripMenuItem_Click);
+            this.miércolesDeCenizaToolStripMenuItem.Name = "miércolesDeCenizaToolStripMenuItem";
+            this.miércolesDeCenizaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.miércolesDeCenizaToolStripMenuItem.Text = "10 Miércoles de ceniza";
+            this.miércolesDeCenizaToolStripMenuItem.Click += new System.EventHandler(this.miércolesDeCenizaToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -204,6 +213,7 @@
         private System.Windows.Forms.ToolStripMenuItem nominaDeAlmacenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingresoALaFiestaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sumaDePrimosYNoPrimosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miércolesDeCenizaToolStripMenuItem;
     }
 }
 

@@ -73,5 +73,10 @@ namespace SolucionEjercicios
         {
             AsignarContenido(new SumaPrimosNoPrimos());
         }
+
+        private void miércolesDeCenizaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarContenido(new MiercolesDeCeniza());
+        }
     }
 }
