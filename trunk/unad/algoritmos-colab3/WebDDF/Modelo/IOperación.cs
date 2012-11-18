@@ -10,6 +10,8 @@ namespace WebDDF.Modelo
 {
     interface IOperación
     {
+        IPadreDeOperaciones Padre { get; set; }
+
         Rectangle Rectángulo { get; set; }
 
         void Ejecutar(Diagrama diagrama);

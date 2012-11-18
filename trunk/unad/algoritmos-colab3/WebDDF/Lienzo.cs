@@ -34,11 +34,17 @@ namespace WebDDF
         {
             if (OperacionSeleccionada != null)
             {
-                int indice = Diagrama.Operaciones.IndexOf(OperacionSeleccionada);
-                Diagrama.Operaciones.Insert(indice + 1, operación);
+                if (OperacionSeleccionada is IPadreDeOperaciones)
+                {
+                    (OperacionSeleccionada as IPadreDeOperaciones).Agregar(operación);
+                }
+                else
+                {
+                    OperacionSeleccionada.Padre.Agregar(operación);
+                }
             }
             else
-                Diagrama.Operaciones.Add(operación);
+                Diagrama.Agregar(operación);
             Invalidate();
         }
 
@@ -58,7 +64,7 @@ namespace WebDDF
             Point mouse = new Point(e.X, e.Y);
             using (Graphics g = CreateGraphics())
             {
-                foreach (IOperación operación in Diagrama.Operaciones)
+                foreach (IOperación operación in Diagrama)
                 {
                     Rectangle rectángulo = Rectangle.Inflate(operación.Rectángulo, 2, 2);
                     if (rectángulo.Contains(mouse))
@@ -73,7 +79,7 @@ namespace WebDDF
         {
             OperacionSeleccionada = null;
             Point mouse = new Point(e.X, e.Y);
-            foreach (IOperación operación in Diagrama.Operaciones)
+            foreach (IOperación operación in Diagrama)
             {
                 if (operación.Rectángulo.Contains(mouse))
                     OperacionSeleccionada = operación;
@@ -84,7 +90,7 @@ namespace WebDDF
         void LienzoMouseDoubleClick(object sender, MouseEventArgs e)
         {
             Point mouse = new Point(e.X, e.Y);
-            foreach (IOperación operación in Diagrama.Operaciones)
+            foreach (IOperación operación in Diagrama)
             {
                 if (operación.Rectángulo.Contains(mouse))
                 {

@@ -71,7 +71,7 @@
     <Compile Include="Modelo\Asignación.cs" />
     <Compile Include="Modelo\Diagrama.cs" />
     <Compile Include="Modelo\IOperación.cs" />
-    <Compile Include="Modelo\IOperaciónPadre.cs" />
+    <Compile Include="Modelo\IPadreDeOperaciones.cs" />
     <Compile Include="Modelo\MientrasQue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
