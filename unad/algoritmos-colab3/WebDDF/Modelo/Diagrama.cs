@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebDDF.Modelo
 {
@@ -17,6 +13,7 @@ namespace WebDDF.Modelo
 
         static Diagrama()
         {
+            CentroMedio.FormatFlags = StringFormatFlags.NoWrap;
             CentroMedio.Alignment = StringAlignment.Center;
             CentroMedio.LineAlignment = StringAlignment.Center;
         }

@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editores\AsignacionEditor.cs">
+    <Compile Include="Editores\AsignaciónEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editores\AsignacionEditor.Designer.cs">
-      <DependentUpon>AsignacionEditor.cs</DependentUpon>
+    <Compile Include="Editores\AsignaciónEditor.Designer.cs">
+      <DependentUpon>AsignaciónEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Lienzo.cs">
       <SubType>UserControl</SubType>
@@ -67,8 +67,8 @@
     <Compile Include="Modelo\IOperación.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Editores\AsignacionEditor.resx">
-      <DependentUpon>AsignacionEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Editores\AsignaciónEditor.resx">
+      <DependentUpon>AsignaciónEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -82,6 +82,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\WebDDF.Modelo.Variable.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
