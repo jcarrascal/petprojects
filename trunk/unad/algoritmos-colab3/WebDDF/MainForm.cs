@@ -20,8 +20,7 @@ namespace WebDDF
 
         private void agregarAsignación_Click(object sender, EventArgs e)
         {
-            lienzo.Diagrama.Operaciones.Add(new Asignación());
-            lienzo.Invalidate();
+            lienzo.AddOperation(new Asignación());
         }
     }
 }
