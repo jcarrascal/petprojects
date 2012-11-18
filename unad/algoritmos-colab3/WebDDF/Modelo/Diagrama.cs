@@ -19,6 +19,7 @@ namespace WebDDF.Modelo
 
         static Diagrama()
         {
+            CentroMedio.Trimming = StringTrimming.EllipsisCharacter;
             CentroMedio.FormatFlags = StringFormatFlags.NoWrap;
             CentroMedio.Alignment = StringAlignment.Center;
             CentroMedio.LineAlignment = StringAlignment.Center;

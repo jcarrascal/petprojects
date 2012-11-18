@@ -20,12 +20,17 @@ namespace WebDDF
 
         private void agregarAsignación_Click(object sender, EventArgs e)
         {
-            lienzo.AddOperation(new Asignación());
+            lienzo.AgregarOperación(new Asignación());
         }
 
         private void agregarMientrasQue_Click(object sender, EventArgs e)
         {
-            lienzo.AddOperation(new MientrasQue());
+            lienzo.AgregarOperación(new CicloMientras());
+        }
+
+        private void agregarCicloPara_Click(object sender, EventArgs e)
+        {
+            lienzo.AgregarOperación(new CicloPara());
         }
     }
 }

@@ -11,11 +11,11 @@ using WebDDF.Modelo;
 
 namespace WebDDF.Editores
 {
-    partial class MientrasQueEditor : Form
+    partial class CicloMientrasEditor : Form
     {
-        readonly MientrasQue mientrasQue;
+        readonly CicloMientras mientrasQue;
 
-        public MientrasQueEditor(MientrasQue mientrasQue)
+        public CicloMientrasEditor(CicloMientras mientrasQue)
         {
             InitializeComponent();
             this.mientrasQue = mientrasQue;
