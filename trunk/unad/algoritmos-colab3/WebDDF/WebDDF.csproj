@@ -44,6 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editores\AsignacionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editores\AsignacionEditor.Designer.cs">
+      <DependentUpon>AsignacionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lienzo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lienzo.Designer.cs">
+      <DependentUpon>Lienzo.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +67,9 @@
     <Compile Include="Modelo\IOperación.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Editores\AsignacionEditor.resx">
+      <DependentUpon>AsignacionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
