@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebDDF.Editores;
 
 namespace WebDDF.Modelo
 {
     class MientrasQue : IOperaciónPadre
     {
         readonly List<IOperación> operaciones = new List<IOperación>();
+
+        public string Expresión { get; set; }
 
         public Rectangle Rectángulo { get; set; }
 
@@ -46,12 +49,14 @@ namespace WebDDF.Modelo
             };
             g.FillPolygon(Brushes.White, puntos);
             g.DrawPolygon(Pens.Black, puntos);
+            g.DrawString(Expresión, SystemFonts.DefaultFont, Brushes.Black, Rectángulo, Diagrama.CentroMedio);
             centroArriba.Y += Rectángulo.Height;
         }
 
         public DialogResult Editar(IWin32Window parent)
         {
-            throw new NotImplementedException();
+            using (MientrasQueEditor editar = new MientrasQueEditor(this))
+                return editar.ShowDialog(parent);
         }
 
         public List<IOperación> Operaciones

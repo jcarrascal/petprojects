@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewAsignaciones = new System.Windows.Forms.DataGridView();
-            this.buttonAceptar = new System.Windows.Forms.Button();
-            this.buttonCancelar = new System.Windows.Forms.Button();
             this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.expresiónDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.variableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonAceptar = new System.Windows.Forms.Button();
+            this.buttonCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAsignaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +55,22 @@
             this.dataGridViewAsignaciones.Name = "dataGridViewAsignaciones";
             this.dataGridViewAsignaciones.Size = new System.Drawing.Size(399, 139);
             this.dataGridViewAsignaciones.TabIndex = 0;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            // 
+            // expresiónDataGridViewTextBoxColumn
+            // 
+            this.expresiónDataGridViewTextBoxColumn.DataPropertyName = "Expresión";
+            this.expresiónDataGridViewTextBoxColumn.HeaderText = "Expresión";
+            this.expresiónDataGridViewTextBoxColumn.Name = "expresiónDataGridViewTextBoxColumn";
+            // 
+            // variableBindingSource
+            // 
+            this.variableBindingSource.DataSource = typeof(WebDDF.Modelo.Variable);
             // 
             // buttonAceptar
             // 
@@ -78,22 +94,6 @@
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
             // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            // 
-            // expresiónDataGridViewTextBoxColumn
-            // 
-            this.expresiónDataGridViewTextBoxColumn.DataPropertyName = "Expresión";
-            this.expresiónDataGridViewTextBoxColumn.HeaderText = "Expresión";
-            this.expresiónDataGridViewTextBoxColumn.Name = "expresiónDataGridViewTextBoxColumn";
-            // 
-            // variableBindingSource
-            // 
-            this.variableBindingSource.DataSource = typeof(WebDDF.Modelo.Variable);
-            // 
             // AsignaciónEditor
             // 
             this.AcceptButton = this.buttonAceptar;
@@ -106,7 +106,7 @@
             this.Controls.Add(this.dataGridViewAsignaciones);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AsignaciónEditor";
-            this.Text = "AsignacionEditor";
+            this.Text = "Asignacion";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAsignaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             this.ResumeLayout(false);
