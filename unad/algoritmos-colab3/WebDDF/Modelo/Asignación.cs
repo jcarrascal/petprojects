@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WebDDF.Editores;
 
 namespace WebDDF.Modelo
 {
@@ -16,7 +18,6 @@ namespace WebDDF.Modelo
 
         public readonly BindingList<KeyValuePair<string, string>> Expresiones = new BindingList<KeyValuePair<string, string>>();
 
-        public bool EstáSeleccionada { get; set; }
         public Rectangle Rectángulo { get; set; }
 
         public void Ejecutar(Diagrama diagrama)
@@ -34,8 +35,6 @@ namespace WebDDF.Modelo
             Rectángulo = Medir(centroArriba);
             g.FillRectangle(Brushes.White, Rectángulo);
             g.DrawRectangle(Pens.Black, Rectángulo);
-            if (EstáSeleccionada)
-                g.DrawRectangle(Pens.Black, Rectangle.Inflate(Rectángulo, -2, -2));
             centroArriba.Y += Rectángulo.Height;
             Rectangle etiqueta = new Rectangle(Rectángulo.X + Márgen, Rectángulo.Y + Márgen, Rectángulo.Width - (Márgen * 2), Linea);
             foreach (KeyValuePair<string, string> asignación in Expresiones)
@@ -43,6 +42,12 @@ namespace WebDDF.Modelo
                 g.DrawString(asignación.Key + " = " + asignación.Value, SystemFonts.DefaultFont, Brushes.Black, etiqueta, Diagrama.CentroMedio);
                 etiqueta.Y += Linea;
             }
+        }
+
+        public DialogResult Editar(IWin32Window parent)
+        {
+            using (AsignacionEditor editar = new AsignacionEditor())
+                return editar.ShowDialog(parent);
         }
 
         Rectangle Medir(Point centroArriba)

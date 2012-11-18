@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            WebDDF.Modelo.Diagrama diagrama1 = new WebDDF.Modelo.Diagrama();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -40,7 +41,8 @@
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.panelLienzo = new System.Windows.Forms.Panel();
+            this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
+            this.lienzo = new WebDDF.Lienzo();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +58,8 @@
             this.copyToolStripButton,
             this.pasteToolStripButton,
             this.toolStripSeparator1,
-            this.helpToolStripButton});
+            this.helpToolStripButton,
+            this.agregarAsignación});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(715, 25);
@@ -145,22 +148,31 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
-            // panelLienzo
+            // agregarAsignación
             // 
-            this.panelLienzo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLienzo.Location = new System.Drawing.Point(0, 25);
-            this.panelLienzo.Name = "panelLienzo";
-            this.panelLienzo.Size = new System.Drawing.Size(715, 367);
-            this.panelLienzo.TabIndex = 1;
-            this.panelLienzo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLienzo_Paint);
-            this.panelLienzo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelLienzo_MouseMove);
+            this.agregarAsignación.Image = ((System.Drawing.Image)(resources.GetObject("agregarAsignación.Image")));
+            this.agregarAsignación.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarAsignación.Name = "agregarAsignación";
+            this.agregarAsignación.Size = new System.Drawing.Size(86, 22);
+            this.agregarAsignación.Text = "Asignación";
+            this.agregarAsignación.Click += new System.EventHandler(this.agregarAsignación_Click);
+            // 
+            // lienzo
+            // 
+            this.lienzo.Diagrama = diagrama1;
+            this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lienzo.Location = new System.Drawing.Point(0, 25);
+            this.lienzo.Name = "lienzo";
+            this.lienzo.OperacionSeleccionada = null;
+            this.lienzo.Size = new System.Drawing.Size(715, 367);
+            this.lienzo.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 392);
-            this.Controls.Add(this.panelLienzo);
+            this.Controls.Add(this.lienzo);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
             this.Name = "MainForm";
@@ -185,7 +197,8 @@
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private System.Windows.Forms.Panel panelLienzo;
+        private System.Windows.Forms.ToolStripButton agregarAsignación;
+        private Lienzo lienzo;
     }
 }
 

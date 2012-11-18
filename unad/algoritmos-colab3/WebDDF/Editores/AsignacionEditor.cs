@@ -7,21 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WebDDF.Modelo;
 
-namespace WebDDF
+namespace WebDDF.Editores
 {
-    public partial class MainForm : Form
+    partial class AsignacionEditor : Form
     {
-        public MainForm()
+        public AsignacionEditor()
         {
             InitializeComponent();
         }
+    }
 
-        private void agregarAsignación_Click(object sender, EventArgs e)
-        {
-            lienzo.Diagrama.Operaciones.Add(new Asignación());
-            lienzo.Invalidate();
-        }
+    public class AsignacionÍtem
+    {
+        public string Variable { get; set; }
+
+        public string Expresion { get; set; }
     }
 }
