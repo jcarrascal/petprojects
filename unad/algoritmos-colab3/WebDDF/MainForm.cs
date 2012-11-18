@@ -22,5 +22,10 @@ namespace WebDDF
         {
             lienzo.AddOperation(new Asignación());
         }
+
+        private void agregarMientrasQue_Click(object sender, EventArgs e)
+        {
+            lienzo.AddOperation(new MientrasQue());
+        }
     }
 }

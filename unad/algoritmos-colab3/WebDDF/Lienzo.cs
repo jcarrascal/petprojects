@@ -22,9 +22,9 @@ namespace WebDDF
             Diagrama = new Diagrama();
 
             InitializeComponent();
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
+            ResizeRedraw = true;
             Paint += LienzoPaint;
-            Resize += LienzoResize;
             MouseMove += LienzoMouseMove;
             MouseClick += LienzoMouseClick;
             MouseDoubleClick += LienzoMouseDoubleClick;
@@ -51,11 +51,6 @@ namespace WebDDF
                 Rectangle rectángulo = Rectangle.Inflate(OperacionSeleccionada.Rectángulo, 2, 2);
                 e.Graphics.DrawRectangle(SystemPens.ActiveBorder, rectángulo);
             }
-        }
-
-        void LienzoResize(object sender, EventArgs e)
-        {
-            Invalidate();
         }
 
         void LienzoMouseMove(object sender, MouseEventArgs e)
