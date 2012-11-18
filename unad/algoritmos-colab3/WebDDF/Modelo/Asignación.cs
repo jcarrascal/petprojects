@@ -14,6 +14,8 @@ namespace WebDDF.Modelo
     {
         public readonly List<Variable> Variables = new List<Variable>();
 
+        public IPadreDeOperaciones Padre { get; set; }
+
         public Rectangle Rectángulo { get; set; }
 
         public void Ejecutar(Diagrama diagrama)

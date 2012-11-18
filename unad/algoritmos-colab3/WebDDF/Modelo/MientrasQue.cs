@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,11 +11,13 @@ using WebDDF.Editores;
 
 namespace WebDDF.Modelo
 {
-    class MientrasQue : IOperaciónPadre
+    class MientrasQue : IOperación, IPadreDeOperaciones
     {
-        readonly List<IOperación> operaciones = new List<IOperación>();
+        List<IOperación> operaciones = new List<IOperación>();
 
         public string Expresión { get; set; }
+
+        public IPadreDeOperaciones Padre { get; set; }
 
         public Rectangle Rectángulo { get; set; }
 
@@ -26,7 +30,7 @@ namespace WebDDF.Modelo
         {
             Rectángulo = Medir(centroArriba);
             DibujarOperacion(g, ref centroArriba);
-            foreach (IOperación operación in Operaciones)
+            foreach (IOperación operación in operaciones)
             {
                 Diagrama.DibujarConector(g, ref centroArriba);
                 operación.Dibujar(g, ref centroArriba);
@@ -59,16 +63,50 @@ namespace WebDDF.Modelo
                 return editar.ShowDialog(parent);
         }
 
-        public List<IOperación> Operaciones
-        {
-            get { return operaciones; }
-        }
-
         Rectangle Medir(Point centroArriba)
         {
             int ancho = Diagrama.OperaciónBorde * 2 + Diagrama.OperaciónMárgen * 2 + 100;
             int alto = Diagrama.OperaciónBorde * 2 + Diagrama.OperaciónMárgen * 2 + Diagrama.OperaciónLinea;
             return new Rectangle(centroArriba.X - ancho / 2, centroArriba.Y, ancho, alto);
+        }
+
+        public IEnumerator<IOperación> GetEnumerator()
+        {
+            foreach (IOperación operación in operaciones)
+            {
+                yield return operación;
+                if (operación is IEnumerable<IOperación>)
+                {
+                    foreach (IOperación op in operación as IEnumerable<IOperación>)
+                        yield return op;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        public void Agregar(IOperación operación)
+        {
+            operación.Padre = this;
+            operaciones.Add(operación);
+        }
+
+        public void InsertarDespuésDe(IOperación operación, IOperación anterior)
+        {
+            Debug.Assert(anterior.Padre == this);
+            operación.Padre = this;
+            int indice = operaciones.IndexOf(anterior);
+            operaciones.Insert(indice + 1, operación);
+        }
+
+        public void Eliminar(IOperación operación)
+        {
+            Debug.Assert(operación.Padre == this);
+            operación.Padre = null;
+            operaciones.Remove(operación);
         }
     }
 }
