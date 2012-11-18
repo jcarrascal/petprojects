@@ -43,6 +43,7 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
             this.lienzo = new WebDDF.Lienzo();
+            this.agregarMientrasQue = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,8 @@
             this.pasteToolStripButton,
             this.toolStripSeparator1,
             this.helpToolStripButton,
-            this.agregarAsignación});
+            this.agregarAsignación,
+            this.agregarMientrasQue});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(715, 25);
@@ -167,6 +169,15 @@
             this.lienzo.Size = new System.Drawing.Size(715, 367);
             this.lienzo.TabIndex = 1;
             // 
+            // agregarMientrasQue
+            // 
+            this.agregarMientrasQue.Image = ((System.Drawing.Image)(resources.GetObject("agregarMientrasQue.Image")));
+            this.agregarMientrasQue.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarMientrasQue.Name = "agregarMientrasQue";
+            this.agregarMientrasQue.Size = new System.Drawing.Size(96, 22);
+            this.agregarMientrasQue.Text = "Mientras que";
+            this.agregarMientrasQue.Click += new System.EventHandler(this.agregarMientrasQue_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +210,7 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripButton agregarAsignación;
         private Lienzo lienzo;
+        private System.Windows.Forms.ToolStripButton agregarMientrasQue;
     }
 }
 

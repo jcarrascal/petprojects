@@ -6,6 +6,10 @@ namespace WebDDF.Modelo
 {
     class Diagrama
     {
+        public const int OperaciónBorde = 1;
+        public const int OperaciónMárgen = 3;
+        public const int OperaciónLinea = 25;
+
         const int Márgen = 30;
         const int TamañoAlcance = 40;
         const int EspacioEntreOperaciones = 20;
@@ -27,7 +31,6 @@ namespace WebDDF.Modelo
             DibujarAlcance("Inicio", g, ref centroArriba);
             foreach (IOperación operación in Operaciones)
             {
-                // Dibujar flecha.
                 DibujarConector(g, ref centroArriba);
                 operación.Dibujar(g, ref centroArriba);
             }
@@ -48,7 +51,7 @@ namespace WebDDF.Modelo
             g.FillPolygon(Brushes.Black, flecha, FillMode.Winding);
         }
 
-        public void DibujarAlcance(string etiqueta, Graphics g, ref Point centroArriba)
+        public static void DibujarAlcance(string etiqueta, Graphics g, ref Point centroArriba)
         {
             Rectangle rectángulo = new Rectangle(centroArriba.X - TamañoAlcance / 2, centroArriba.Y, TamañoAlcance, TamañoAlcance);
             g.FillEllipse(Brushes.White, rectángulo);

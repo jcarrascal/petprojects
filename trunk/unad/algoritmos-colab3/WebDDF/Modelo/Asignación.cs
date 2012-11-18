@@ -12,10 +12,6 @@ namespace WebDDF.Modelo
 {
     class Asignación : IOperación
     {
-        const int Borde = 1;
-        const int Márgen = 3;
-        const int Linea = 25;
-
         public readonly List<Variable> Variables = new List<Variable>();
 
         public Rectangle Rectángulo { get; set; }
@@ -36,7 +32,11 @@ namespace WebDDF.Modelo
             g.FillRectangle(Brushes.White, Rectángulo);
             g.DrawRectangle(Pens.Black, Rectángulo);
             centroArriba.Y += Rectángulo.Height;
-            Rectangle etiqueta = new Rectangle(Rectángulo.X + Márgen, Rectángulo.Y + Márgen, Rectángulo.Width - (Márgen * 2), Linea);
+            Rectangle etiqueta = new Rectangle(
+                Rectángulo.X + Diagrama.OperaciónMárgen,
+                Rectángulo.Y + Diagrama.OperaciónMárgen,
+                Rectángulo.Width - (Diagrama.OperaciónMárgen * 2),
+                Diagrama.OperaciónLinea);
             foreach (Variable variable in Variables)
             {
                 g.DrawString(
@@ -45,7 +45,7 @@ namespace WebDDF.Modelo
                     Brushes.Black, 
                     etiqueta, 
                     Diagrama.CentroMedio);
-                etiqueta.Y += Linea;
+                etiqueta.Y += Diagrama.OperaciónLinea;
             }
         }
 
@@ -57,8 +57,8 @@ namespace WebDDF.Modelo
 
         Rectangle Medir(Point centroArriba)
         {
-            int ancho = Borde * 2 + Márgen * 2 + 100;
-            int alto = Borde * 2 + Márgen * 2 + Math.Max(Variables.Count, 1) * Linea;
+            int ancho = Diagrama.OperaciónBorde * 2 + Diagrama.OperaciónMárgen * 2 + 100;
+            int alto = Diagrama.OperaciónBorde * 2 + Diagrama.OperaciónMárgen * 2 + Math.Max(Variables.Count, 1) * Diagrama.OperaciónLinea;
             return new Rectangle(centroArriba.X - ancho / 2, centroArriba.Y, ancho, alto);
         }
     }
