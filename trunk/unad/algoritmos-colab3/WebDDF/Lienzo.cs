@@ -30,7 +30,7 @@ namespace WebDDF
             MouseDoubleClick += LienzoMouseDoubleClick;
         }
 
-        public void AddOperation(IOperación operación)
+        public void AgregarOperación(IOperación operación)
         {
             if (OperacionSeleccionada != null)
             {

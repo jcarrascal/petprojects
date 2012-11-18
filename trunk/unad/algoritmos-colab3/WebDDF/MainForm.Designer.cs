@@ -32,8 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lienzo = new WebDDF.Lienzo();
             this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
-            this.agregarMientrasQue = new System.Windows.Forms.ToolStripButton();
+            this.agregarCicloMientras = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,9 +43,10 @@
             this.lienzo.Diagrama = diagrama1;
             this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lienzo.Location = new System.Drawing.Point(0, 25);
+            this.lienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lienzo.Name = "lienzo";
             this.lienzo.OperacionSeleccionada = null;
-            this.lienzo.Size = new System.Drawing.Size(715, 367);
+            this.lienzo.Size = new System.Drawing.Size(624, 386);
             this.lienzo.TabIndex = 1;
             // 
             // agregarAsignación
@@ -56,34 +58,46 @@
             this.agregarAsignación.Text = "Asignación";
             this.agregarAsignación.Click += new System.EventHandler(this.agregarAsignación_Click);
             // 
-            // agregarMientrasQue
+            // agregarCicloMientras
             // 
-            this.agregarMientrasQue.Image = ((System.Drawing.Image)(resources.GetObject("agregarMientrasQue.Image")));
-            this.agregarMientrasQue.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.agregarMientrasQue.Name = "agregarMientrasQue";
-            this.agregarMientrasQue.Size = new System.Drawing.Size(96, 22);
-            this.agregarMientrasQue.Text = "Mientras que";
-            this.agregarMientrasQue.Click += new System.EventHandler(this.agregarMientrasQue_Click);
+            this.agregarCicloMientras.Image = ((System.Drawing.Image)(resources.GetObject("agregarCicloMientras.Image")));
+            this.agregarCicloMientras.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarCicloMientras.Name = "agregarCicloMientras";
+            this.agregarCicloMientras.Size = new System.Drawing.Size(103, 22);
+            this.agregarCicloMientras.Text = "Ciclo mientras";
+            this.agregarCicloMientras.Click += new System.EventHandler(this.agregarMientrasQue_Click);
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarAsignación,
-            this.agregarMientrasQue});
+            this.agregarCicloMientras,
+            this.agregarCicloPara});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(715, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // agregarCicloPara
+            // 
+            this.agregarCicloPara.Image = ((System.Drawing.Image)(resources.GetObject("agregarCicloPara.Image")));
+            this.agregarCicloPara.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarCicloPara.Name = "agregarCicloPara";
+            this.agregarCicloPara.Size = new System.Drawing.Size(80, 22);
+            this.agregarCicloPara.Text = "Ciclo para";
+            this.agregarCicloPara.Click += new System.EventHandler(this.agregarCicloPara_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 392);
+            this.ClientSize = new System.Drawing.Size(624, 411);
             this.Controls.Add(this.lienzo);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "WebDDF";
             this.toolStrip1.ResumeLayout(false);
@@ -97,8 +111,9 @@
 
         private Lienzo lienzo;
         private System.Windows.Forms.ToolStripButton agregarAsignación;
-        private System.Windows.Forms.ToolStripButton agregarMientrasQue;
+        private System.Windows.Forms.ToolStripButton agregarCicloMientras;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton agregarCicloPara;
     }
 }
 

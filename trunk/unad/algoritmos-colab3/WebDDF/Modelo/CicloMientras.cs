@@ -3,15 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebDDF.Editores;
 
 namespace WebDDF.Modelo
 {
-    class MientrasQue : IOperación, IPadreDeOperaciones
+    class CicloMientras : IOperación, IPadreDeOperaciones
     {
         List<IOperación> operaciones = new List<IOperación>();
 
@@ -53,13 +50,16 @@ namespace WebDDF.Modelo
             };
             g.FillPolygon(Brushes.White, puntos);
             g.DrawPolygon(Pens.Black, puntos);
-            g.DrawString(Expresión, SystemFonts.DefaultFont, Brushes.Black, Rectángulo, Diagrama.CentroMedio);
+            using (Font font = new Font(SystemFonts.DefaultFont.FontFamily, 6))
+                g.DrawString("MQ", font, Brushes.Black, new Point(r.X + reducción, r.Y + 6));
+            Rectangle etiqueta = Rectangle.Inflate(Rectángulo, Diagrama.OperaciónMárgen, Diagrama.OperaciónMárgen);
+            g.DrawString(Expresión, SystemFonts.DefaultFont, Brushes.Black, etiqueta, Diagrama.CentroMedio);
             centroArriba.Y += Rectángulo.Height;
         }
 
         public DialogResult Editar(IWin32Window parent)
         {
-            using (MientrasQueEditor editar = new MientrasQueEditor(this))
+            using (CicloMientrasEditor editar = new CicloMientrasEditor(this))
                 return editar.ShowDialog(parent);
         }
 

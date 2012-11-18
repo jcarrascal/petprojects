@@ -50,11 +50,17 @@
     <Compile Include="Editores\AsignaciónEditor.Designer.cs">
       <DependentUpon>AsignaciónEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editores\MientrasQueEditor.cs">
+    <Compile Include="Editores\CicloMientrasEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editores\MientrasQueEditor.Designer.cs">
-      <DependentUpon>MientrasQueEditor.cs</DependentUpon>
+    <Compile Include="Editores\CicloMientrasEditor.Designer.cs">
+      <DependentUpon>CicloMientrasEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editores\CicloParaEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editores\CicloParaEditor.Designer.cs">
+      <DependentUpon>CicloParaEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Lienzo.cs">
       <SubType>UserControl</SubType>
@@ -72,14 +78,18 @@
     <Compile Include="Modelo\Diagrama.cs" />
     <Compile Include="Modelo\IOperación.cs" />
     <Compile Include="Modelo\IPadreDeOperaciones.cs" />
-    <Compile Include="Modelo\MientrasQue.cs" />
+    <Compile Include="Modelo\CicloMientras.cs" />
+    <Compile Include="Modelo\CicloPara.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Editores\AsignaciónEditor.resx">
       <DependentUpon>AsignaciónEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editores\MientrasQueEditor.resx">
-      <DependentUpon>MientrasQueEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Editores\CicloMientrasEditor.resx">
+      <DependentUpon>CicloMientrasEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editores\CicloParaEditor.resx">
+      <DependentUpon>CicloParaEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
