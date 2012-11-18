@@ -30,6 +30,18 @@ namespace WebDDF
             MouseDoubleClick += LienzoMouseDoubleClick;
         }
 
+        public void AddOperation(IOperación operación)
+        {
+            if (OperacionSeleccionada != null)
+            {
+                int indice = Diagrama.Operaciones.IndexOf(OperacionSeleccionada);
+                Diagrama.Operaciones.Insert(indice + 1, operación);
+            }
+            else
+                Diagrama.Operaciones.Add(operación);
+            Invalidate();
+        }
+
         void LienzoPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
