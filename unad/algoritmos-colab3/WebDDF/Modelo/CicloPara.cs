@@ -66,7 +66,7 @@ namespace WebDDF.Modelo
             g.DrawPolygon(Pens.Black, puntos);
             using (Font font = new Font(SystemFonts.DefaultFont.FontFamily, 6))
                 g.DrawString("PARA", font, Brushes.Black, new Point(r.X + reducción, r.Y + 6));
-            Rectangle etiqueta = Rectangle.Inflate(Rectángulo, Diagrama.OperaciónMárgen, 26);
+            Rectangle etiqueta = Rectangle.Inflate(Rectángulo, -Diagrama.OperaciónMárgen, -Diagrama.OperaciónMárgen);
             g.DrawString(
                 string.Format("{0} <- {1}, {2}, {3}", Variable, Inicio, Expresión, Paso),
                 SystemFonts.DefaultFont, 

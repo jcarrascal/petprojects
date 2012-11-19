@@ -35,6 +35,7 @@
             this.agregarCicloMientras = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
+            this.agregarLectura = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +73,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarAsignación,
             this.agregarCicloMientras,
-            this.agregarCicloPara});
+            this.agregarCicloPara,
+            this.agregarLectura});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(624, 25);
@@ -87,6 +89,15 @@
             this.agregarCicloPara.Size = new System.Drawing.Size(80, 22);
             this.agregarCicloPara.Text = "Ciclo para";
             this.agregarCicloPara.Click += new System.EventHandler(this.agregarCicloPara_Click);
+            // 
+            // agregarLectura
+            // 
+            this.agregarLectura.Image = ((System.Drawing.Image)(resources.GetObject("agregarLectura.Image")));
+            this.agregarLectura.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarLectura.Name = "agregarLectura";
+            this.agregarLectura.Size = new System.Drawing.Size(66, 22);
+            this.agregarLectura.Text = "Lectura";
+            this.agregarLectura.Click += new System.EventHandler(this.agregarLectura_Click);
             // 
             // MainForm
             // 
@@ -114,6 +125,7 @@
         private System.Windows.Forms.ToolStripButton agregarCicloMientras;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton agregarCicloPara;
+        private System.Windows.Forms.ToolStripButton agregarLectura;
     }
 }
 
