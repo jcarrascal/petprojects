@@ -36,6 +36,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
             this.agregarLectura = new System.Windows.Forms.ToolStripButton();
+            this.agregarSalida = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +75,8 @@
             this.agregarAsignación,
             this.agregarCicloMientras,
             this.agregarCicloPara,
-            this.agregarLectura});
+            this.agregarLectura,
+            this.agregarSalida});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(624, 25);
@@ -98,6 +100,15 @@
             this.agregarLectura.Size = new System.Drawing.Size(66, 22);
             this.agregarLectura.Text = "Lectura";
             this.agregarLectura.Click += new System.EventHandler(this.agregarLectura_Click);
+            // 
+            // agregarSalida
+            // 
+            this.agregarSalida.Image = ((System.Drawing.Image)(resources.GetObject("agregarSalida.Image")));
+            this.agregarSalida.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarSalida.Name = "agregarSalida";
+            this.agregarSalida.Size = new System.Drawing.Size(58, 22);
+            this.agregarSalida.Text = "Salida";
+            this.agregarSalida.Click += new System.EventHandler(this.agregarSalida_Click);
             // 
             // MainForm
             // 
@@ -126,6 +137,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton agregarCicloPara;
         private System.Windows.Forms.ToolStripButton agregarLectura;
+        private System.Windows.Forms.ToolStripButton agregarSalida;
     }
 }
 

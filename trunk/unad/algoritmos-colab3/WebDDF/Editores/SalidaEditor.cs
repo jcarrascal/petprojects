@@ -11,20 +11,20 @@ using WebDDF.Modelo;
 
 namespace WebDDF.Editores
 {
-    partial class CicloMientrasEditor : Form
+    partial class SalidaEditor : Form
     {
-        readonly CicloMientras cicloMientras;
+        readonly Salida salida;
 
-        public CicloMientrasEditor(CicloMientras cicloMientras)
+        public SalidaEditor(Salida salida)
         {
             InitializeComponent();
-            this.cicloMientras = cicloMientras;
-            textBoxExpresión.Text = cicloMientras.Expresión;
+            this.salida = salida;
+            textBoxExpresión.Text = salida.Expresión;
         }
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            cicloMientras.Expresión = textBoxExpresión.Text;
+            salida.Expresión = textBoxExpresión.Text;
             DialogResult = DialogResult.OK;
         }
     }
