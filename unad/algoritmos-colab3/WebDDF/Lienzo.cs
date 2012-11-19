@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebDDF.Modelo;
+using System.Diagnostics;
 
 namespace WebDDF
 {
@@ -45,7 +46,18 @@ namespace WebDDF
             }
             else
                 Diagrama.Agregar(operación);
+            Debug.Assert(operación.Padre != null);
             Invalidate();
+        }
+
+        public void EliminarOperaciónSeleccionada()
+        {
+            if (OperacionSeleccionada != null)
+            {
+                OperacionSeleccionada.Padre.Eliminar(OperacionSeleccionada);
+                OperacionSeleccionada = null;
+                Invalidate();
+            }
         }
 
         void LienzoPaint(object sender, PaintEventArgs e)

@@ -132,6 +132,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\DataSources\WebDDF.Modelo.Variable.datasource" />
     <None Include="Properties\Settings.settings">
@@ -146,6 +147,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Asignación.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CicloMientras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CicloPara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Decisión.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lectura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salida.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
