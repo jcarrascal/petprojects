@@ -87,6 +87,11 @@ namespace WebDDF.Modelo
             g.DrawPolygon(Pens.Black, puntos);
             Rectangle etiqueta = Rectangle.Inflate(Rectángulo, -Diagrama.OperaciónMárgen, -Diagrama.OperaciónMárgen * 2);
             g.DrawString(Expresión, SystemFonts.DefaultFont, Brushes.Black, etiqueta, Diagrama.CentroMedio);
+            using (Font font = new Font(SystemFonts.DefaultFont.FontFamily, 7))
+            {
+                g.DrawString("Sí", font, Brushes.Black, new Point(r.X + r.Width - 15, r.Y));
+                g.DrawString("No", font, Brushes.Black, new Point(r.X, r.Y));
+            }
             centroArriba.Y += Rectángulo.Height;
         }
 
