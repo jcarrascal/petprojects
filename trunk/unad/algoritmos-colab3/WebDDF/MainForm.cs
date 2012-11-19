@@ -47,5 +47,13 @@ namespace WebDDF
         {
             lienzo.AgregarOperación(new Decisión());
         }
+
+        private void lienzo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                lienzo.EliminarOperaciónSeleccionada();
+            }
+        }
     }
 }

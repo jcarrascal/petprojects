@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             WebDDF.Modelo.Diagrama diagrama1 = new WebDDF.Modelo.Diagrama();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lienzo = new WebDDF.Lienzo();
             this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
             this.agregarCicloMientras = new System.Windows.Forms.ToolStripButton();
@@ -51,10 +50,11 @@
             this.lienzo.OperacionSeleccionada = null;
             this.lienzo.Size = new System.Drawing.Size(624, 386);
             this.lienzo.TabIndex = 1;
+            this.lienzo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lienzo_KeyUp);
             // 
             // agregarAsignación
             // 
-            this.agregarAsignación.Image = ((System.Drawing.Image)(resources.GetObject("agregarAsignación.Image")));
+            this.agregarAsignación.Image = global::WebDDF.Properties.Resources.Asignación;
             this.agregarAsignación.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarAsignación.Name = "agregarAsignación";
             this.agregarAsignación.Size = new System.Drawing.Size(86, 22);
@@ -63,7 +63,7 @@
             // 
             // agregarCicloMientras
             // 
-            this.agregarCicloMientras.Image = ((System.Drawing.Image)(resources.GetObject("agregarCicloMientras.Image")));
+            this.agregarCicloMientras.Image = global::WebDDF.Properties.Resources.CicloMientras;
             this.agregarCicloMientras.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarCicloMientras.Name = "agregarCicloMientras";
             this.agregarCicloMientras.Size = new System.Drawing.Size(103, 22);
@@ -76,9 +76,9 @@
             this.agregarAsignación,
             this.agregarCicloMientras,
             this.agregarCicloPara,
+            this.agregarDecisión,
             this.agregarLectura,
-            this.agregarSalida,
-            this.agregarDecisión});
+            this.agregarSalida});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(624, 25);
@@ -87,7 +87,7 @@
             // 
             // agregarCicloPara
             // 
-            this.agregarCicloPara.Image = ((System.Drawing.Image)(resources.GetObject("agregarCicloPara.Image")));
+            this.agregarCicloPara.Image = global::WebDDF.Properties.Resources.CicloPara;
             this.agregarCicloPara.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarCicloPara.Name = "agregarCicloPara";
             this.agregarCicloPara.Size = new System.Drawing.Size(80, 22);
@@ -96,7 +96,7 @@
             // 
             // agregarLectura
             // 
-            this.agregarLectura.Image = ((System.Drawing.Image)(resources.GetObject("agregarLectura.Image")));
+            this.agregarLectura.Image = global::WebDDF.Properties.Resources.Lectura;
             this.agregarLectura.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarLectura.Name = "agregarLectura";
             this.agregarLectura.Size = new System.Drawing.Size(66, 22);
@@ -105,7 +105,7 @@
             // 
             // agregarSalida
             // 
-            this.agregarSalida.Image = ((System.Drawing.Image)(resources.GetObject("agregarSalida.Image")));
+            this.agregarSalida.Image = global::WebDDF.Properties.Resources.Salida;
             this.agregarSalida.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarSalida.Name = "agregarSalida";
             this.agregarSalida.Size = new System.Drawing.Size(58, 22);
@@ -114,7 +114,7 @@
             // 
             // agregarDecisión
             // 
-            this.agregarDecisión.Image = ((System.Drawing.Image)(resources.GetObject("agregarDecisión.Image")));
+            this.agregarDecisión.Image = global::WebDDF.Properties.Resources.Decisión;
             this.agregarDecisión.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.agregarDecisión.Name = "agregarDecisión";
             this.agregarDecisión.Size = new System.Drawing.Size(72, 22);
