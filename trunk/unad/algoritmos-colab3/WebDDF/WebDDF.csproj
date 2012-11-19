@@ -62,6 +62,12 @@
     <Compile Include="Editores\CicloParaEditor.Designer.cs">
       <DependentUpon>CicloParaEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editores\DecisiónEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editores\DecisiónEditor.Designer.cs">
+      <DependentUpon>DecisiónEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editores\SalidaEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Asignación.cs" />
+    <Compile Include="Modelo\Decisión.cs" />
     <Compile Include="Modelo\Salida.cs" />
     <Compile Include="Modelo\Diagrama.cs" />
     <Compile Include="Modelo\IOperación.cs" />
@@ -104,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editores\CicloParaEditor.resx">
       <DependentUpon>CicloParaEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editores\DecisiónEditor.resx">
+      <DependentUpon>DecisiónEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editores\SalidaEditor.resx">
       <DependentUpon>SalidaEditor.cs</DependentUpon>

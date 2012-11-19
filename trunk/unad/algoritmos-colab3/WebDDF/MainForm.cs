@@ -42,5 +42,10 @@ namespace WebDDF
         {
             lienzo.AgregarOperación(new Salida());
         }
+
+        private void agregarDecisión_Click(object sender, EventArgs e)
+        {
+            lienzo.AgregarOperación(new Decisión());
+        }
     }
 }
