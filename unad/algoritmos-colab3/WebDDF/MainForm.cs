@@ -37,5 +37,10 @@ namespace WebDDF
         {
             lienzo.AgregarOperación(new Lectura());
         }
+
+        private void agregarSalida_Click(object sender, EventArgs e)
+        {
+            lienzo.AgregarOperación(new Salida());
+        }
     }
 }
