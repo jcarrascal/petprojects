@@ -62,6 +62,12 @@
     <Compile Include="Editores\CicloParaEditor.Designer.cs">
       <DependentUpon>CicloParaEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editores\LecturaEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editores\LecturaEditor.Designer.cs">
+      <DependentUpon>LecturaEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lienzo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +86,7 @@
     <Compile Include="Modelo\IPadreDeOperaciones.cs" />
     <Compile Include="Modelo\CicloMientras.cs" />
     <Compile Include="Modelo\CicloPara.cs" />
+    <Compile Include="Modelo\Lectura.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Editores\AsignaciónEditor.resx">
@@ -90,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editores\CicloParaEditor.resx">
       <DependentUpon>CicloParaEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editores\LecturaEditor.resx">
+      <DependentUpon>LecturaEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

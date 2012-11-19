@@ -52,7 +52,7 @@ namespace WebDDF.Modelo
             g.DrawPolygon(Pens.Black, puntos);
             using (Font font = new Font(SystemFonts.DefaultFont.FontFamily, 6))
                 g.DrawString("MQ", font, Brushes.Black, new Point(r.X + reducción, r.Y + 6));
-            Rectangle etiqueta = Rectangle.Inflate(Rectángulo, Diagrama.OperaciónMárgen, Diagrama.OperaciónMárgen);
+            Rectangle etiqueta = Rectangle.Inflate(Rectángulo, -Diagrama.OperaciónMárgen, -Diagrama.OperaciónMárgen);
             g.DrawString(Expresión, SystemFonts.DefaultFont, Brushes.Black, etiqueta, Diagrama.CentroMedio);
             centroArriba.Y += Rectángulo.Height;
         }
