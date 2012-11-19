@@ -37,6 +37,7 @@
             this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
             this.agregarLectura = new System.Windows.Forms.ToolStripButton();
             this.agregarSalida = new System.Windows.Forms.ToolStripButton();
+            this.agregarDecisión = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +77,8 @@
             this.agregarCicloMientras,
             this.agregarCicloPara,
             this.agregarLectura,
-            this.agregarSalida});
+            this.agregarSalida,
+            this.agregarDecisión});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(624, 25);
@@ -110,6 +112,15 @@
             this.agregarSalida.Text = "Salida";
             this.agregarSalida.Click += new System.EventHandler(this.agregarSalida_Click);
             // 
+            // agregarDecisión
+            // 
+            this.agregarDecisión.Image = ((System.Drawing.Image)(resources.GetObject("agregarDecisión.Image")));
+            this.agregarDecisión.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarDecisión.Name = "agregarDecisión";
+            this.agregarDecisión.Size = new System.Drawing.Size(72, 22);
+            this.agregarDecisión.Text = "Decisión";
+            this.agregarDecisión.Click += new System.EventHandler(this.agregarDecisión_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -138,6 +149,7 @@
         private System.Windows.Forms.ToolStripButton agregarCicloPara;
         private System.Windows.Forms.ToolStripButton agregarLectura;
         private System.Windows.Forms.ToolStripButton agregarSalida;
+        private System.Windows.Forms.ToolStripButton agregarDecisión;
     }
 }
 
