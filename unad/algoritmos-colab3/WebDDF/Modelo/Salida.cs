@@ -20,9 +20,25 @@ namespace WebDDF.Modelo
 
         public Rectangle Rectángulo { get; set; }
 
-        public void Ejecutar(Diagrama diagrama)
+        public bool Ejecutar(Diagrama diagrama)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(Expresión))
+            {
+                MessageBox.Show("La expresión no puede quedar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            string error;
+            string expresión = Convert.ToString(diagrama.Evaluar(Expresión, out error));
+            if (string.IsNullOrWhiteSpace(error))
+            {
+                MessageBox.Show(expresión, "Salida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         public void Dibujar(Graphics g, ref Point centroArriba)

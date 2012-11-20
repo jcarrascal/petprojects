@@ -34,9 +34,73 @@ namespace WebDDF.Modelo
 
         public Rectangle Rectángulo { get; set; }
 
-        public void Ejecutar(Diagrama diagrama)
+        public bool Ejecutar(Diagrama diagrama)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(Variable))
+            {
+                MessageBox.Show("La variable no puede quedar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Inicio))
+            {
+                MessageBox.Show("El inicio no puede quedar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Expresión))
+            {
+                MessageBox.Show("La expresión no puede quedar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            string error;
+            int inicio;
+            try
+            {
+                inicio = Convert.ToInt32(diagrama.Evaluar(Expresión, out error));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Inicio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            diagrama[Variable] = inicio;
+            int indice = inicio;
+            do
+            {
+                object expresión = diagrama.Evaluar(Expresión, out error);
+                if (string.IsNullOrWhiteSpace(error))
+                {
+                    try
+                    {
+                        if (Convert.ToBoolean(expresión))
+                        {
+                            foreach (IOperación operación in operaciones)
+                            {
+                                if (!operación.Ejecutar(diagrama))
+                                    return false;
+                            }
+                            indice += Paso;
+                            diagrama[Variable] = indice;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("El resultado de {{0}} no es un valor booleano. " + ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            while (true);
         }
 
         public void Dibujar(Graphics g, ref Point centroArriba)

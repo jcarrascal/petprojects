@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebDDF.Editores;
+using WebDDF.Ejecución;
 
 namespace WebDDF.Modelo
 {
@@ -19,9 +20,28 @@ namespace WebDDF.Modelo
 
         public Rectangle Rectángulo { get; set; }
 
-        public void Ejecutar(Diagrama diagrama)
+        public bool Ejecutar(Diagrama diagrama)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(Variable))
+            {
+                MessageBox.Show("El nombre de la variable no puede estar vacía", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            using (LecturaEjecución lecturaEjecución = new LecturaEjecución())
+            {
+                DialogResult dr = lecturaEjecución.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    string error;
+                    object valor = diagrama.Evaluar(lecturaEjecución.Resultado, out error);
+                    if (string.IsNullOrWhiteSpace(error))
+                    {
+                        diagrama[this.Variable] = valor;
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         public void Dibujar(Graphics g, ref Point centroArriba)
