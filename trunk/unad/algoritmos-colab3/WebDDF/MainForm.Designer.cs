@@ -28,29 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             WebDDF.Modelo.Diagrama diagrama1 = new WebDDF.Modelo.Diagrama();
-            this.lienzo = new WebDDF.Lienzo();
             this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
             this.agregarCicloMientras = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
+            this.agregarDecisión = new System.Windows.Forms.ToolStripButton();
             this.agregarLectura = new System.Windows.Forms.ToolStripButton();
             this.agregarSalida = new System.Windows.Forms.ToolStripButton();
-            this.agregarDecisión = new System.Windows.Forms.ToolStripButton();
+            this.ejecutar = new System.Windows.Forms.ToolStripButton();
+            this.variables = new System.Windows.Forms.PropertyGrid();
+            this.lienzo = new WebDDF.Lienzo();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lienzo
-            // 
-            this.lienzo.Diagrama = diagrama1;
-            this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lienzo.Location = new System.Drawing.Point(0, 25);
-            this.lienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lienzo.Name = "lienzo";
-            this.lienzo.OperacionSeleccionada = null;
-            this.lienzo.Size = new System.Drawing.Size(624, 386);
-            this.lienzo.TabIndex = 1;
-            this.lienzo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lienzo_KeyUp);
             // 
             // agregarAsignación
             // 
@@ -78,7 +69,8 @@
             this.agregarCicloPara,
             this.agregarDecisión,
             this.agregarLectura,
-            this.agregarSalida});
+            this.agregarSalida,
+            this.ejecutar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(624, 25);
@@ -93,6 +85,15 @@
             this.agregarCicloPara.Size = new System.Drawing.Size(80, 22);
             this.agregarCicloPara.Text = "Ciclo para";
             this.agregarCicloPara.Click += new System.EventHandler(this.agregarCicloPara_Click);
+            // 
+            // agregarDecisión
+            // 
+            this.agregarDecisión.Image = global::WebDDF.Properties.Resources.Decisión;
+            this.agregarDecisión.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.agregarDecisión.Name = "agregarDecisión";
+            this.agregarDecisión.Size = new System.Drawing.Size(72, 22);
+            this.agregarDecisión.Text = "Decisión";
+            this.agregarDecisión.Click += new System.EventHandler(this.agregarDecisión_Click);
             // 
             // agregarLectura
             // 
@@ -112,14 +113,37 @@
             this.agregarSalida.Text = "Salida";
             this.agregarSalida.Click += new System.EventHandler(this.agregarSalida_Click);
             // 
-            // agregarDecisión
+            // ejecutar
             // 
-            this.agregarDecisión.Image = global::WebDDF.Properties.Resources.Decisión;
-            this.agregarDecisión.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.agregarDecisión.Name = "agregarDecisión";
-            this.agregarDecisión.Size = new System.Drawing.Size(72, 22);
-            this.agregarDecisión.Text = "Decisión";
-            this.agregarDecisión.Click += new System.EventHandler(this.agregarDecisión_Click);
+            this.ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("ejecutar.Image")));
+            this.ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ejecutar.Name = "ejecutar";
+            this.ejecutar.Size = new System.Drawing.Size(69, 22);
+            this.ejecutar.Text = "Ejecutar";
+            this.ejecutar.Click += new System.EventHandler(this.ejecutar_Click);
+            // 
+            // variables
+            // 
+            this.variables.CommandsVisibleIfAvailable = false;
+            this.variables.Dock = System.Windows.Forms.DockStyle.Right;
+            this.variables.HelpVisible = false;
+            this.variables.Location = new System.Drawing.Point(390, 25);
+            this.variables.Name = "variables";
+            this.variables.Size = new System.Drawing.Size(234, 386);
+            this.variables.TabIndex = 0;
+            this.variables.ToolbarVisible = false;
+            // 
+            // lienzo
+            // 
+            this.lienzo.Diagrama = diagrama1;
+            this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lienzo.Location = new System.Drawing.Point(0, 25);
+            this.lienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lienzo.Name = "lienzo";
+            this.lienzo.OperacionSeleccionada = null;
+            this.lienzo.Size = new System.Drawing.Size(390, 386);
+            this.lienzo.TabIndex = 1;
+            this.lienzo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lienzo_KeyUp);
             // 
             // MainForm
             // 
@@ -127,6 +151,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 411);
             this.Controls.Add(this.lienzo);
+            this.Controls.Add(this.variables);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -150,6 +175,8 @@
         private System.Windows.Forms.ToolStripButton agregarLectura;
         private System.Windows.Forms.ToolStripButton agregarSalida;
         private System.Windows.Forms.ToolStripButton agregarDecisión;
+        private System.Windows.Forms.ToolStripButton ejecutar;
+        private System.Windows.Forms.PropertyGrid variables;
     }
 }
 

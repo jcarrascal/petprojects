@@ -1,12 +1,17 @@
-﻿using System.Collections;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 
 namespace WebDDF.Modelo
 {
-    class Diagrama : IPadreDeOperaciones
+    class Diagrama : IPadreDeOperaciones, ICustomTypeDescriptor, INotifyPropertyChanged
     {
         public const int OperaciónBorde = 1;
         public const int OperaciónMárgen = 3;
@@ -25,7 +30,7 @@ namespace WebDDF.Modelo
             CentroMedio.LineAlignment = StringAlignment.Center;
         }
 
-        public readonly Dictionary<string, string> Variables = new Dictionary<string,string>();
+        readonly Dictionary<string, object> Variables = new Dictionary<string, object>();
         readonly List<IOperación> operaciones = new List<IOperación>();
 
         public void Dibujar(Graphics g, Rectangle espacio)
@@ -63,9 +68,54 @@ namespace WebDDF.Modelo
             centroArriba.Y += TamañoAlcance;
         }
 
-        public string Evaluar(string expresión)
+        public object Evaluar(string expresión, out string error)
         {
-            return expresión;
+            error = null;
+            CodeDomProvider proveedor = new VBCodeProvider();
+            CompilerParameters parámetros = new CompilerParameters()
+            {
+                GenerateInMemory = true,
+                GenerateExecutable = false,
+            };
+            parámetros.ReferencedAssemblies.Add("System.dll");
+            string fuente = @"Imports System
+Public Class Expresión
+    Public Function Evaluar() As Object
+        Return " + expresión.Replace("'", "\"") + @"
+    End Function
+End Class";
+            CompilerResults resultados = proveedor.CompileAssemblyFromSource(parámetros, fuente);
+            if (resultados.Errors.HasErrors)
+            {
+                error = resultados.Errors[0].ErrorText;
+                return null;
+            }
+
+            if (resultados.CompiledAssembly == null)
+            {
+                error = "No es posible generar el ensamblado.";
+                return null;
+            }
+
+            Type tipoDeExpresión = resultados.CompiledAssembly.GetType("Expresión");
+            if (tipoDeExpresión == null)
+            {
+                error = "No es posible encontrar la clase.";
+                return null;
+            }
+
+            try
+            {
+                object instanciaDeExpresión = Activator.CreateInstance(tipoDeExpresión);
+                MethodInfo método = tipoDeExpresión.GetMethod("Evaluar");
+                object resultado = método.Invoke(instanciaDeExpresión, new object[] { });
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                return null;
+            }
         }
 
         public IEnumerator<IOperación> GetEnumerator()
@@ -106,5 +156,164 @@ namespace WebDDF.Modelo
             operación.Padre = null;
             operaciones.Remove(operación);
         }
+
+        public void Ejecutar()
+        {
+            foreach (IOperación operación in this)
+            {
+                operación.Ejecutar(this);
+            }
+        }
+
+        #region Implementation of ICustomTypeDescriptor
+
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
+            return TypeDescriptor.GetAttributes(this, true);
+        }
+
+        string ICustomTypeDescriptor.GetClassName()
+        {
+            return TypeDescriptor.GetClassName(this, true);
+        }
+
+        string ICustomTypeDescriptor.GetComponentName()
+        {
+            return TypeDescriptor.GetComponentName(this, true);
+        }
+
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
+            return TypeDescriptor.GetConverter(this, true);
+        }
+
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
+            return TypeDescriptor.GetDefaultEvent(this, true);
+        }
+
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
+            return TypeDescriptor.GetDefaultProperty(this, true);
+        }
+
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
+            return TypeDescriptor.GetEditor(this, editorBaseType, true);
+        }
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
+            return TypeDescriptor.GetEvents(attributes, true);
+        }
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
+            return TypeDescriptor.GetEvents(this, true);
+        }
+
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            attributes = new List<Attribute>(attributes ?? new Attribute[] { }) { new CategoryAttribute("Variables") }.ToArray();
+            List<PropertyDescriptor> propiedades = new List<PropertyDescriptor>();
+            foreach (string variable in this.Variables.Keys)
+                propiedades.Add(new CustomPropertyDescriptor(variable, attributes));
+            return new PropertyDescriptorCollection(propiedades.ToArray());
+        }
+
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
+        }
+
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
+            return this;
+        }
+
+        #endregion
+
+        #region CustomPropertyDescriptor
+
+        class CustomPropertyDescriptor : PropertyDescriptor
+        {
+            public CustomPropertyDescriptor(string variable, Attribute[] attributes)
+                : base(variable, attributes)
+            {
+            }
+
+            public override object GetValue(object component)
+            {
+                var diagrama = component as Diagrama;
+                if (diagrama == null)
+                    throw new InvalidOperationException();
+                return diagrama.Variables[this.Name];
+            }
+
+            public override bool CanResetValue(object component)
+            {
+                return false;
+            }
+
+            public override Type ComponentType
+            {
+                get { return typeof(Diagrama); }
+            }
+
+            public override bool IsReadOnly
+            {
+                get { return true; }
+            }
+
+            public override Type PropertyType
+            {
+                get { return typeof(object); }
+            }
+
+            public override void ResetValue(object component)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void SetValue(object component, object value)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override bool ShouldSerializeValue(object component)
+            {
+                return true;
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
+        }
+
+        public object this[string nombre]
+        {
+            get
+            {
+                return Variables[nombre];
+            }
+
+            set
+            {
+                Variables[nombre] = value;
+                OnPropertyChanged(new PropertyChangedEventArgs(nombre));
+            }
+        }
+
+        #endregion
     }
 }

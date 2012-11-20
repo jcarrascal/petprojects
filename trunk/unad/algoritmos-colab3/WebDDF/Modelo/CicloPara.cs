@@ -28,6 +28,8 @@ namespace WebDDF.Modelo
 
         public int Paso { get; set; }
 
+        public string Error { get; set; }
+
         public IPadreDeOperaciones Padre { get; set; }
 
         public Rectangle Rectángulo { get; set; }
