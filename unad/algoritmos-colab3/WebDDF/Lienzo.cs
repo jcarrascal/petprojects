@@ -60,6 +60,11 @@ namespace WebDDF
             }
         }
 
+        public void Ejecutar()
+        {
+            Diagrama.Ejecutar();
+        }
+
         void LienzoPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;

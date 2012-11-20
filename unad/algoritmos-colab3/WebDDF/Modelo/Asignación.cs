@@ -14,6 +14,8 @@ namespace WebDDF.Modelo
     {
         public readonly List<Variable> Variables = new List<Variable>();
 
+        public string Error { get; set; }
+
         public IPadreDeOperaciones Padre { get; set; }
 
         public Rectangle Rectángulo { get; set; }
@@ -24,7 +26,13 @@ namespace WebDDF.Modelo
             {
                 string nombre = variable.Nombre;
                 string expresión = variable.Expresión;
-                diagrama.Variables[nombre] = diagrama.Evaluar(expresión);
+                string error;
+                object valor = diagrama.Evaluar(expresión, out error);
+                if (string.IsNullOrWhiteSpace(error))
+                    diagrama[nombre] = valor;
+                else
+                {
+                }
             }
         }
 

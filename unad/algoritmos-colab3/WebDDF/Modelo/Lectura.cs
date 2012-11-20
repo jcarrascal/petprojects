@@ -13,9 +13,11 @@ namespace WebDDF.Modelo
     {
         public string Variable { get; set; }
 
+        public string Error { get; set; }
+
         public IPadreDeOperaciones Padre { get; set; }
 
-        public System.Drawing.Rectangle Rectángulo { get; set; }
+        public Rectangle Rectángulo { get; set; }
 
         public void Ejecutar(Diagrama diagrama)
         {

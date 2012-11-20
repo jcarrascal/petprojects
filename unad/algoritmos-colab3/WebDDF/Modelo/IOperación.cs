@@ -10,6 +10,8 @@ namespace WebDDF.Modelo
 {
     interface IOperación
     {
+        string Error { get; set; }
+
         IPadreDeOperaciones Padre { get; set; }
 
         Rectangle Rectángulo { get; set; }

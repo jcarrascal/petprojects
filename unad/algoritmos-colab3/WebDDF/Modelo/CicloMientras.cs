@@ -14,6 +14,8 @@ namespace WebDDF.Modelo
 
         public string Expresión { get; set; }
 
+        public string Error { get; set; }
+
         public IPadreDeOperaciones Padre { get; set; }
 
         public Rectangle Rectángulo { get; set; }
