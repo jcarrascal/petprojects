@@ -20,7 +20,7 @@ namespace WebDDF.Modelo
 
         public Rectangle Rectángulo { get; set; }
 
-        public void Ejecutar(Diagrama diagrama)
+        public bool Ejecutar(Diagrama diagrama)
         {
             foreach (Variable variable in Variables)
             {
@@ -32,8 +32,11 @@ namespace WebDDF.Modelo
                     diagrama[nombre] = valor;
                 else
                 {
+                    MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
+            return true;
         }
 
         public void Dibujar(Graphics g, ref Point centroArriba)

@@ -28,20 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             WebDDF.Modelo.Diagrama diagrama1 = new WebDDF.Modelo.Diagrama();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.variables = new System.Windows.Forms.PropertyGrid();
+            this.lienzo = new WebDDF.Lienzo();
             this.agregarAsignación = new System.Windows.Forms.ToolStripButton();
             this.agregarCicloMientras = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.agregarCicloPara = new System.Windows.Forms.ToolStripButton();
             this.agregarDecisión = new System.Windows.Forms.ToolStripButton();
             this.agregarLectura = new System.Windows.Forms.ToolStripButton();
             this.agregarSalida = new System.Windows.Forms.ToolStripButton();
             this.ejecutar = new System.Windows.Forms.ToolStripButton();
-            this.variables = new System.Windows.Forms.PropertyGrid();
-            this.lienzo = new WebDDF.Lienzo();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarAsignación,
+            this.agregarCicloMientras,
+            this.agregarCicloPara,
+            this.agregarDecisión,
+            this.agregarLectura,
+            this.agregarSalida,
+            this.ejecutar});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // variables
+            // 
+            this.variables.CommandsVisibleIfAvailable = false;
+            this.variables.Dock = System.Windows.Forms.DockStyle.Right;
+            this.variables.HelpVisible = false;
+            this.variables.Location = new System.Drawing.Point(390, 25);
+            this.variables.Name = "variables";
+            this.variables.Size = new System.Drawing.Size(234, 386);
+            this.variables.TabIndex = 0;
+            this.variables.ToolbarVisible = false;
+            // 
+            // lienzo
+            // 
+            this.lienzo.Diagrama = diagrama1;
+            this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lienzo.Location = new System.Drawing.Point(0, 25);
+            this.lienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lienzo.Name = "lienzo";
+            this.lienzo.OperacionSeleccionada = null;
+            this.lienzo.Size = new System.Drawing.Size(390, 386);
+            this.lienzo.TabIndex = 1;
+            this.lienzo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lienzo_KeyUp);
             // 
             // agregarAsignación
             // 
@@ -60,22 +98,6 @@
             this.agregarCicloMientras.Size = new System.Drawing.Size(103, 22);
             this.agregarCicloMientras.Text = "Ciclo mientras";
             this.agregarCicloMientras.Click += new System.EventHandler(this.agregarMientrasQue_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregarAsignación,
-            this.agregarCicloMientras,
-            this.agregarCicloPara,
-            this.agregarDecisión,
-            this.agregarLectura,
-            this.agregarSalida,
-            this.ejecutar});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // agregarCicloPara
             // 
@@ -115,35 +137,12 @@
             // 
             // ejecutar
             // 
-            this.ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("ejecutar.Image")));
+            this.ejecutar.Image = global::WebDDF.Properties.Resources.Ejecutar;
             this.ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ejecutar.Name = "ejecutar";
             this.ejecutar.Size = new System.Drawing.Size(69, 22);
             this.ejecutar.Text = "Ejecutar";
             this.ejecutar.Click += new System.EventHandler(this.ejecutar_Click);
-            // 
-            // variables
-            // 
-            this.variables.CommandsVisibleIfAvailable = false;
-            this.variables.Dock = System.Windows.Forms.DockStyle.Right;
-            this.variables.HelpVisible = false;
-            this.variables.Location = new System.Drawing.Point(390, 25);
-            this.variables.Name = "variables";
-            this.variables.Size = new System.Drawing.Size(234, 386);
-            this.variables.TabIndex = 0;
-            this.variables.ToolbarVisible = false;
-            // 
-            // lienzo
-            // 
-            this.lienzo.Diagrama = diagrama1;
-            this.lienzo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lienzo.Location = new System.Drawing.Point(0, 25);
-            this.lienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lienzo.Name = "lienzo";
-            this.lienzo.OperacionSeleccionada = null;
-            this.lienzo.Size = new System.Drawing.Size(390, 386);
-            this.lienzo.TabIndex = 1;
-            this.lienzo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lienzo_KeyUp);
             // 
             // MainForm
             // 

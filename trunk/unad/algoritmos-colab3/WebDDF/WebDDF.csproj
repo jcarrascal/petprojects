@@ -80,6 +80,12 @@
     <Compile Include="Editores\LecturaEditor.Designer.cs">
       <DependentUpon>LecturaEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ejecución\LecturaEjecución.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ejecución\LecturaEjecución.Designer.cs">
+      <DependentUpon>LecturaEjecución.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lienzo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editores\LecturaEditor.resx">
       <DependentUpon>LecturaEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ejecución\LecturaEjecución.resx">
+      <DependentUpon>LecturaEjecución.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -165,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Salida.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ejecutar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

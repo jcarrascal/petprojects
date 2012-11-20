@@ -103,6 +103,16 @@ namespace WebDDF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ejecutar {
+            get {
+                object obj = ResourceManager.GetObject("Ejecutar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lectura {
             get {
                 object obj = ResourceManager.GetObject("Lectura", resourceCulture);

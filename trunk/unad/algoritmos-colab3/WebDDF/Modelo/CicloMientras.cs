@@ -20,9 +20,43 @@ namespace WebDDF.Modelo
 
         public Rectangle Rectángulo { get; set; }
 
-        public void Ejecutar(Diagrama diagrama)
+        public bool Ejecutar(Diagrama diagrama)
         {
-            throw new NotImplementedException();
+            string error;
+            do 
+            {
+                object valor = diagrama.Evaluar(Expresión, out error);
+                if (string.IsNullOrWhiteSpace(error))
+                {
+                    try
+                    {
+                        if (Convert.ToBoolean(valor))
+                        {
+                            foreach (IOperación operación in operaciones)
+                            {
+                                if (!operación.Ejecutar(diagrama))
+                                    return false;
+                            }
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("El resultado de {{0}} no es un valor booleano. " + ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            while (true);
         }
 
         public void Dibujar(Graphics g, ref Point centroArriba)

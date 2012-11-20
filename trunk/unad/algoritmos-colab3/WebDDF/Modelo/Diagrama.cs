@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using System.Text;
 
 namespace WebDDF.Modelo
 {
@@ -71,6 +72,11 @@ namespace WebDDF.Modelo
         public object Evaluar(string expresión, out string error)
         {
             error = null;
+            if (string.IsNullOrWhiteSpace(expresión))
+            {
+                error = "La expresión está vacía.";
+                return null;
+            }
             CodeDomProvider proveedor = new VBCodeProvider();
             CompilerParameters parámetros = new CompilerParameters()
             {
@@ -78,10 +84,22 @@ namespace WebDDF.Modelo
                 GenerateExecutable = false,
             };
             parámetros.ReferencedAssemblies.Add("System.dll");
+            StringBuilder variables = new StringBuilder();
+            variables.AppendLine();
+            foreach (string variable in Variables.Keys)
+            {
+                object value = Variables[variable];
+                variables.Append("        Dim ");
+                variables.Append(variable);
+                variables.Append(" As ");
+                variables.Append(value.GetType().Name);
+                variables.Append(" = ");
+                variables.AppendLine(EscaparValor(value));
+            }
             string fuente = @"Imports System
 Public Class Expresión
-    Public Function Evaluar() As Object
-        Return " + expresión.Replace("'", "\"") + @"
+    Public Function Evaluar() As Object" + variables.ToString() + @"
+        Return " + EscaparExpresión(expresión) + @"
     End Function
 End Class";
             CompilerResults resultados = proveedor.CompileAssemblyFromSource(parámetros, fuente);
@@ -116,6 +134,20 @@ End Class";
                 error = ex.ToString();
                 return null;
             }
+        }
+
+        private string EscaparExpresión(string expresión)
+        {
+            return (expresión ?? string.Empty).Replace("'", "\"").Replace(",", "&");
+        }
+
+        static string EscaparValor(object value)
+        {
+            if (value.GetType() == typeof(string))
+            {
+                return "\"" + Convert.ToString(value).Replace("\"", "\\\"") + "\"";
+            }
+            return Convert.ToString(value);
         }
 
         public IEnumerator<IOperación> GetEnumerator()
@@ -157,12 +189,15 @@ End Class";
             operaciones.Remove(operación);
         }
 
-        public void Ejecutar()
+        public bool Ejecutar()
         {
+            Variables.Clear();
             foreach (IOperación operación in this)
             {
-                operación.Ejecutar(this);
+                if (!operación.Ejecutar(this))
+                    return false;
             }
+            return true;
         }
 
         #region Implementation of ICustomTypeDescriptor

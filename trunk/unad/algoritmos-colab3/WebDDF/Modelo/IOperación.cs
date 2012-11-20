@@ -16,7 +16,7 @@ namespace WebDDF.Modelo
 
         Rectangle Rectángulo { get; set; }
 
-        void Ejecutar(Diagrama diagrama);
+        bool Ejecutar(Diagrama diagrama);
 
         void Dibujar(Graphics g, ref Point centroArriba);
 
